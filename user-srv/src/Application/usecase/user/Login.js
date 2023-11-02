@@ -5,18 +5,27 @@ const userLogin=async(dbrepo,service,email,password)=>{
         val:email
     }
     const user=await dbrepo.userExist(loginCredentials)
+
+    const {_id,username}=user
      
     let response={
         userExist:false,
-        password:null
+        password:null,
+        token:null
     }
     if(!user) return response
     else {
           
         response.userExist=true
         const verifyPassword=await service.verifyPassword(user.password,password)
-        if(verifyPassword)
-        response.password=true
+        if(verifyPassword){
+
+            const token=await service.generateToken(_id,username)   
+            response.password=true
+            response.token=token
+            
+        }
+
         else response.password=false
         return response
     }

@@ -5,6 +5,7 @@ import serverConfig from "./src/Framework/webserver/server.js"
 import config from "./src/config/config.js"
 import Routes from "./src/Framework/webserver/Routes/index.js"
 import connection from "./src/Framework/database/connection.js"
+import dotenv from "dotenv"
 
 
 //create instance of Express
@@ -15,6 +16,9 @@ const server=http.createServer(app)
 
 //start Server
 serverConfig(server,config).startServer()
+
+//env configuration
+dotenv.config()
 
 //connect db 
 connection(config)

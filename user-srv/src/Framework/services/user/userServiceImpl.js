@@ -1,6 +1,8 @@
 
 //import libraries if it is required
 import argon2 from "argon2"
+import jwt from 'jsonwebtoken'
+
 const userServiceImplements=()=>{
 
     
@@ -27,7 +29,22 @@ const userServiceImplements=()=>{
         }
           
     }
+    const generateToken=async(id,username)=>{
+
+        const secret_key='ajmal123user-srv'
+
+        const payload={
+          userId:id,
+          username:username
+        }
+        
+       
+        const token=jwt.sign(payload,secret_key)
+        return token
+
+    }
     return {
+        generateToken,
         verifyPassword,
         passwordHash
     }

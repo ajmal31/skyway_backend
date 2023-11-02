@@ -6,6 +6,9 @@ import userServiceInterface from "../../../../Application/srv/user/userSrvInterf
 import userServiceImplements from "../../../services/user/userServiceImpl.js"
 import registerValidation from "../../../../custom-middlewares/user/registerValidation.js"
 import loginValidation from "../../../../custom-middlewares/user/loginvalidation.js"
+//my own middleware
+// import {jwtVerfication} from "jwt-verification-middleware" 
+
 
 const useRoutes=(express)=>{
   
@@ -19,6 +22,8 @@ const useRoutes=(express)=>{
     //POST METHODS
     router.route('/register').post(registerValidation,controller.register) 
     router.route('/login').post(loginValidation,controller.login)
+
+  
 
 
     

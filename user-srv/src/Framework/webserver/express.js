@@ -4,6 +4,7 @@ import helmet from "helmet"
 import xXssProtection from "x-xss-protection"
 import morgan from "morgan"
 
+
 const expressConfig=(app)=>{
 
     //allow json kind of datas
