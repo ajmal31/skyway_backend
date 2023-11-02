@@ -7,20 +7,34 @@ const userController=(repositoryInterface,repositoryImplements,serviceInterface,
             //user service and implements assign service 
             const service=serviceInterface(userServiceImplements())
 
+    //POST METHODS
+    
+    //user Register
     const register=async(req,res)=>{
 
         const response=await registerUser(dbRepository,service,req.body)
-        console.log('response in controller ',response)
-         if(!response.message){
-            console.log('user created case');
-            res.json({response}).status(200)
-
-         } 
-         else {
-            console.log('user exist case')
-            res.json({message:response.message}).status(403)
-         }
+       
+         if(!response.message)res.json({response}).status(200)
+         else res.json({message:response.message}).status(403)
+         
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
     return{
         register

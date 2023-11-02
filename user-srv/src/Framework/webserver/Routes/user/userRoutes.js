@@ -4,6 +4,7 @@ import userRepositoryInterface from "../../../../Application/repo/user/userRepoI
 import userRepositoryImplements from "../../../database/mongodb/repositories/user/userRepositoryImpl.js"
 import userServiceInterface from "../../../../Application/srv/user/userSrvInterface.js"
 import userServiceImplements from "../../../services/user/userServiceImpl.js"
+import validation from "../../../../custom-middlewares/user/validation.js"
 
 const useRoutes=(express)=>{
     console.log('reach user routes')
@@ -14,10 +15,10 @@ const useRoutes=(express)=>{
     const controller=userController(userRepositoryInterface,userRepositoryImplements,userServiceInterface,userServiceImplements)
 
     // app.get('/register',controller.register)
-    router.route('/register').post(controller.register)  
+    router.route('/register').post(validation,controller.register) 
 
 
-
+    
     return router
         
 
