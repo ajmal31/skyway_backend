@@ -1,5 +1,5 @@
 import {body,validationResult} from 'express-validator'
-const validation=[
+const registerValidation=[
     // "is" checking is it valid or not ,"notEmpty" is checking is there have value or not
 
     //checking inputs have values or not
@@ -9,6 +9,7 @@ const validation=[
     body('destination').notEmpty().withMessage('destination not required'),
     body('password').notEmpty().withMessage('password not required'),
     body('confirm_password').notEmpty().withMessage('confirm password not required'),
+    body('email').notEmpty().withMessage('email is required'),
 
     //checking input values length whether it is valid or not
     
@@ -55,4 +56,4 @@ const validation=[
 
 ]
 
-export default validation
+export default registerValidation
