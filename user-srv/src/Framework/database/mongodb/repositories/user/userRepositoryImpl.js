@@ -39,7 +39,15 @@ const userRepositoryImplements=()=>{
         }
         
     }
+    const remove=async(userId)=>{
+
+        const response=await userModel.updateOne({_id:userId},{$set:{soft_delete:true}})
+        return response
+
+    }
+    
     return{
+        remove,
         register,
         findUser
     }

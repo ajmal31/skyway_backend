@@ -7,7 +7,7 @@ import userServiceImplements from "../../../services/user/userServiceImpl.js"
 import registerValidation from "../../../../custom-middlewares/user/registerValidation.js"
 import loginValidation from "../../../../custom-middlewares/user/loginvalidation.js"
 //my own middleware
-// import {jwtVerfication} from "jwt-verification-middleware" 
+import {jwtVerfication} from "jwt-verification-middleware" 
 
 
 const useRoutes=(express)=>{
@@ -22,6 +22,13 @@ const useRoutes=(express)=>{
     //POST METHODS
     router.route('/register').post(registerValidation,controller.register) 
     router.route('/login').post(loginValidation,controller.login)
+    
+    //MIDDLEWARE/  !!!notice
+    app.use(jwtVerfication('ajmal123user-srv'))
+
+    //GET METHODS
+    router.route('/delete/:id').get(controller.remove)
+    router.route('/getUser/:id').get(controller.getUser)
 
   
 

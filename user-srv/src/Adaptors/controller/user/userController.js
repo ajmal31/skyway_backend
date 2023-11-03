@@ -1,6 +1,9 @@
 //import all usecases  here
 import registerUser from "../../../Application/usecase/user/Register.js"
 import userLogin from "../../../Application/usecase/user/Login.js"
+import softDelete from "../../../Application/usecase/user/softDelete.js"
+import findOneUser from "../../../Application/usecase/user/getUser.js"
+
 const userController=(repositoryInterface,repositoryImplements,serviceInterface,userServiceImplements)=>{
     
             //user repo and implements assign to dbRepository
@@ -9,6 +12,8 @@ const userController=(repositoryInterface,repositoryImplements,serviceInterface,
             const service=serviceInterface(userServiceImplements())
 
     //POST METHODS
+
+
     
     //USER REGISTER
     const register=async(req,res)=>{
@@ -34,7 +39,29 @@ const userController=(repositoryInterface,repositoryImplements,serviceInterface,
 
 
 
+    //GET METHODS
 
+
+    
+    //SOFT DELETE
+    const remove=async(req,res)=>{
+
+       const userId=req.params.id
+       const response=await softDelete(userId,dbRepository)
+       if(response) res.json({message:'user deleted succeful'})
+
+
+    }
+    //GET PARTICULAR USER
+    const getUser=async(req,res)=>{
+        const userId=req.params.id
+        const response=await findOneUser(userId,dbRepository)
+        return response ? res.json({response}): res.json({message:"did'nt get user details"})
+    }
+
+
+
+    
 
 
 
@@ -50,6 +77,8 @@ const userController=(repositoryInterface,repositoryImplements,serviceInterface,
     
 
     return{
+        getUser,
+        remove,
         register,
         login
     }

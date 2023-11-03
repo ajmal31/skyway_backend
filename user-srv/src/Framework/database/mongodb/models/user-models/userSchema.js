@@ -11,7 +11,8 @@ const userSchema=new Schema({
     destination: {type: String ,required :true},
     date_of_birth:{type: Date},
     password:{type:String,required:true},
-    confirm_password:{type: String, required:true}
+    confirm_password:{type: String, required:true},
+    soft_delete: {type: Boolean ,default:false}
     
 
 
