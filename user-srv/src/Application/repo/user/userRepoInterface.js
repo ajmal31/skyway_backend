@@ -6,10 +6,12 @@ const userRepositoryInterface=(repositories)=>{
      const userExist=(data)=>repositories.findUser(data)
      const remove=(userId)=>repositories.remove(userId)
      const getUser=(obj)=>repositories.findUser(obj)
+     const update=(data)=>repositories.update(data)
        
      
 
     return {
+        update,
         getUser,
         remove,
         userExist,

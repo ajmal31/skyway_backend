@@ -2,6 +2,7 @@
 //import libraries if it is required
 import argon2 from "argon2"
 import jwt from 'jsonwebtoken'
+import { jwtDecode } from "jwt-decode"
 
 const userServiceImplements=()=>{
 
@@ -43,7 +44,15 @@ const userServiceImplements=()=>{
         return token
 
     }
+    const decode=async(data)=>{
+        
+        const decodedData=jwtDecode(data)
+        return decodedData
+
+
+    }
     return {
+        decode,
         generateToken,
         verifyPassword,
         passwordHash

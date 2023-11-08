@@ -4,23 +4,30 @@ const userLogin=async(dbrepo,service,email,password)=>{
         key:'email',
         val:email
     }
-    const user=await dbrepo.userExist(loginCredentials)
-
-    const {_id,username}=user
-     
+    const user=await dbrepo?.userExist(loginCredentials)
+    
     let response={
         userExist:false,
         password:null,
         token:null
     }
+
+      const createToken=async(_id,username)=>{
+
+        return await service?.generateToken(_id,username)
+
+      }
+    //if user not exist return
     if(!user) return response
-    else {
-          
+
+        //destructuring id and username for passing arguments
+        const {_id,username}=user
+      
         response.userExist=true
         const verifyPassword=await service.verifyPassword(user.password,password)
         if(verifyPassword){
 
-            const token=await service.generateToken(_id,username)   
+            const token=await createToken(_id,username)   
             response.password=true
             response.token=token
             
@@ -28,7 +35,7 @@ const userLogin=async(dbrepo,service,email,password)=>{
 
         else response.password=false
         return response
-    }
+    
     
 
 }

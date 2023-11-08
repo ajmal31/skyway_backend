@@ -22,16 +22,29 @@ const useRoutes=(express)=>{
     //POST METHODS
     router.route('/register').post(registerValidation,controller.register) 
     router.route('/login').post(loginValidation,controller.login)
+    router.route('/googleLogin').post(controller.googleLogin)
     
-    //MIDDLEWARE/  !!!notice
+    
+    //MIDDLEWARE/  !!!notice!! this is not working while setup globally but it working while writing along with each route
     app.use(jwtVerfication('ajmal123user-srv'))
 
     //GET METHODS
     router.route('/delete/:id').get(controller.remove)
     router.route('/getUser/:id').get(controller.getUser)
 
-  
 
+
+    //PUT METHODS 
+
+
+    //!! more update required related this route depend on the frontend work 
+    router.route('/update').put(controller.update)
+
+
+
+
+    
+   
 
     
     return router

@@ -4,7 +4,7 @@ const userRepositoryImplements=()=>{
   
 
     const findUser=async(obj)=>{
-  
+       
         const {key,val}=obj
         const query={[key]:val}
         const response=await userModel.findOne(query)
@@ -46,7 +46,25 @@ const userRepositoryImplements=()=>{
 
     }
     
+    const update=async(userdata)=>{
+        
+        const obj={
+            username:userdata?.getUsername(),
+            email:userdata?.getEmail(),
+            region:userdata?.getRegion(),
+            phone:userdata?.getPhone(),
+            destination:userdata?.getDestination(),
+           
+        }
+        const {username,email,region,phone,destination}=obj
+        const response=await userModel.findOneAndUpdate({email:email},
+        {$set:{username:username,email:email,region:region,phone:phone,destination:destination}},
+        {returnOriginal:false}) 
+        return response
+
+    }
     return{
+        update,
         remove,
         register,
         findUser

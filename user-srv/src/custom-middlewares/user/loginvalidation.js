@@ -7,7 +7,7 @@ const loginValidation=[
     body('email').isEmail().withMessage('invalid email address'),
 
     body('email').isLength({max:30}),
-    body('password').isLength({min:5}).withMessage('password must be 5 charactors'),
+    body('password').isLength({min:4}).withMessage('password must be 5 charactors'),
 
 
     // (req,res,next)=>{
