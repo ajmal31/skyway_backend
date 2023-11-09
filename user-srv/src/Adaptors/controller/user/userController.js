@@ -41,7 +41,7 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
         let { email, password } = req.body
 
         const response = await userLogin(dbRepository, service, email, password)
-        if (response.password && response.userExist) return res.json({ message: 'user Logged in succesful', authToken: response.token })
+        if (response.password && response.userExist) return res.json({ message: 'user Logged in succesful', authToken: response.token ,username:response.username})
         else if (response.userExist && !response.password) return res.json({ message: 'please enter your valid password' })
         else return res.json({ message: 'user does not exist' })
 
@@ -55,8 +55,8 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
         const { encodedData } = req.body
         const response = await googleWithLogin(dbRepository, service, encodedData)
         console.log('response is controller',response)
-        if(response) return res.json({message:"user Logged in succesful",authToken:response})
-        else return res.json({message:"user does not exist",authToken:response}) 
+        if(response.token) return res.json({message:"user Logged in succesful",authToken:response.token,username:response.username})
+        else return res.json({message:"user does not exist"}) 
 
      }catch(err){
         console.log('error occured in controler related while receiving goog login response ',err)

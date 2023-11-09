@@ -9,7 +9,8 @@ const userLogin=async(dbrepo,service,email,password)=>{
     let response={
         userExist:false,
         password:null,
-        token:null
+        token:null,
+        username:null
     }
 
       const createToken=async(_id,username)=>{
@@ -30,6 +31,7 @@ const userLogin=async(dbrepo,service,email,password)=>{
             const token=await createToken(_id,username)   
             response.password=true
             response.token=token
+            response.username=username
             
         }
 
