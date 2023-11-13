@@ -23,9 +23,7 @@ const registerUser=async(dbrepo,service,body)=>{
            //handle password and confirm password is Match
             let HashPassword=await service.passwordHashing(password)
             
-            console.log('before sending password and confirm password')
-            console.log(password)
-            console.log(confirm_password)
+
             const userDetails= await userData(username,email,region,phone,destination,date_of_birth,HashPassword,HashPassword)
             const response=await dbrepo.register(userDetails)
             return response
