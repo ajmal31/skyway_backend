@@ -5,7 +5,7 @@ import ventureServiceInterface from "../../../../Application/srv/venture/venture
 import ventureRepositoryImplements from "../../../database/mongodb/repositories/venture/ventureRepositoryImpl.js"
 import ventureServiceImplements from "../../../services/venture/ventureServiceImpl.js"
 import { uploadImage } from "../../../../multer/index.js"
-
+import {jwtVerfication} from "jwt-verification-middleware"
 
 
 const ventureRoutes=(express)=>{
