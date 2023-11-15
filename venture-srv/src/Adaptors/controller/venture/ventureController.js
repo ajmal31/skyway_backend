@@ -14,25 +14,29 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
 
   const register=async(req,res)=>{
 
-         const reponse=await ventureRegister(dbRepo,service,req.body)
-  }
-
-  const upload=async(req,res)=>{
-
-    const uploadedFiles=req.files.map(file=>{
-      return{
-        orginalName:file.orginalName,
-        location:file.location
-      }
-    })
-
-    console.log('uploaded files',uploadedFiles)
-
-    res.json({message:'image uploaded succesfulll',uploadedFiles})
-
-
+         const response=await ventureRegister(dbRepo,service,req.body)
+         console.log(response,'response in controller')
+         if(response?.error) return res.json({error:response?.error})
+         return res.json({response})
 
   }
+   //test route written check whether it uploading to s3 is working or not
+  // const upload=async(req,res)=>{
+
+  //   const uploadedFiles=req.files.map(file=>{
+  //     return{
+  //       orginalName:file.orginalName,
+  //       location:file.location
+  //     }
+  //   })
+
+  //   console.log('uploaded files',uploadedFiles)
+
+  //   res.json({message:'image uploaded succesfulll',uploadedFiles})
+
+
+
+  // }
   const callRequested=async(req,res)=>{
 
        const uid=req.body.userId
@@ -40,20 +44,15 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
        const response=await connectUser(dbRepo,uid,vid)
        if(!response) return res.json({message:'User Already requested this company'})
        return res.json({message:'You request send to the company ..they will contact you as soon as possible'})
-
+ 
        
   } 
 
   return {
     callRequested, 
-    upload,
     register
 
   }
-
-
-
-
 
 }
 

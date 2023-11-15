@@ -1,18 +1,28 @@
 const ventureRepositoryInterface=(repositories)=>{
 
-     const ventureExist=(vid)=>repositories.ventureExists(vid)
+     const ventureIdExist=(vid)=>repositories.ventureIdExist(vid)
      const userExist=(uid,vid)=>repositories.userExists(uid,vid)
      const addUser=(uid,vid)=>repositories.addUser(uid,vid)
      const addVentureWithUser=(uid,vid)=>repositories.addVentureWithUser(uid,vid)
+     const register=(data)=>repositories.register(data)
+     const ventureNameExist=(obj)=>repositories.ventureExist(obj)
+     const emailExist=(obj)=>repositories.ventureExist(obj)
+     const registerNumberExist=(obj)=>repositories.ventureExist(obj)
+     const licenseNumberExist=(obj)=>repositories.ventureExist(obj)
 
 
      
 
     return {
+        ventureNameExist,
+        emailExist,
+        registerNumberExist,
+        licenseNumberExist,
+        register,
         addVentureWithUser,
         addUser,
         userExist,
-        ventureExist
+        ventureIdExist
        
     }
 }

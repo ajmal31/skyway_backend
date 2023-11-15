@@ -1,6 +1,7 @@
 import mongoose from "mongoose"
 const { Schema } = mongoose
 
+const passwordValidation={type: String, required: true, unique: true, validate: (value) => value?.length > 6}
 //define mongoose schema for "Ventures" collection
 const ventureSchema = new Schema({
 
@@ -13,18 +14,17 @@ const ventureSchema = new Schema({
         type: String,
         required: true,
         unique: true,
-        validate: (value) => value?.length > 1
+        validate: (value) => value.length > 1
     },
     phone_one: {
         type: String,
         required: true,
-        unique: true,
-        validate: (value) => value?.length === 10
+        validate: (value) => value.length === 10
     },
     phone_two: {
-        validate: ventureSchema.path('phone_one').validations[0]
+        type:String ,required:true,validate:(value)=>value.length===10
     },
-    official_email: {
+    official_email:{
         type: String,
         required: true,
         unique: true,
@@ -32,24 +32,24 @@ const ventureSchema = new Schema({
     },
     venture_category: { type: String, required: true },
     description: { type: String, required: true, validate: (value) => value.length >= 50 },
-    expertise_countries: { type: String, required: true },
+    expertise_contries: { type: String, required: true },
     min_max_service_amount: { type: String, required: true },
-    official_portfolio: { type: String, required: true, unique: true },
-    website_link: { validate: ventureSchema.path('official_portfolio').validators[0] },
+    official_portfolio: { type: String, required: true},
+    website_link: { type: String, required: true},
     register_number: { type: Number, required: true, unique: true },
     license_number: { type: Number, required: true, unique: true },
-    social_media: { type: String, required: true, unique: true },
-    insurance_img: { type: String, required: true, unique: true },
-    license_img: { type: String, required: true, unique: true },
+    social_media: { type: String, required: true },
+    insurance_img: { type: String, required: true },
+    license_img: { type: String, required: true },
 
     //password Section
-    password_one: { type: String, required: true, unique: true, validate: (value) => value?.length > 6 },
-    confirm_password_one: { validate: ventureSchema.path('password_one').validations[0] },
-    password_two: { validate: ventureSchema.path('password_one').validations[0] },
-    confirm_password_two: { validate: ventureSchema.path('password').validations[0] }
+    password_one: { type: String, required: true,  validate: (value) => value?.length > 6 },
+    confirm_password_one: { type: String, required: true, validate: (value) => value?.length > 6},
+    password_two: {  type: String, required: true,  validate: (value) => value?.length > 6 },
+    confirm_password_two: { type: String, required: true, validate: (value) => value?.length > 6 }
 
 
 })
 
-const ventureModel = mongoose.model('venutures', ventureSchema)
+const ventureModel = mongoose.model('ventures', ventureSchema)
 export default ventureModel

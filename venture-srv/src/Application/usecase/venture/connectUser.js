@@ -2,7 +2,7 @@ const connectUser = async (dbrepo, uid, vid) => {
 
     let userAdded = false
 
-    const ventureExists = await dbrepo.ventureExist(vid)
+    const ventureExists = await dbrepo.ventureIdExist(vid)
 
     if(ventureExists){
 

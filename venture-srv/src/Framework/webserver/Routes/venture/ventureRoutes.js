@@ -6,6 +6,7 @@ import ventureRepositoryImplements from "../../../database/mongodb/repositories/
 import ventureServiceImplements from "../../../services/venture/ventureServiceImpl.js"
 import { uploadImage } from "../../../../multer/index.js"
 import {jwtVerfication} from "jwt-verification-middleware"
+import register_validation from "../../../../custome-middlewares/Register_validation.js"
 
 
 const ventureRoutes=(express)=>{
@@ -19,7 +20,7 @@ const ventureRoutes=(express)=>{
 
     
    //POST methods
-   router.route('/register').post(controller.register)
+   router.route('/register').post(register_validation,controller.register)
 
 
    //GET METHODS

@@ -1,21 +1,10 @@
 //import schemas here
 import connectedUserModel from "../../models/venture-models/connected_users.js"
+import ventureModel from "../../models/venture-models/ventures.js"
 const ventureRepositoryImplements=()=>{
-    
-   // const connectedUser=async(uid,vid)=>{
-   // try{
-
-   //    const response_one =await connectedUserModel.findOne({ventureId:vid})
-   //    if(response_one)
-   //    let response_two=await connectedUserModel.find({ventureId:vid},{users:{$elemMatch:{userId:uid}}}) 
-   //    if(!response_two) response_three=await connectedUserModel.updateOne({ventureId:vid},{$addToSet:{users:{userId:uid}}})
-
-   // }catch(err){
-
-   //    console.log('error occured while inserting userdata',err)
-  // }
-
-  const ventureExists=async(vid)=>{
+   
+  
+  const ventureIdExist=async(vid)=>{
 
        const response=await connectedUserModel.exists({ventureId:vid})
       
@@ -44,15 +33,82 @@ const ventureRepositoryImplements=()=>{
     return response
 
   }
+  const register=async(data)=>{
+
+    const {firstName,
+      lastName,
+      ventureName,
+      phone_one,
+      phone_two,
+      official_email,
+      venture_category,
+      description,
+      expertise_contries,
+      min_max_service_amount,
+      official_portfolio,
+      website_link,
+      register_number,
+      license_number,
+      social_media,
+      insurance_img,
+      license_img,
+      password_one,
+      confirm_password_one,
+      password_two,
+      confirm_password_two
+    }=data
+    
+   const venture=new ventureModel({
+
+        firstName:firstName(),
+        lastName:lastName(),
+        ventureName:ventureName(),
+        phone_one:phone_one(),
+        phone_two:phone_two(),
+        official_email:official_email(),
+        venture_category:venture_category(),
+        description:description(),
+        expertise_contries:expertise_contries(),
+        min_max_service_amount:min_max_service_amount(),
+        official_portfolio:official_portfolio(),
+        website_link:website_link(),
+        register_number:register_number(),
+        license_number:license_number(),
+        social_media:social_media(),
+        insurance_img:insurance_img(),
+        license_img:license_img(),
+        password_one:password_one(),
+        confirm_password_one:confirm_password_one(),
+        password_two:password_two(),
+        confirm_password_two :confirm_password_two()
+   })
+
+   const response=await venture.save()
+   return response
+   
+       
+  }
+  const ventureExist=async(obj)=>{
+
+    
+   const {key,value}=obj
+   const query={[key]:value}
+   const response=await ventureModel.findOne(query)
+   return response
+
+
+  }
      
        
    
 
    return{
+      ventureExist,
+      register,
       addVentureWithUser,
       addUser,
       userExists,
-      ventureExists
+      ventureIdExist
 
    }
 }
