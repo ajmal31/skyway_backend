@@ -4,6 +4,7 @@ import ventureRepositoryInterface from "../../../../Application/repo/venture/ven
 import ventureServiceInterface from "../../../../Application/srv/venture/ventureSrvInterface.js"
 import ventureRepositoryImplements from "../../../database/mongodb/repositories/venture/ventureRepositoryImpl.js"
 import ventureServiceImplements from "../../../services/venture/ventureServiceImpl.js"
+import { uploadImage } from "../../../../multer/index.js"
 
 
 
@@ -19,6 +20,16 @@ const ventureRoutes=(express)=>{
     
    //POST methods
    router.route('/register').post(controller.register)
+
+
+   //GET METHODS
+   router.route('/callRequested').post(controller.callRequested)
+
+
+   
+
+   //test route
+   router.route('/upload').post(uploadImage.array('file',2,controller.upload))
 
 
     return router

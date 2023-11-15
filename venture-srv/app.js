@@ -20,6 +20,9 @@ serverConfig(server,config).startServer()
 //env configuration
 dotenv.config()
 
+console.log('AWS credentials:', process.env.AWS_ACCESSKEY, process.env.AWS_SECRETKEY);
+
+
 //connect db 
 connection(config)
 
