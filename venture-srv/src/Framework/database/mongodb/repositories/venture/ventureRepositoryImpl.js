@@ -1,41 +1,41 @@
 //import schemas here
 import connectedUserModel from "../../models/venture-models/connected_users.js"
 import ventureModel from "../../models/venture-models/ventures.js"
-const ventureRepositoryImplements=()=>{
-   
-  
-  const ventureIdExist=async(vid)=>{
+const ventureRepositoryImplements = () => {
 
-       const response=await connectedUserModel.exists({ventureId:vid})
-      
-       return response
 
-  }
-  const userExists=async(uid,vid)=>{
-    
-    const response=await connectedUserModel.findOne({ventureId:vid,users:{$in:[uid]}})
-   //  const response=await connectedUserModel.updateOne({ventureId:vid},{$addToSet:{users:{uid}}})
+  const ventureIdExist = async (vid) => {
+
+    const response = await connectedUserModel.exists({ ventureId: vid })
+
     return response
-  }    
-  const addUser=async(uid,vid)=>{
-
-  const response=await connectedUserModel.updateOne({ventureId:vid},{$push:{users:uid}})
-  return response
 
   }
-  const addVentureWithUser=async(uid,vid)=>{
+  const userExists = async (uid, vid) => {
 
-    const venture=new connectedUserModel({
-       ventureId:vid,
-       users:[uid]
+    const response = await connectedUserModel.findOne({ ventureId: vid, users: { $in: [uid] } })
+    //  const response=await connectedUserModel.updateOne({ventureId:vid},{$addToSet:{users:{uid}}})
+    return response
+  }
+  const addUser = async (uid, vid) => {
+
+    const response = await connectedUserModel.updateOne({ ventureId: vid }, { $push: { users: uid } })
+    return response
+
+  }
+  const addVentureWithUser = async (uid, vid) => {
+
+    const venture = new connectedUserModel({
+      ventureId: vid,
+      users: [uid]
     })
-    const response=await venture.save()
+    const response = await venture.save()
     return response
 
   }
-  const register=async(data)=>{
+  const register = async (data) => {
 
-    const {firstName,
+    const { firstName,
       lastName,
       ventureName,
       phone_one,
@@ -56,61 +56,70 @@ const ventureRepositoryImplements=()=>{
       confirm_password_one,
       password_two,
       confirm_password_two
-    }=data
-    
-   const venture=new ventureModel({
+    } = data
 
-        firstName:firstName(),
-        lastName:lastName(),
-        ventureName:ventureName(),
-        phone_one:phone_one(),
-        phone_two:phone_two(),
-        official_email:official_email(),
-        venture_category:venture_category(),
-        description:description(),
-        expertise_contries:expertise_contries(),
-        min_max_service_amount:min_max_service_amount(),
-        official_portfolio:official_portfolio(),
-        website_link:website_link(),
-        register_number:register_number(),
-        license_number:license_number(),
-        social_media:social_media(),
-        insurance_img:insurance_img(),
-        license_img:license_img(),
-        password_one:password_one(),
-        confirm_password_one:confirm_password_one(),
-        password_two:password_two(),
-        confirm_password_two :confirm_password_two()
-   })
+    const venture = new ventureModel({
 
-   const response=await venture.save()
-   return response
-   
-       
-  }
-  const ventureExist=async(obj)=>{
+      firstName: firstName(),
+      lastName: lastName(),
+      ventureName: ventureName(),
+      phone_one: phone_one(),
+      phone_two: phone_two(),
+      official_email: official_email(),
+      venture_category: venture_category(),
+      description: description(),
+      expertise_contries: expertise_contries(),
+      min_max_service_amount: min_max_service_amount(),
+      official_portfolio: official_portfolio(),
+      website_link: website_link(),
+      register_number: register_number(),
+      license_number: license_number(),
+      social_media: social_media(),
+      insurance_img: insurance_img(),
+      license_img: license_img(),
+      password_one: password_one(),
+      confirm_password_one: confirm_password_one(),
+      password_two: password_two(),
+      confirm_password_two: confirm_password_two()
+    })
 
-    
-   const {key,value}=obj
-   const query={[key]:value}
-   const response=await ventureModel.findOne(query)
-   return response
+    const response = await venture.save()
+    return response
 
 
   }
-     
-       
-   
+  const ventureExist = async (obj) => {
 
-   return{
-      ventureExist,
-      register,
-      addVentureWithUser,
-      addUser,
-      userExists,
-      ventureIdExist
 
-   }
+    const { key, value } = obj
+    const query = { [key]: value }
+    const response = await ventureModel.findOne(query)
+    return response
+
+
+  }
+  const getAllVentures = async () => {
+
+    const response = await ventureModel.find()
+    return response
+
+
+
+  }
+
+
+
+
+  return {
+    getAllVentures,
+    ventureExist,
+    register,
+    addVentureWithUser,
+    addUser,
+    userExists,
+    ventureIdExist
+
+  }
 }
 
 export default ventureRepositoryImplements

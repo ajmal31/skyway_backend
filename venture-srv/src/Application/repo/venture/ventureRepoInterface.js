@@ -9,11 +9,13 @@ const ventureRepositoryInterface=(repositories)=>{
      const emailExist=(obj)=>repositories.ventureExist(obj)
      const registerNumberExist=(obj)=>repositories.ventureExist(obj)
      const licenseNumberExist=(obj)=>repositories.ventureExist(obj)
+     const getAllVentures=(obj)=>repositories.getAllVentures(obj)
 
 
      
 
     return {
+        getAllVentures,
         ventureNameExist,
         emailExist,
         registerNumberExist,

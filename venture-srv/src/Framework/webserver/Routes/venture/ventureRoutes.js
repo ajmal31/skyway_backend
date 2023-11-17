@@ -21,10 +21,17 @@ const ventureRoutes=(express)=>{
     
    //POST methods
    router.route('/register').post(register_validation,controller.register)
+   router.route('/login').post(controller.login)
 
 
    //GET METHODS
-   router.route('/callRequested').post(controller.callRequested)
+   router.route('/callRequested').post(jwtVerfication('ajmal123user-srv'),controller.callRequested)
+
+   //GET ALL VENTURES
+   router.route('/getAllventures').get(controller.getAllVentures)
+
+
+
 
 
    

@@ -1,6 +1,8 @@
 //import all usecases  here
 import ventureRegister from "../../../Application/usecase/venture/register.js"
 import connectUser from "../../../Application/usecase/venture/connectUser.js"
+import listVentures from "../../../Application/usecase/venture/getAllVentures.js"
+import ventureLogin from "../../../Application/usecase/venture/ventureLogin.js"
 
 const ventureController = (repositoryInterface, repositoryImplements, serviceInterface, ServiceImplements) => {
 
@@ -39,18 +41,38 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
   // }
   const callRequested=async(req,res)=>{
 
-       const uid=req.body.userId
-       const vid=req.body.ventureId
+    console.log('user details',req.userdata)
+
+    const uid=req.userdata.userId
+    const vid=req.body.ventureId
+
        const response=await connectUser(dbRepo,uid,vid)
        if(!response) return res.json({message:'User Already requested this company'})
        return res.json({message:'You request send to the company ..they will contact you as soon as possible'})
  
        
   } 
+  const getAllVentures=async(req,res)=>{
+
+     const response=await listVentures(dbRepo)
+     return res.json({response})
+  
+  }
+  const login=async(req,res)=>{
+
+    const response=await ventureLogin(dbRepo,service,req.body)
+    console.log('incontrooler',response)
+    if(response===null) return res.json({message:'venture does not exist'})
+    if(response?.loggedIn) return res.json({message:'venture login succesful',token:response.token})
+    else if(response?.password_one) return res.json({message:'please check you second Password'})
+    return res.json({message:'please check your first password'})
+  }
 
   return {
+    getAllVentures,
     callRequested, 
-    register
+    register,
+    login
 
   }
 

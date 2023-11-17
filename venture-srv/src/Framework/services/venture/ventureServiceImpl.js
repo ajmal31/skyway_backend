@@ -1,6 +1,8 @@
 
 //import libraries if it is required 
 import argon2 from "argon2"
+import  jwt  from "jsonwebtoken"
+import env from "../../../config/env.js"
 const ventureServiceImplements=()=>{
 
     const passwordHash=async(pass1,pass2)=>{
@@ -10,8 +12,24 @@ const ventureServiceImplements=()=>{
         return {password_one,password_two}
 
     }
+    const verifyPassword=async(dbpass_one,pass_one,dbpass_two,pass_two)=>{
+
+
+        const password_one=await argon2.verify(dbpass_one,pass_one)
+        const password_two=await argon2.verify(dbpass_two,pass_two)
+        return {password_one,password_two}
+    }
+    
+    const generateToken=async(ventureData)=>{
+        
+      const token=jwt.sign(ventureData,env.JWT_SECRETKEY)
+      return token
+          
+    }
 
     return{
+        generateToken,
+        verifyPassword,
         passwordHash
 
     }
