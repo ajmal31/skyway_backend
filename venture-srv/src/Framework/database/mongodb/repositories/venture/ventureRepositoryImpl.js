@@ -1,9 +1,10 @@
 //import schemas here
 import connectedUserModel from "../../models/venture-models/connected_users.js"
 import ventureModel from "../../models/venture-models/ventures.js"
+import mongoose from 'mongoose'
 const ventureRepositoryImplements = () => {
 
-
+   //checking while registering new Venture  already is exist or not
   const ventureIdExist = async (vid) => {
 
     const response = await connectedUserModel.exists({ ventureId: vid })
@@ -12,22 +13,30 @@ const ventureRepositoryImplements = () => {
 
   }
   const userExists = async (uid, vid) => {
-
-    const response = await connectedUserModel.findOne({ ventureId: vid, users: { $in: [uid] } })
-    //  const response=await connectedUserModel.updateOne({ventureId:vid},{$addToSet:{users:{uid}}})
+   
+    
+    const response = await connectedUserModel.findOne({ventureId:vid,users:{$elemMatch:{userId:uid}}})
+   
     return response
   }
+  //add new User to particular venture document
   const addUser = async (uid, vid) => {
-
-    const response = await connectedUserModel.updateOne({ ventureId: vid }, { $push: { users: uid } })
+     
+    const response = await connectedUserModel.updateOne({ ventureId: vid }, {$push:{users:{userId:uid,status:'pending'}}})
     return response
 
   }
+  //creating new document with ventureId and user-cred
   const addVentureWithUser = async (uid, vid) => {
 
     const venture = new connectedUserModel({
       ventureId: vid,
-      users: [uid]
+      users:[
+        {
+          userId:uid,
+          status:'pending'
+        }
+      ]
     })
     const response = await venture.save()
     return response

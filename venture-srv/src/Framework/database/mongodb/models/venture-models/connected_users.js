@@ -4,8 +4,13 @@ const {Schema} =mongoose
 
 const connectedUserSchema=new Schema({
     
-    ventureId:String,
-    users:[]        
+    ventureId:Schema.Types.ObjectId,
+    users:[
+        {
+            userId:Schema.Types.ObjectId,
+            status:String
+        }
+    ]        
 },{
     timestamps:true
 })
