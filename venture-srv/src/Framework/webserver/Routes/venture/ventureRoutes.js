@@ -29,6 +29,7 @@ const ventureRoutes=(express)=>{
 
    //GET ALL VENTURES
    router.route('/getAllventures').get(controller.getAllVentures)
+   router.route('/getAllUsers').get(controller.getAllUsers)
 
 
 

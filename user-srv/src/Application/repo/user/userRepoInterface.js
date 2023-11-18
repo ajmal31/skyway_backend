@@ -7,10 +7,12 @@ const userRepositoryInterface=(repositories)=>{
      const remove=(userId)=>repositories.remove(userId)
      const getUser=(obj)=>repositories.findUser(obj)
      const update=(data)=>repositories.update(data)
+     const findUser=(obj)=>repositories.findUser(obj)
        
      
 
     return {
+        findUser,
         update,
         getUser,
         remove,

@@ -3,6 +3,7 @@ import ventureRegister from "../../../Application/usecase/venture/register.js"
 import connectUser from "../../../Application/usecase/venture/connectUser.js"
 import listVentures from "../../../Application/usecase/venture/getAllVentures.js"
 import ventureLogin from "../../../Application/usecase/venture/ventureLogin.js"
+import takeAllUsers from "../../../Application/usecase/venture/takeAllUsers.js"
 
 const ventureController = (repositoryInterface, repositoryImplements, serviceInterface, ServiceImplements) => {
 
@@ -68,7 +69,14 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
     return res.json({message:'please check your first password'})
   }
 
+  const getAllUsers=async(req,res)=>{
+
+    const response=await takeAllUsers()
+
+  }
+
   return {
+    getAllUsers,
     getAllVentures,
     callRequested, 
     register,

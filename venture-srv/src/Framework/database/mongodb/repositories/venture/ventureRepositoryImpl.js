@@ -1,7 +1,6 @@
 //import schemas here
 import connectedUserModel from "../../models/venture-models/connected_users.js"
 import ventureModel from "../../models/venture-models/ventures.js"
-import mongoose from 'mongoose'
 const ventureRepositoryImplements = () => {
 
    //checking while registering new Venture  already is exist or not

@@ -4,6 +4,7 @@ import userLogin from "../../../Application/usecase/user/Login.js"
 import softDelete from "../../../Application/usecase/user/softDelete.js"
 import findOneUser from "../../../Application/usecase/user/getUser.js"
 import googleWithLogin from "../../../Application/usecase/user/googleLogin.js"
+import connectUser from "../../../Application/usecase/user/connectUser.js"
 
 const userController = (repositoryInterface, repositoryImplements, serviceInterface, userServiceImplements) => {
 
@@ -66,6 +67,20 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
 
     }
 
+    const callRequested=async(req,res)=>{
+
+        console.log('user details',req.userdata)
+    
+        const uid=req.userdata.userId
+        const vid=req.body.ventureId
+    
+           const response=await connectUser(dbRepository,uid,vid)
+           if(!response) return res.json({message:'User Already requested this company'})
+           return res.json({message:'You request send to the company ..they will contact you as soon as possible'})
+     
+           
+      } 
+
 
 
     //GET METHODS
@@ -113,6 +128,7 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
 
 
     return {
+        callRequested,
         googleLogin,
         update,
         getUser,

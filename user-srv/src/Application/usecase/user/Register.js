@@ -1,5 +1,6 @@
 //import entities if it need
 import userData from "../../../Entities/user/userEntities.js"
+import publisher from "../../../Message-broker/publisher/publisher.js"
 const registerUser=async(dbrepo,service,body)=>{
        
 
@@ -26,6 +27,9 @@ const registerUser=async(dbrepo,service,body)=>{
 
             const userDetails= await userData(username,email,region,phone,destination,date_of_birth,HashPassword,HashPassword)
             const response=await dbrepo.register(userDetails)
+
+            
+
             return response
 
 
