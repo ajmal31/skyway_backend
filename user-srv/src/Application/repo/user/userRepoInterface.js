@@ -8,10 +8,14 @@ const userRepositoryInterface=(repositories)=>{
      const getUser=(obj)=>repositories.findUser(obj)
      const update=(data)=>repositories.update(data)
      const findUser=(obj)=>repositories.findUser(obj)
+     const ventureExist=(uid,vid)=>repositories.ventureExist(uid,vid)
+     const addVentureToUser=(uid,vid)=>repositories.addVentureToUser(uid,vid)
        
      
 
     return {
+        addVentureToUser,
+        ventureExist,
         findUser,
         update,
         getUser,

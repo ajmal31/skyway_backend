@@ -6,10 +6,7 @@ const connectedUserSchema=new Schema({
     
     ventureId:Schema.Types.ObjectId,
     users:[
-        {
-            userId:Schema.Types.ObjectId,
-            status:String
-        }
+       
     ]        
 },{
     timestamps:true

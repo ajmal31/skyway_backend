@@ -14,27 +14,25 @@ const ventureRepositoryImplements = () => {
   const userExists = async (uid, vid) => {
    
     
-    const response = await connectedUserModel.findOne({ventureId:vid,users:{$elemMatch:{userId:uid}}})
+    const response = await connectedUserModel.findOne({ventureId:vid,users:{$elemMatch:{_id:uid}}})
    
     return response
   }
   //add new User to particular venture document
-  const addUser = async (uid, vid) => {
+  const addUser = async (userdata, vid) => {
      
-    const response = await connectedUserModel.updateOne({ ventureId: vid }, {$push:{users:{userId:uid,status:'pending'}}})
+    const response = await connectedUserModel.updateOne({ ventureId: vid }, {$push:{users:{userdata}}})
     return response
 
   }
   //creating new document with ventureId and user-cred
-  const addVentureWithUser = async (uid, vid) => {
+  const addVentureWithUser = async (userdata, vid) => {
 
     const venture = new connectedUserModel({
       ventureId: vid,
       users:[
-        {
-          userId:uid,
-          status:'pending'
-        }
+        userdata,
+        
       ]
     })
     const response = await venture.save()
@@ -88,7 +86,9 @@ const ventureRepositoryImplements = () => {
       password_one: password_one(),
       confirm_password_one: confirm_password_one(),
       password_two: password_two(),
-      confirm_password_two: confirm_password_two()
+      confirm_password_two: confirm_password_two(),
+      genuine:'pending',
+      admin_allowed:'pending'
     })
 
     const response = await venture.save()

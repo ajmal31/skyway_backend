@@ -46,7 +46,10 @@ const ventureSchema = new Schema({
     password_one: { type: String, required: true,  validate: (value) => value?.length > 6 },
     confirm_password_one: { type: String, required: true, validate: (value) => value?.length > 6},
     password_two: {  type: String, required: true,  validate: (value) => value?.length > 6 },
-    confirm_password_two: { type: String, required: true, validate: (value) => value?.length > 6 }
+    confirm_password_two: { type: String, required: true, validate: (value) => value?.length > 6 },
+    genuine:{type:String,requied:true},
+    admin_allowed:{type:String,reqired:true}
+
 
 
 })

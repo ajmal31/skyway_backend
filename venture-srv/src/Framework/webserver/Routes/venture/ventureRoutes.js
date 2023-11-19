@@ -24,9 +24,6 @@ const ventureRoutes=(express)=>{
    router.route('/login').post(controller.login)
 
 
-   //GET METHODS
-   router.route('/callRequested').post(jwtVerfication('ajmal123user-srv'),controller.callRequested)
-
    //GET ALL VENTURES
    router.route('/getAllventures').get(controller.getAllVentures)
    router.route('/getAllUsers').get(controller.getAllUsers)

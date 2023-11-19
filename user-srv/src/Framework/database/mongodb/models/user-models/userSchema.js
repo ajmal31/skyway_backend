@@ -12,7 +12,10 @@ const userSchema=new Schema({
     date_of_birth:{type: Date},
     password:{type:String,required:true},
     confirm_password:{type: String, required:true},
-    soft_delete: {type: Boolean ,default:false}
+    soft_delete: {type: Boolean ,default:false},
+    ventures:[
+        
+    ]
     
 
 

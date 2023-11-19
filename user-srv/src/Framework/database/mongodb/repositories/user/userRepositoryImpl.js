@@ -63,7 +63,19 @@ const userRepositoryImplements=()=>{
         return response
 
     }
+    const ventureExist=async(uid,vid)=>{
+
+        const response=await userModel.findOne({_id:uid,ventures:{$elemMatch:{ventureId:vid}}})
+        return response
+    }
+    const addVentureToUser=async(uid,vid)=>{
+
+        const response=await userModel.updateOne({_id:uid},{$push:{ventures:{ventureId:vid,status:'pending'}}})
+        return response
+    }
     return{
+        addVentureToUser,
+        ventureExist,
         update,
         remove,
         register,

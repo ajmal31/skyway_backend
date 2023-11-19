@@ -6,6 +6,7 @@ import findOneUser from "../../../Application/usecase/user/getUser.js"
 import googleWithLogin from "../../../Application/usecase/user/googleLogin.js"
 import connectUser from "../../../Application/usecase/user/connectUser.js"
 
+
 const userController = (repositoryInterface, repositoryImplements, serviceInterface, userServiceImplements) => {
 
     //user repo and implements assign to dbRepository
@@ -15,9 +16,7 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
 
     //POST METHODS
 
-
-
-    //register
+    //register ❗ ❗ ❗ ❗ update exist should be update
     const register = async (req, res) => {
 
         try {
@@ -35,7 +34,7 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
 
 
     }
-    //login
+    //login ❗ ❗ ❗ ❗  update exist should be update
     const login = async (req, res) => {
 
 
@@ -47,7 +46,8 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
         else return res.json({ message: 'user does not exist' })
 
     }
-
+  
+    //🏁🏁
     const googleLogin = async (req, res) => {
 
 
@@ -75,17 +75,13 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
         const vid=req.body.ventureId
     
            const response=await connectUser(dbRepository,uid,vid)
-           if(!response) return res.json({message:'User Already requested this company'})
-           return res.json({message:'You request send to the company ..they will contact you as soon as possible'})
+           console.log('response in controller while making getting response realted user request')
+           return res.json(response)
      
            
-      } 
-
-
+    } 
 
     //GET METHODS
-
-
 
     //delete user (soft delete)
     const remove = async (req, res) => {
@@ -103,8 +99,6 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
         return response ? res.json({ response }) : res.json({ message: "did'nt get user details" })
     }
 
-
-
     //PUT METHODS
 
     //update user
@@ -113,18 +107,6 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
         const reponse = await update(req.body, dbRepository, service)
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     return {
