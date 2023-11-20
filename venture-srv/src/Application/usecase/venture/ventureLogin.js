@@ -5,26 +5,39 @@ const ventureLogin=async(dbRepo,service,data)=>{
         key:'official_email',
         value:data?.email
     }
-    console.log(emailObj)
+   
+
     const emailExist=await dbRepo.emailExist(emailObj)
-    console.log(emailExist)
+
     if(!emailExist) return emailExist
+
+        //Response object
+        const obj={
+            loggedIn:false,
+            password_one:false,
+            password_two:false,
+            token:false,
+            pending:null,
+            ventureName:emailExist?.ventureName,
+            status:emailExist?.admin_allowed
+    
+        }
  
+            //if this accoun registration is pending ..shoulbe validate admin then only venture can enter ||continue here
+        // ||complete properly venture login ❗ ❗ ❗ ❗ 
+  
+        if(emailExist?.admin_allowed==='pending'){
+            obj.pending=true
+            
+        }
 
     const dbPasword_one=emailExist.password_one
     const dbPasword_two=emailExist.password_two
 
     const verifyPassword=await service.verifyPassword(dbPasword_one,data.password_one,dbPasword_two,data.password_two)
-    console.log('after verifying password',verifyPassword)
+
     const {password_one,password_two}=verifyPassword
 
-    const obj={
-        loggedIn:false,
-        password_one:false,
-        password_two:false,
-        token:false
-
-    }
     
     if(password_one&&password_two) {
 
@@ -36,6 +49,7 @@ const ventureLogin=async(dbRepo,service,data)=>{
             ventureName:emailExist.ventureName
 
         }
+
         const token=await service.generateToken(ventureData)
         obj.token=token
         return obj
