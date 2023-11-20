@@ -1,4 +1,6 @@
-const adminServiceInterface=()=>{
+const adminServiceInterface=(services:any)=>{
+
+    console.log('service interface')
 
 
 }

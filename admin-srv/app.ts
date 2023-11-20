@@ -4,6 +4,8 @@ import http from 'http'
 import expressConfig from "./src/Framework/webserver/express"
 import serverConfig from "./src/Framework/webserver/server"
 import config from "./src/config/config"
+import Routes from "./src/Framework/webserver/Routes"
+import connection from "./src/Framework/database/connection"
 
 
 
@@ -16,6 +18,15 @@ const server:Server=http.createServer(app)
 //Invoking Server Creating Function
 serverConfig(server,config.port).startServer()
 
+
+//Invoking Express config Function
+expressConfig(app)
+
+//Connecting Routes 
+Routes(app,express)
+
+//connect Db
+connection(config.mongodb_uri)
 
 
 
