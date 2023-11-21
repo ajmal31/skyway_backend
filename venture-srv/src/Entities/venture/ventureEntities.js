@@ -21,28 +21,7 @@ const ventureEntity=(data,hashedPasswords)=>{
 
     }=data
     const {password_one,password_two}=hashedPasswords
-    console.log(hashedPasswords)
-    console.log('from entity')
-    console.log( firstName,
-        lastName,
-        ventureName,
-        phone_one,
-        phone_two,
-        official_email,
-        venture_category,
-        description,
-        expertise_contries,
-        min_max_service_amount,
-        official_portfolio,
-        website_link,
-        register_number,
-        license_number,
-        social_media,
-        insurance_img,
-        license_img,
-        password_one,
-        password_two,
-         )
+   
         
    return{
   

@@ -1,5 +1,6 @@
 //import entities
 import ventureEntity from "../../../Entities/venture/ventureEntities.js"
+import publisher from "../../../message-broker/publisher/publisher.js"
 const ventureRegister = async (dbrepo, service, data) => {
 
 
@@ -49,7 +50,12 @@ const ventureRegister = async (dbrepo, service, data) => {
     const ventureData = ventureEntity(data,hashedPasswords)
 
     const response=await dbrepo.register(ventureData)
-    if(response) return response
+    if(response) {
+        
+        
+        const result=await publisher(response)
+        return response
+    }
     console.log('venture regsiter failed')
 
 

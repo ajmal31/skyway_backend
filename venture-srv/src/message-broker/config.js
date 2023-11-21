@@ -9,6 +9,7 @@ const createChannel = async () => {
         const channel = await connection.createChannel()
         const queueName = 'VENTURE_SRV'
         const queue = await channel.assertQueue(queueName)
+        
         return channel
 
     }catch(err){

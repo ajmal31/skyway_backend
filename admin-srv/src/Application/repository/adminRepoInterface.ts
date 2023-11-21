@@ -1,6 +1,11 @@
 const adminRepInterface=(respositories:any)=>{
 
-  console.log('helo interface')
+  const ventureDataHandler=(data:Record<string,any>)=>respositories.insertVentureData(data)
+
+
+  return {
+    ventureDataHandler
+  }
 }
 
 export default adminRepInterface

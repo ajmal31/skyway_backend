@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const adminRepInterface = (respositories) => {
-    console.log('helo interface');
+    const ventureDataHandler = (data) => respositories.insertVentureData(data);
+    return {
+        ventureDataHandler
+    };
 };
 exports.default = adminRepInterface;
