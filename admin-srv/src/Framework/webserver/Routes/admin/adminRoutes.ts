@@ -13,7 +13,13 @@ const adminRoutes=(express:any):Router=>{
 
     const controller=adminController(adminRepInterface,repositoryImplements,adminServiceInterface,serviceImplements)
 
-    // router.route('/').get()
+
+    //POST METHODS
+
+    router.route('/login').post(controller.login)
+    
+
+   
 
     return router
     

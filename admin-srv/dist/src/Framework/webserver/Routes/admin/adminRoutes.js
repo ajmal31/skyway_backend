@@ -13,7 +13,8 @@ const adminRoutes = (express) => {
     const app = express();
     //Invoking Controller assign to a Varaible
     const controller = (0, controller_1.default)(adminRepoInterface_1.default, respositoryImpl_1.default, adminServiceInterface_1.default, serviceImpl_1.default);
-    // router.route('/').get()
+    //POST METHODS
+    router.route('/login').post(controller.login);
     return router;
 };
 exports.default = adminRoutes;

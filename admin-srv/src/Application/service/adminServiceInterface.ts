@@ -1,6 +1,11 @@
 const adminServiceInterface=(services:any)=>{
 
-    console.log('service interface')
+    const tokenGenerate=(data:Record<string,any>)=>services.tokenGenerate(data)
+
+    return{
+
+        tokenGenerate
+    }
 
 
 }
