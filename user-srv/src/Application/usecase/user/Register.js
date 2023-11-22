@@ -4,7 +4,7 @@ import publisher from "../../../Message-broker/publisher/publisher.js"
 const registerUser=async(dbrepo,service,body)=>{
        
 
-
+      
       const {username,email,region,phone,destination,date_of_birth,password,confirm_password}=body
       const emailObj={
         key:'email',
@@ -27,8 +27,8 @@ const registerUser=async(dbrepo,service,body)=>{
 
             const userDetails= await userData(username,email,region,phone,destination,date_of_birth,HashPassword,HashPassword)
             const response=await dbrepo.register(userDetails)
-
-            
+            const foreign='ADMIN-SRV'
+            const result=await publisher(foreign,response)
 
             return response
 

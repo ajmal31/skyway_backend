@@ -1,5 +1,6 @@
 import ventureReplicationSchema from "../models/allVentures"
 import admin from "../models/admin-cred"
+import user_replication from "../models/users"
 const repositoryImplements = () => {
 
     const insertVentureData = async (data: Record<string, any>) => {
@@ -14,15 +15,21 @@ const repositoryImplements = () => {
 
     }
     const findAllventures=async()=>{
-        console.log('hi iam')
-
+        
         const response=await ventureReplicationSchema.find()
-        console.log('response in repo',response     )
+        
         return response
+    }
+    const insertUserData=async(data:Record<string,any>)=>{
+
+       const user=new user_replication({data})
+       const response=await user.save()
+
     }
 
 
     return {
+        insertUserData,
         findAllventures,
         findAdmin,
         insertVentureData

@@ -7,12 +7,14 @@ import serviceImplements from "../../Framework/services/user/serviceImpl"
 
 //import Use case below
 import ventureHandler from "../../Application/usecase/ventureHandler"
+import userHandler from "../../Application/usecase/userHandler"
 
 const consumer = async () => {
 
     const dbRepo = adminRepInterface(repositoryImplements())
     const service = adminServiceInterface(serviceImplements())
 
+    //Invoking channel Creating function
     const channel = await createChannel()
 
     channel.consume('ADMIN-SRV', (message) => {
@@ -20,9 +22,13 @@ const consumer = async () => {
             const data = JSON.parse(message?.content.toString())
             if (data?.ventureName) {
 
-                ventureHandler(dbRepo,data)
+                ventureHandler(dbRepo, data)
 
+            } else if(data?.username){
+
+                userHandler(dbRepo,data)
             }
+
 
             channel.ack(message)
 

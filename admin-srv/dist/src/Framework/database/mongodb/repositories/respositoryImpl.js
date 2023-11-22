@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const allVentures_1 = __importDefault(require("../models/allVentures"));
 const admin_cred_1 = __importDefault(require("../models/admin-cred"));
+const users_1 = __importDefault(require("../models/users"));
 const repositoryImplements = () => {
     const insertVentureData = async (data) => {
         const ventureReplicated = data;
@@ -16,12 +17,15 @@ const repositoryImplements = () => {
         return response;
     };
     const findAllventures = async () => {
-        console.log('hi iam');
         const response = await allVentures_1.default.find();
-        console.log('response in repo', response);
         return response;
     };
+    const insertUserData = async (data) => {
+        const user = new users_1.default({ data });
+        const response = await user.save();
+    };
     return {
+        insertUserData,
         findAllventures,
         findAdmin,
         insertVentureData

@@ -1,14 +1,15 @@
-const adminRepInterface=(respositories:any)=>{
+const adminRepInterface=(repositories:any)=>{
 
-  const ventureDataHandler=(data:Record<string,any>)=>respositories.insertVentureData(data)
-  const login=(data:Record<string,any>)=>respositories.login(data)
-  const adminExist=(email:string)=>respositories.findAdmin(email)
-  const ventureList=()=>respositories.findAllventures()
+  const ventureDataHandler=(data:Record<string,any>)=>repositories.insertVentureData(data)
+  const login=(data:Record<string,any>)=>repositories.login(data)
+  const adminExist=(email:string)=>repositories.findAdmin(email)
+  const ventureList=()=>repositories.findAllventures()
+  const userHandler=(data:Record<string,any>)=>repositories.insertUserData(data)
   
 
 
   return {
-    
+    userHandler,
     ventureList,
     adminExist,
     ventureDataHandler,

@@ -29,6 +29,7 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
             }
 
         } catch (err) {
+            
             console.log('error ocuured while getin reponse realted user register', err)
         }
 
