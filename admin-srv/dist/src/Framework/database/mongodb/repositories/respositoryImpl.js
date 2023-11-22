@@ -15,7 +15,14 @@ const repositoryImplements = () => {
         const response = await admin_cred_1.default.findOne({ email });
         return response;
     };
+    const findAllventures = async () => {
+        console.log('hi iam');
+        const response = await allVentures_1.default.find();
+        console.log('response in repo', response);
+        return response;
+    };
     return {
+        findAllventures,
         findAdmin,
         insertVentureData
     };

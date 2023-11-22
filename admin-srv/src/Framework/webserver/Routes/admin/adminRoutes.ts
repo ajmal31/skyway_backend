@@ -17,6 +17,10 @@ const adminRoutes=(express:any):Router=>{
     //POST METHODS
 
     router.route('/login').post(controller.login)
+
+    //GET METHODS
+
+    router.route('/getAllventures').get(controller.getAllventures)
     
 
    

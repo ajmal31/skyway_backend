@@ -1,5 +1,6 @@
 import { Request,Response } from "express"
 import loginUsecase from "../../../Application/usecase/login"
+import allVentureList from "../../../Application/usecase/getAllVenturs"
 const adminController=(dbrepInterface:any,dbRepoImplements:any,serviceInterface:any,serviceImplements:any)=>{
 
 
@@ -13,8 +14,15 @@ const adminController=(dbrepInterface:any,dbRepoImplements:any,serviceInterface:
         return res.json(response)
         
     }
+    //GET METHODS
+
+    const getAllventures=async(req:Request,res:Response)=>{
+
+        const response=await allVentureList(dbRepo)
+    }
 
     return {
+        getAllventures,
         login
        
     }   

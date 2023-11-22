@@ -13,9 +13,17 @@ const repositoryImplements = () => {
         return response
 
     }
+    const findAllventures=async()=>{
+        console.log('hi iam')
+
+        const response=await ventureReplicationSchema.find()
+        console.log('response in repo',response     )
+        return response
+    }
 
 
     return {
+        findAllventures,
         findAdmin,
         insertVentureData
     }

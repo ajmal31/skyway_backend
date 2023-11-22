@@ -15,6 +15,8 @@ const adminRoutes = (express) => {
     const controller = (0, controller_1.default)(adminRepoInterface_1.default, respositoryImpl_1.default, adminServiceInterface_1.default, serviceImpl_1.default);
     //POST METHODS
     router.route('/login').post(controller.login);
+    //GET METHODS
+    router.route('/getAllventures').get(controller.getAllventures);
     return router;
 };
 exports.default = adminRoutes;
