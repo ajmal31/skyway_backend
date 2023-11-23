@@ -24,6 +24,9 @@ const adminRoutes = (express: any): Router => {
 
     router.route('/getAllUsers').get(controller.getAllUsers)
 
+    //PUT METHODS
+    router.route('/updateVentureStatus').post(controller.updateVentureStatus)
+
 
 
 

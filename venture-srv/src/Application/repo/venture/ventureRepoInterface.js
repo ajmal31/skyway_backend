@@ -10,11 +10,13 @@ const ventureRepositoryInterface=(repositories)=>{
      const registerNumberExist=(obj)=>repositories.ventureExist(obj)
      const licenseNumberExist=(obj)=>repositories.ventureExist(obj)
      const getAllVentures=(obj)=>repositories.getAllVentures(obj)
+     const updateVentureStatus=(id)=>repositories.updateVentureStatus(id)
 
 
      
 
     return {
+        updateVentureStatus,
         getAllVentures,
         ventureNameExist,
         emailExist,

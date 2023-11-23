@@ -4,31 +4,33 @@ import user_replication from "../models/users"
 const repositoryImplements = () => {
 
     const insertVentureData = async (data: Record<string, any>) => {
-        const ventureReplicated = data
-        const model = new ventureReplicationSchema({ ventureReplicated })
-        const response = await model.save()
+
+        const model = await ventureReplicationSchema.findOneAndUpdate({ "ventureReplicated._id": data?._id },
+        { $set: { ventureReplicated: data } })
+        return model
+
     }
-    const findAdmin=async(email:string)=>{
- 
-        const response=await admin.findOne({email})
+    const findAdmin = async (email: string) => {
+
+        const response = await admin.findOne({ email })
         return response
 
     }
-    const findAllventures=async()=>{
-        
-        const response=await ventureReplicationSchema.find()
-        
+    const findAllventures = async () => {
+
+        const response = await ventureReplicationSchema.find()
+
         return response
     }
-    const insertUserData=async(data:Record<string,any>)=>{
+    const insertUserData = async (data: Record<string, any>) => {
 
-       const user=new user_replication({data})
-       const response=await user.save()
+        const user = new user_replication({ data })
+        const response = await user.save()
 
     }
-    const getAllUsers=async()=>{
+    const getAllUsers = async () => {
 
-        const response=await user_replication.find()
+        const response = await user_replication.find()
         return response
 
     }

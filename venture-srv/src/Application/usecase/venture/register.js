@@ -53,7 +53,7 @@ const ventureRegister = async (dbrepo, service, data) => {
     if(response) {
         
         
-        const result=await publisher(response)
+        const result=await publisher("ADMIN-SRV",response)
         return response
     }
     console.log('venture regsiter failed')

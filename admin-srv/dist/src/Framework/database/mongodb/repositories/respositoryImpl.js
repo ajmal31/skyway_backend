@@ -8,9 +8,8 @@ const admin_cred_1 = __importDefault(require("../models/admin-cred"));
 const users_1 = __importDefault(require("../models/users"));
 const repositoryImplements = () => {
     const insertVentureData = async (data) => {
-        const ventureReplicated = data;
-        const model = new allVentures_1.default({ ventureReplicated });
-        const response = await model.save();
+        const model = await allVentures_1.default.findOneAndUpdate({ "ventureReplicated._id": data?._id }, { $set: { ventureReplicated: data } });
+        return model;
     };
     const findAdmin = async (email) => {
         const response = await admin_cred_1.default.findOne({ email });
