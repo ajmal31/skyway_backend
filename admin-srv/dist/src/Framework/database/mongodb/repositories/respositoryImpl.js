@@ -24,7 +24,12 @@ const repositoryImplements = () => {
         const user = new users_1.default({ data });
         const response = await user.save();
     };
+    const getAllUsers = async () => {
+        const response = await users_1.default.find();
+        return response;
+    };
     return {
+        getAllUsers,
         insertUserData,
         findAllventures,
         findAdmin,

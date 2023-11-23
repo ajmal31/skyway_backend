@@ -1,17 +1,17 @@
-import { Express,Router } from "express"
+import { Express, Router } from "express"
 import adminController from "../../../../Adaptors/controller/admin/controller"
 import adminRepInterface from "../../../../Application/repository/adminRepoInterface"
 import adminServiceInterface from "../../../../Application/service/adminServiceInterface"
 import serviceImplements from "../../../services/user/serviceImpl"
 import repositoryImplements from "../../../database/mongodb/repositories/respositoryImpl"
-const adminRoutes=(express:any):Router=>{
+const adminRoutes = (express: any): Router => {
 
-    const router=express.Router()
-    const app=express()
+    const router = express.Router()
+    const app = express()
 
     //Invoking Controller assign to a Varaible
 
-    const controller=adminController(adminRepInterface,repositoryImplements,adminServiceInterface,serviceImplements)
+    const controller = adminController(adminRepInterface, repositoryImplements, adminServiceInterface, serviceImplements)
 
 
     //POST METHODS
@@ -21,12 +21,14 @@ const adminRoutes=(express:any):Router=>{
     //GET METHODS
 
     router.route('/getAllventures').get(controller.getAllventures)
-    
 
-   
+    router.route('/getAllUsers').get(controller.getAllUsers)
+
+
+
 
     return router
-    
+
 
 
 }

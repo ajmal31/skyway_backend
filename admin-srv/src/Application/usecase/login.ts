@@ -2,7 +2,8 @@ const loginUsecase = async (dbRepo: any, service: any, data: Record<string, any>
 
     let  response={
         message:'',
-        token:''
+        token:'',
+        email:''
     }
 
     const adminExist = await dbRepo.adminExist(data?.email)
@@ -18,6 +19,7 @@ const loginUsecase = async (dbRepo: any, service: any, data: Record<string, any>
         const token = await service.tokenGenerate(data)
         response.message='Admin login succesful'
         response.token=token
+        response.email=adminExist.email
         return response
     }
     response.message='Invalid Password'

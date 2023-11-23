@@ -26,9 +26,15 @@ const repositoryImplements = () => {
        const response=await user.save()
 
     }
+    const getAllUsers=async()=>{
 
+        const response=await user_replication.find()
+        return response
+
+    }
 
     return {
+        getAllUsers,
         insertUserData,
         findAllventures,
         findAdmin,

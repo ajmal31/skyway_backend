@@ -17,6 +17,7 @@ const adminRoutes = (express) => {
     router.route('/login').post(controller.login);
     //GET METHODS
     router.route('/getAllventures').get(controller.getAllventures);
+    router.route('/getAllUsers').get(controller.getAllUsers);
     return router;
 };
 exports.default = adminRoutes;

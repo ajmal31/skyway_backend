@@ -5,10 +5,12 @@ const adminRepInterface=(repositories:any)=>{
   const adminExist=(email:string)=>repositories.findAdmin(email)
   const ventureList=()=>repositories.findAllventures()
   const userHandler=(data:Record<string,any>)=>repositories.insertUserData(data)
+  const getAllUsers=()=>repositories.getAllUsers()
   
 
 
   return {
+    getAllUsers,
     userHandler,
     ventureList,
     adminExist,
