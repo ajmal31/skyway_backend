@@ -19,6 +19,7 @@ const consumer = async () => {
 
     channel.consume('ADMIN-SRV', (message) => {
         if (message) {
+            console.log('messag consumes in admin service')
             const data = JSON.parse(message?.content.toString())
             if (data?.ventureName) {
 
@@ -32,7 +33,7 @@ const consumer = async () => {
 
             channel.ack(message)
 
-        } else console.log('message doesnt found')
+        } else console.log('message doesnt found in admin service')
 
     })
 

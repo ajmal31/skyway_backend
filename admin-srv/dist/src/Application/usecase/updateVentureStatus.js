@@ -8,5 +8,6 @@ const updateVentureStatus = async (data) => {
     console.log('status', data);
     const response = await (0, publish_1.default)('VENTURE_SRV', data);
     console.log('after sending to venture srv', response);
+    return response;
 };
 exports.default = updateVentureStatus;

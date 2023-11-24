@@ -18,6 +18,7 @@ const consumer = async () => {
     const channel = await (0, config_1.default)();
     channel.consume('ADMIN-SRV', (message) => {
         if (message) {
+            console.log('messag consumes in admin service');
             const data = JSON.parse(message?.content.toString());
             if (data?.ventureName) {
                 (0, ventureHandler_1.default)(dbRepo, data);
@@ -28,7 +29,7 @@ const consumer = async () => {
             channel.ack(message);
         }
         else
-            console.log('message doesnt found');
+            console.log('message doesnt found in admin service');
     });
 };
 exports.default = consumer;

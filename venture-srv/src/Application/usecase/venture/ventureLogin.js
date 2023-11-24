@@ -23,13 +23,14 @@ const ventureLogin=async(dbRepo,service,data)=>{
     
         }
  
-            //if this accoun registration is pending ..shoulbe validate admin then only venture can enter ||continue here
+        //if this accoun registration is pending ..shoulbe validate admin then only venture can enter ||continue here
         // ||complete properly venture login ❗ ❗ ❗ ❗ 
   
+        //this situtation i can't use boolean (localstorage)
         if(emailExist?.admin_allowed==='pending'){
-            obj.pending=true
+            obj.pending="true"
             
-        }
+        }else obj.pending="false"
 
     const dbPasword_one=emailExist.password_one
     const dbPasword_two=emailExist.password_two

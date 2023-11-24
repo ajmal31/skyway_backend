@@ -116,7 +116,7 @@ const ventureRepositoryImplements = () => {
   }
   const updateVentureStatus=async (id)=>{
 
-    const response=await ventureModel.findOneAndUpdate({_id:id},{$set:{admin_allowed:'allowed'}})
+    const response=await ventureModel.findOneAndUpdate({_id:id},{$set:{admin_allowed:'allowed'}},{new:true});  
     return response
   }
 

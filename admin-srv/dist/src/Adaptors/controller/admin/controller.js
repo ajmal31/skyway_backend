@@ -26,6 +26,8 @@ const adminController = (dbrepInterface, dbRepoImplements, serviceInterface, ser
     };
     const updateVentureStatus = async (req, res) => {
         const response = await (0, updateVentureStatus_1.default)(req?.body);
+        if (response)
+            return res.json({ message: "status changed" });
     };
     return {
         updateVentureStatus,

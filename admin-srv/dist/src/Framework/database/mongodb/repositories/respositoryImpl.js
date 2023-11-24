@@ -8,7 +8,9 @@ const admin_cred_1 = __importDefault(require("../models/admin-cred"));
 const users_1 = __importDefault(require("../models/users"));
 const repositoryImplements = () => {
     const insertVentureData = async (data) => {
-        const model = await allVentures_1.default.findOneAndUpdate({ "ventureReplicated._id": data?._id }, { $set: { ventureReplicated: data } });
+        console.log('reached in implmentswith data', data);
+        const model = await allVentures_1.default.findOneAndUpdate({ "ventureReplicated._id": data?._id }, { $set: { ventureReplicated: data } }, { upsert: true });
+        console.log('after inserting or updating the status data to admin ,resposne', model);
         return model;
     };
     const findAdmin = async (email) => {

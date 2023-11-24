@@ -20,7 +20,7 @@ const consumer = async () => {
     channel.consume('VENTURE_SRV', message => {
 
         const data = JSON.parse(message.content)
-        console.log('data in venture srv consumer',data)
+        console.log('data consuming in venture-srv',data)
         if(data.method==='call request') connectUser(dbrepo,data)
         if(data?.id) updateVentureStatus(data,dbrepo)
         channel.ack(message)

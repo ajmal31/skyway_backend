@@ -34,6 +34,7 @@ const adminController=(dbrepInterface:any,dbRepoImplements:any,serviceInterface:
 
 
      const response=await ventureStatusUpdate(req?.body)
+     if(response) return res.json({message:"status changed"})
 
     } 
 

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const config_1 = __importDefault(require("../config"));
 const publish = async (foriegn, data) => {
     const channel = await (0, config_1.default)();
+    console.log(`data published from admin service to${foriegn}`);
     const response = await channel.sendToQueue(foriegn, Buffer.from(JSON.stringify(data)));
     return response;
 };
