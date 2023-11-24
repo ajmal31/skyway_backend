@@ -7,6 +7,7 @@ import ventureServiceImplements from "../../../services/venture/ventureServiceIm
 import { uploadImage } from "../../../../multer/index.js"
 import {jwtVerfication} from "jwt-verification-middleware"
 import register_validation from "../../../../custome-middlewares/Register_validation.js"
+import env from "../../../../config/env.js"
 
 
 const ventureRoutes=(express)=>{
@@ -24,9 +25,11 @@ const ventureRoutes=(express)=>{
    router.route('/login').post(controller.login)
 
 
+
    //GET ALL VENTURES
    router.route('/getAllventures').get(controller.getAllVentures)
-   router.route('/getAllUsers').get(controller.getAllUsers)
+   router.route('/getAllUsers').get(jwtVerfication(env.JWT_SECRETKEY),controller.getAllUsers)
+
 
 
 

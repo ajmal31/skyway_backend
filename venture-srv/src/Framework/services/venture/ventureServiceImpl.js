@@ -5,6 +5,7 @@ import  jwt  from "jsonwebtoken"
 import env from "../../../config/env.js"
 const ventureServiceImplements=()=>{
 
+    //Password Hashing 
     const passwordHash=async(pass1,pass2)=>{
  
         const password_one=await argon2.hash(pass1)
@@ -12,6 +13,7 @@ const ventureServiceImplements=()=>{
         return {password_one,password_two}
 
     }
+    //Hashed Password Verifying
     const verifyPassword=async(dbpass_one,pass_one,dbpass_two,pass_two)=>{
 
 
@@ -19,7 +21,7 @@ const ventureServiceImplements=()=>{
         const password_two=await argon2.verify(dbpass_two,pass_two)
         return {password_one,password_two}
     }
-    
+    //Jwt Token Generating
     const generateToken=async(ventureData)=>{
         
       const token=jwt.sign(ventureData,env.JWT_SECRETKEY)

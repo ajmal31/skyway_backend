@@ -1,7 +1,10 @@
-const takeAllUsers=async()=>{
+const takeAllUsers=async(dbRepo,vid)=>{
 
 
-    return 
+    const response= await dbRepo.getAllUsers(vid)
+    const {users}=response
+    return users
+
 }
 
 export default takeAllUsers

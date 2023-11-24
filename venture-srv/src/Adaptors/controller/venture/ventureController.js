@@ -75,7 +75,10 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
 
   const getAllUsers = async (req, res) => {
 
-    const response = await takeAllUsers()
+    const {_id}=req.userdata
+
+    const data = await takeAllUsers(dbRepo,_id)
+    return res.json({data})
 
   }
 

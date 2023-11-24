@@ -25,7 +25,7 @@ const ventureRepositoryImplements = () => {
     return response
 
   }
-  //creating new document with ventureId and user-cred
+  //creating new document with ventureId and user-credentials
   const addVentureWithUser = async (userdata, vid) => {
 
     const venture = new connectedUserModel({
@@ -39,6 +39,7 @@ const ventureRepositoryImplements = () => {
     return response
 
   }
+  //venture Register
   const register = async (data) => {
 
     const { firstName,
@@ -119,11 +120,17 @@ const ventureRepositoryImplements = () => {
     const response=await ventureModel.findOneAndUpdate({_id:id},{$set:{admin_allowed:'allowed'}},{new:true});  
     return response
   }
+  //Taking Some Users From Who Connected a Particular Venture
+  const getAllUsers=async(vid)=>{
 
+    const response=await connectedUserModel.findOne({ventureId:vid})
+    return response
+  }
 
 
 
   return {
+    getAllUsers,
     updateVentureStatus,
     getAllVentures,
     ventureExist,
