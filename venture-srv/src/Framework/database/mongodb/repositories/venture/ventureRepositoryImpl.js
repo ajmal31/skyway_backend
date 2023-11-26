@@ -3,7 +3,7 @@ import connectedUserModel from "../../models/venture-models/connected_users.js"
 import ventureModel from "../../models/venture-models/ventures.js"
 const ventureRepositoryImplements = () => {
 
-   //checking while registering new Venture  already is exist or not
+  //checking while registering new Venture  already is exist or not
   const ventureIdExist = async (vid) => {
 
     const response = await connectedUserModel.exists({ ventureId: vid })
@@ -12,16 +12,16 @@ const ventureRepositoryImplements = () => {
 
   }
   const userExists = async (uid, vid) => {
-   
-    
-    const response = await connectedUserModel.findOne({ventureId:vid,users:{$elemMatch:{_id:uid}}})
-   
+
+
+    const response = await connectedUserModel.findOne({ ventureId: vid, users: { $elemMatch: { _id: uid } } })
+
     return response
   }
   //add new User to particular venture document
   const addUser = async (userdata, vid) => {
-     
-    const response = await connectedUserModel.updateOne({ ventureId: vid }, {$push:{users:{userdata}}})
+
+    const response = await connectedUserModel.updateOne({ ventureId: vid }, { $push: { users: { userdata } } })
     return response
 
   }
@@ -30,9 +30,9 @@ const ventureRepositoryImplements = () => {
 
     const venture = new connectedUserModel({
       ventureId: vid,
-      users:[
+      users: [
         userdata,
-        
+
       ]
     })
     const response = await venture.save()
@@ -88,8 +88,8 @@ const ventureRepositoryImplements = () => {
       confirm_password_one: confirm_password_one(),
       password_two: password_two(),
       confirm_password_two: confirm_password_two(),
-      genuine:'pending',
-      admin_allowed:'pending'
+      genuine: 'pending',
+      admin_allowed: 'pending'
     })
 
     const response = await venture.save()
@@ -97,33 +97,35 @@ const ventureRepositoryImplements = () => {
 
 
   }
+  //find or checking 
   const ventureExist = async (obj) => {
-
 
     const { key, value } = obj
     const query = { [key]: value }
     const response = await ventureModel.findOne(query)
+
     return response
 
 
   }
+  //get All Ventures
   const getAllVentures = async () => {
 
-    const response = await ventureModel.find()
+    const response = await ventureModel.find({ admin_allowed: 'allowed' })
     return response
 
 
 
   }
-  const updateVentureStatus=async (id)=>{
+  const updateVentureStatus = async (id) => {
 
-    const response=await ventureModel.findOneAndUpdate({_id:id},{$set:{admin_allowed:'allowed'}},{new:true});  
+    const response = await ventureModel.findOneAndUpdate({ _id: id }, { $set: { admin_allowed: 'allowed' } }, { new: true });
     return response
   }
   //Taking Some Users From Who Connected a Particular Venture
-  const getAllUsers=async(vid)=>{
+  const getAllUsers = async (vid) => {
 
-    const response=await connectedUserModel.findOne({ventureId:vid})
+    const response = await connectedUserModel.findOne({ ventureId: vid })
     return response
   }
 

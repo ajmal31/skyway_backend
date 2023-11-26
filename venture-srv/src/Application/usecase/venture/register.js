@@ -29,7 +29,7 @@ const ventureRegister = async (dbrepo, service, data) => {
         value:data.register_number
     }
     const register=await dbrepo.registerNumberExist(registerObj)
-    if(register) return {erros:'This registration number already used'}
+    if(register) return {error:'This registration number already used'}
 
 
     //check the license number whether it is register or not
@@ -39,7 +39,7 @@ const ventureRegister = async (dbrepo, service, data) => {
         value:data.license_number
     }
     const licenseExist=await dbrepo.licenseNumberExist(licenseObj)
-    if(register) return {erros:'This license number already used'}
+    if(licenseExist) return {error:'This license number already used'}
 
 
 
@@ -54,7 +54,7 @@ const ventureRegister = async (dbrepo, service, data) => {
         
         
         const result=await publisher("ADMIN-SRV",response)
-        return response
+        return {success:"venture Registration succesfull"}
     }
     console.log('venture regsiter failed')
 

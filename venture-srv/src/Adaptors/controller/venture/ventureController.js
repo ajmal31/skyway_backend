@@ -4,6 +4,7 @@ import connectUser from "../../../Application/usecase/venture/connectUser.js"
 import listVentures from "../../../Application/usecase/venture/getAllVentures.js"
 import ventureLogin from "../../../Application/usecase/venture/ventureLogin.js"
 import takeAllUsers from "../../../Application/usecase/venture/takeAllUsers.js"
+import takeOneVenture from "../../../Application/usecase/venture/takeOneVenture.js"
 
 const ventureController = (repositoryInterface, repositoryImplements, serviceInterface, ServiceImplements) => {
 
@@ -20,7 +21,7 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
     const response = await ventureRegister(dbRepo, service, req.body)
     console.log(response, 'response in controller')
     if (response?.error) return res.json({ error: response?.error })
-    return res.json({ response })
+    return res.json({ success:response?.success})
 
   }
   //test route written check whether it uploading to s3 is working or not
@@ -81,8 +82,17 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
     return res.json({data})
 
   }
+  const getOneVenture=async(req,res)=>{
+
+    const vid=req.params.id
+   const response=await takeOneVenture(dbRepo,vid)
+   if(!response) return console.log('vnture details not found')
+   return res.json(response)
+
+  }
 
   return {
+    getOneVenture,
     getAllUsers,
     getAllVentures,
     callRequested,

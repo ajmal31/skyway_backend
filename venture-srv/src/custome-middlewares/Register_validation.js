@@ -42,7 +42,7 @@ const register_validation = [
    
     body('official_email').isLength({ max: 30, }).withMessage('invalid email '),
     body('venture_category').isLength({ min: 5 }).withMessage('category must be at least 5 letter'),
-    body('description').isLength({ min: 50 ,max:500}).withMessage('description must be at least 50 charactors'),
+    body('description').isLength({ min: 1400 ,max:1430}).withMessage('description must be at least 50 charactors'),
     body('password_one').isLength({min:6}).withMessage('enter a valid password'),    
     body('confirm_password_one').isLength({min:6}).withMessage('enter a valid password'),   
     body('password_two').isLength({min:6}).withMessage('enter a valid password'),   

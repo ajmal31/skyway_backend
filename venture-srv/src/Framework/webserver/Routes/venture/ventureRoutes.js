@@ -24,6 +24,8 @@ const ventureRoutes=(express)=>{
    router.route('/register').post(register_validation,controller.register)
    router.route('/login').post(controller.login)
 
+   router.route('/getOneVenture/:id').get(controller.getOneVenture)
+
 
 
    //GET ALL VENTURES
