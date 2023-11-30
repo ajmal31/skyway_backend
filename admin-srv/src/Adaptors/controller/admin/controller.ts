@@ -2,7 +2,6 @@ import { Request,Response } from "express"
 import loginUsecase from "../../../Application/usecase/login"
 import allVentureList from "../../../Application/usecase/getAllVenturs"
 import allUsers from "../../../Application/usecase/getAllUsers"
-import ventureStatusUpdate from "../../../Application/usecase/updateVentureStatus"
 const adminController=(dbrepInterface:any,dbRepoImplements:any,serviceInterface:any,serviceImplements:any)=>{
 
 
@@ -30,16 +29,10 @@ const adminController=(dbrepInterface:any,dbRepoImplements:any,serviceInterface:
     return res.json(response)
 
     }
-    const updateVentureStatus=async(req:Request,res:Response)=>{
 
-
-     const response=await ventureStatusUpdate(req?.body)
-     if(response) return res.json({message:"status changed"})
-
-    } 
 
     return {
-        updateVentureStatus,
+
         getAllUsers,
         getAllventures,
         login

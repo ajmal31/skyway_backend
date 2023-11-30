@@ -7,6 +7,7 @@ import takeAllUsers from "../../../Application/usecase/venture/takeAllUsers.js"
 import takeOneVenture from "../../../Application/usecase/venture/takeOneVenture.js"
 import { uploadS3 } from "../../../multer/index.js"
 import { getUrl } from "../../../multer/index.js"
+import ventureStatusUpdate from "../../../Application/usecase/venture/updateVentureStatus.js"
 const ventureController = (repositoryInterface, repositoryImplements, serviceInterface, ServiceImplements) => {
 
   //Repo interface and implements assign to a dbRepo
@@ -86,10 +87,18 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
     return res.json(response)
 
   }
+  //Update venture status if venture allowed or no
+  const updateVentureStatus=async(req,res)=>{
+
+
+    const response=await ventureStatusUpdate(dbRepo,req?.body)
+    if(response) return res.json(response)
+
+   } 
 
 
   return {
-
+    updateVentureStatus,
     upload,
     getOneVenture,
     getAllUsers,

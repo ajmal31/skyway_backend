@@ -3,11 +3,12 @@ import ventureRepositoryInterface from "../../Application/repo/venture/ventureRe
 import ventureRepositoryImplements from "../../Framework/database/mongodb/repositories/venture/ventureRepositoryImpl.js";
 import ventureServiceInterface from "../../Application/srv/venture/ventureSrvInterface.js";
 import ventureServiceImplements from "../../Framework/services/venture/ventureServiceImpl.js";
-import updateVentureStatus from "../../Application/usecase/updateVentureStatus.js";
+
 
 //use cases
 import connectUser from "../../Application/usecase/venture/connectUser.js";
 import updateConnectUser from "../../Application/usecase/venture/updateConnectUser.js";
+
 
 
 
@@ -24,7 +25,6 @@ const consumer = async () => {
         const data = JSON.parse(message.content)
         console.log('data consuming in venture-srv', data)
         if (data.method === 'call request') connectUser(dbrepo, data)
-        if (data?.id) updateVentureStatus(data, dbrepo)
         if (data.method === "update connect user") updateConnectUser(dbrepo, data)
         channel.ack(message)
 

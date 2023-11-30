@@ -19,7 +19,6 @@ const adminRoutes = (express) => {
     router.route('/getAllventures').get(controller.getAllventures);
     router.route('/getAllUsers').get(controller.getAllUsers);
     //PUT METHODS
-    router.route('/updateVentureStatus').post(controller.updateVentureStatus);
     return router;
 };
 exports.default = adminRoutes;

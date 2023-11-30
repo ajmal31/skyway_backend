@@ -25,6 +25,8 @@ const ventureRoutes=(express)=>{
    //POST methods
    router.route('/register').post(register_validation,controller.register)
    router.route('/login').post(controller.login)
+   //working
+   router.route('/updateVentureStatus').post(controller.updateVentureStatus)
 
    router.route('/getOneVenture/:id').get(controller.getOneVenture)
 
