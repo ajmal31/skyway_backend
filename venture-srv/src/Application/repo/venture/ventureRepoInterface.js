@@ -13,11 +13,13 @@ const ventureRepositoryInterface=(repositories)=>{
      const updateVentureStatus=(id)=>repositories.updateVentureStatus(id)
      const getAllUsers=(vid)=>repositories.getAllUsers(vid)
      const getOneVenture=(obj)=>repositories.ventureExist(obj)
+     const updateConnectUser=(obj)=>repositories.updateConnectUser(obj)
 
 
      
 
     return {
+        updateConnectUser,
         getOneVenture,
         getAllUsers,
         updateVentureStatus,

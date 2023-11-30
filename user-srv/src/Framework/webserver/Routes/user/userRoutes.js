@@ -33,8 +33,9 @@ const useRoutes=(express)=>{
     router.route('/callRequested').post(jwtVerfication('ajmal123user-srv'),controller.callRequested)
 
     //GET METHODS
+
     router.route('/delete/:id').get(controller.remove)
-    router.route('/getUser/:id').get(controller.getUser)
+    router.route('/getUser').get(jwtVerfication('ajmal123user-srv'),controller.getUser)
 
 
 
@@ -42,10 +43,10 @@ const useRoutes=(express)=>{
 
 
     //!! more update required related this route depend on the frontend work 
-    router.route('/update').put(controller.update)
+    router.route('/updateUser').post(registerValidation ,controller.update)
 
 
-
+ 
 
     
    

@@ -20,6 +20,7 @@ const consumer = async () => {
         if (message) {
             console.log('messag consumes in admin service');
             const data = JSON.parse(message?.content.toString());
+            console.log(data);
             if (data?.ventureName) {
                 (0, ventureHandler_1.default)(dbRepo, data);
             }

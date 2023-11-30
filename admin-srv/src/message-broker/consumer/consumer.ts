@@ -21,12 +21,14 @@ const consumer = async () => {
         if (message) {
             console.log('messag consumes in admin service')
             const data = JSON.parse(message?.content.toString())
+            console.log(data)
             if (data?.ventureName) {
 
                 ventureHandler(dbRepo, data)
 
             } else if(data?.username){
 
+                
                 userHandler(dbRepo,data)
             }
 

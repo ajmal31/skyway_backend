@@ -128,10 +128,21 @@ const ventureRepositoryImplements = () => {
     const response = await connectedUserModel.findOne({ ventureId: vid })
     return response
   }
+  const updateConnectUser = async (data) => {
+
+    const response = await connectedUserModel
+      .updateMany({ users: { $elemMatch: { userId: data._id } } },
+        { $set: { "users.$": data } })
+
+        console.log('response after update connected users',response)
+        return response
+
+  }
 
 
 
   return {
+    updateConnectUser,
     getAllUsers,
     updateVentureStatus,
     getAllVentures,

@@ -1,5 +1,5 @@
 import {body,validationResult} from 'express-validator'
-console.log('heloo')
+console.log('Your Reached Register validation')
 const registerValidation=[
     // "is" checking is it valid or not ,"notEmpty" is checking is there have value or not
 

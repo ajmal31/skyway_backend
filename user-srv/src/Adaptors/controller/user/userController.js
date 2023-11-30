@@ -5,6 +5,7 @@ import softDelete from "../../../Application/usecase/user/softDelete.js"
 import findOneUser from "../../../Application/usecase/user/getUser.js"
 import googleWithLogin from "../../../Application/usecase/user/googleLogin.js"
 import connectUser from "../../../Application/usecase/user/connectUser.js"
+import updateUSer from "../../../Application/usecase/user/update.js"
 
 
 const userController = (repositoryInterface, repositoryImplements, serviceInterface, userServiceImplements) => {
@@ -95,7 +96,8 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
     }
     //get particular user
     const getUser = async (req, res) => {
-        const userId = req.params.id
+        const userId = req?.userdata?.userId
+        console.log(userId)
         const response = await findOneUser(userId, dbRepository)
         return response ? res.json({ response }) : res.json({ message: "did'nt get user details" })
     }
@@ -105,7 +107,9 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
     //update user
     const update = async (req, res) => {
 
-        const reponse = await update(req.body, dbRepository, service)
+        console.log('update use controler',req.body)
+        const response = await updateUSer(req.body, dbRepository, service)
+        return res.json({response})
 
     }
 

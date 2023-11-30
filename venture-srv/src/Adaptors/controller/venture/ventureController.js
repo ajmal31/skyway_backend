@@ -5,7 +5,8 @@ import listVentures from "../../../Application/usecase/venture/getAllVentures.js
 import ventureLogin from "../../../Application/usecase/venture/ventureLogin.js"
 import takeAllUsers from "../../../Application/usecase/venture/takeAllUsers.js"
 import takeOneVenture from "../../../Application/usecase/venture/takeOneVenture.js"
-
+import { uploadS3 } from "../../../multer/index.js"
+import { getUrl } from "../../../multer/index.js"
 const ventureController = (repositoryInterface, repositoryImplements, serviceInterface, ServiceImplements) => {
 
   //Repo interface and implements assign to a dbRepo
@@ -21,26 +22,21 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
     const response = await ventureRegister(dbRepo, service, req.body)
     console.log(response, 'response in controller')
     if (response?.error) return res.json({ error: response?.error })
-    return res.json({ success:response?.success})
+    return res.json({ success: response?.success })
 
   }
   //test route written check whether it uploading to s3 is working or not
-  // const upload=async(req,res)=>{
+  const upload = async (req, res) => {
 
-  //   const uploadedFiles=req.files.map(file=>{
-  //     return{
-  //       orginalName:file.orginalName,
-  //       location:file.location
-  //     }
-  //   })
-
-  //   console.log('uploaded files',uploadedFiles)
-
-  //   res.json({message:'image uploaded succesfulll',uploadedFiles})
+    const { file } = req
+    console.log('file', file)
+    const { error, key } = getUrl()
+    if (error) console.log('error occured while uploading to s3 in controller', error)
+    else console.log('succesfull uploaded to s3 ', key)
 
 
 
-  // }
+  }
   const callRequested = async (req, res) => {
 
     console.log('user details', req.userdata)
@@ -76,22 +72,25 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
 
   const getAllUsers = async (req, res) => {
 
-    const {_id}=req.userdata
+    const { _id } = req.userdata
 
-    const data = await takeAllUsers(dbRepo,_id)
-    return res.json({data})
-
-  }
-  const getOneVenture=async(req,res)=>{
-
-    const vid=req.params.id
-   const response=await takeOneVenture(dbRepo,vid)
-   if(!response) return console.log('vnture details not found')
-   return res.json(response)
+    const data = await takeAllUsers(dbRepo, _id)
+    return res.json({ data })
 
   }
+  const getOneVenture = async (req, res) => {
+
+    const vid = req.params.id
+    const response = await takeOneVenture(dbRepo, vid)
+    if (!response) return console.log('vnture details not found')
+    return res.json(response)
+
+  }
+
 
   return {
+
+    upload,
     getOneVenture,
     getAllUsers,
     getAllVentures,

@@ -5,10 +5,10 @@ const repositoryImplements = () => {
 
     const insertVentureData = async (data: Record<string, any>) => {
 
-        console.log('reached in implmentswith data', data)
+       
         const model = await ventureReplicationSchema.findOneAndUpdate({ "ventureReplicated._id": data?._id },
             { $set: { ventureReplicated: data } }, { upsert: true })
-        console.log('after inserting or updating the status data to admin ,resposne', model)
+       
         return model
 
     }
@@ -26,8 +26,7 @@ const repositoryImplements = () => {
     }
     const insertUserData = async (data: Record<string, any>) => {
 
-        const user = new user_replication({ data })
-        const response = await user.save()
+        const response= await user_replication.updateOne({"data._id":data._id},{$set:{data}},{upsert:true})
 
     }
     const getAllUsers = async () => {

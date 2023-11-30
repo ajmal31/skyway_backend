@@ -6,7 +6,7 @@ const userRepositoryInterface=(repositories)=>{
      const userExist=(data)=>repositories.findUser(data)
      const remove=(userId)=>repositories.remove(userId)
      const getUser=(obj)=>repositories.findUser(obj)
-     const update=(data)=>repositories.update(data)
+     const update=(data,uid)=>repositories.update(data,uid)
      const findUser=(obj)=>repositories.findUser(obj)
      const ventureExist=(uid,vid)=>repositories.ventureExist(uid,vid)
      const addVentureToUser=(uid,vid)=>repositories.addVentureToUser(uid,vid)
