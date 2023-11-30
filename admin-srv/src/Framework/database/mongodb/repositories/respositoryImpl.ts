@@ -29,15 +29,9 @@ const repositoryImplements = () => {
         const response= await user_replication.updateOne({"data._id":data._id},{$set:{data}},{upsert:true})
 
     }
-    const getAllUsers = async () => {
-
-        const response = await user_replication.find()
-        return response
-
-    }
 
     return {
-        getAllUsers,
+
         insertUserData,
         findAllventures,
         findAdmin,

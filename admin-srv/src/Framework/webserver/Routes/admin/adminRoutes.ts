@@ -22,7 +22,7 @@ const adminRoutes = (express: any): Router => {
 
     router.route('/getAllventures').get(controller.getAllventures)
 
-    router.route('/getAllUsers').get(controller.getAllUsers)
+
 
     //PUT METHODS
 

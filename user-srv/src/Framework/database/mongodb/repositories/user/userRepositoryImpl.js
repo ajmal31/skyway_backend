@@ -75,17 +75,26 @@ const userRepositoryImplements = () => {
 
 
     }
+    //findVentureId contain user doc
     const ventureExist = async (uid, vid) => {
 
         const response = await userModel.findOne({ _id: uid, ventures: { $elemMatch: { ventureId: vid } } })
         return response
     }
+    //ventureId add To use doc
     const addVentureToUser = async (uid, vid) => {
 
         const response = await userModel.updateOne({ _id: uid }, { $push: { ventures: { ventureId: vid, status: 'pending' } } })
         return response
     }
+    //getAllUsers
+    const getAllUsers=async()=>{
+
+        const response=await userModel.find()
+        return response
+    }
     return {
+        getAllUsers,
         addVentureToUser,
         ventureExist,
         update,

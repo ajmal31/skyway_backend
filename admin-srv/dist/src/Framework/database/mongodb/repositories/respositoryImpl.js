@@ -22,12 +22,7 @@ const repositoryImplements = () => {
     const insertUserData = async (data) => {
         const response = await users_1.default.updateOne({ "data._id": data._id }, { $set: { data } }, { upsert: true });
     };
-    const getAllUsers = async () => {
-        const response = await users_1.default.find();
-        return response;
-    };
     return {
-        getAllUsers,
         insertUserData,
         findAllventures,
         findAdmin,
