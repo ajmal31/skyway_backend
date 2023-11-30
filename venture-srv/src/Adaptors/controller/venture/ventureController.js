@@ -52,8 +52,8 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
 
   }
   const getAllVentures = async (req, res) => {
-
-    const response = await listVentures(dbRepo)
+    console.log(req.body)
+    const response = await listVentures(dbRepo,req?.body?.type)
     return res.json({ response })
 
   }

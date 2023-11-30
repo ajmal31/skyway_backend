@@ -109,9 +109,12 @@ const ventureRepositoryImplements = () => {
 
   }
   //get All Ventures
-  const getAllVentures = async () => {
-
-    const response = await ventureModel.find({ admin_allowed: 'allowed' })
+  const getAllVentures = async (type) => {
+    let query
+    if (type === 'allowed')query = { admin_allowed: type }
+    else if(type==='all') query={}
+    
+    const response = await ventureModel.find(query)
     return response
 
 
@@ -134,8 +137,8 @@ const ventureRepositoryImplements = () => {
       .updateMany({ users: { $elemMatch: { userId: data._id } } },
         { $set: { "users.$": data } })
 
-        console.log('response after update connected users',response)
-        return response
+    console.log('response after update connected users', response)
+    return response
 
   }
 

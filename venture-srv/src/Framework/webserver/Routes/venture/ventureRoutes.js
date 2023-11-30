@@ -33,7 +33,7 @@ const ventureRoutes=(express)=>{
 
 
    //GET ALL VENTURES
-   router.route('/getAllventures').get(controller.getAllVentures)
+   router.route('/getAllventures').post(controller.getAllVentures)
    router.route('/getAllUsers').get(jwtVerfication(env.JWT_SECRETKEY),controller.getAllUsers)
    
    

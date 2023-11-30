@@ -1,7 +1,7 @@
-const listVentures=async(dbRepo)=>{
+const listVentures=async(dbRepo,type)=>{
 
-
-     const Allventures=await dbRepo.getAllVentures()
+    
+     const Allventures=await dbRepo.getAllVentures(type)
      
      if(!Allventures) return {find:false}
      return Allventures
