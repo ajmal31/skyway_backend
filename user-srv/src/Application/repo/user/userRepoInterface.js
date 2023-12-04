@@ -11,10 +11,12 @@ const userRepositoryInterface=(repositories)=>{
      const ventureExist=(uid,vid)=>repositories.ventureExist(uid,vid)
      const addVentureToUser=(uid,vid)=>repositories.addVentureToUser(uid,vid)
      const getAllUsers=()=>repositories.getAllUsers()
+     const getAllConnectedUsers=(vid)=>repositories.getAllConnectedUsers(vid)
        
      
 
     return {
+        getAllConnectedUsers,
         getAllUsers,
         addVentureToUser,
         ventureExist,

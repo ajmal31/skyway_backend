@@ -7,6 +7,7 @@ import googleWithLogin from "../../../Application/usecase/user/googleLogin.js"
 import connectUser from "../../../Application/usecase/user/connectUser.js"
 import updateUSer from "../../../Application/usecase/user/update.js"
 import takeAllUsers from "../../../Application/usecase/user/getAllUsers.js"
+import takeAllConnectedUsers from "../../../Application/usecase/takeAllConnectedUsers.js"
 
 
 const userController = (repositoryInterface, repositoryImplements, serviceInterface, userServiceImplements) => {
@@ -120,7 +121,20 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
         return res.json({response})
     }
 
+    //get All connected users
+    const getAllConnectedUsers=async(req,res)=>{
+         
+
+        const vid=req?.userdata?._id
+        const response=await takeAllConnectedUsers(dbRepository,vid)
+        if(response) return res.json(response)
+         
+    }
+
+   
+
     return {
+        getAllConnectedUsers,
         getAllusers,
         callRequested,
         googleLogin,

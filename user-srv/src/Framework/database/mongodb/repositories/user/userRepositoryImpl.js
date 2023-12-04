@@ -93,7 +93,15 @@ const userRepositoryImplements = () => {
         const response=await userModel.find()
         return response
     }
+    //get All connected users Based on a Particular venture
+    const getAllConnectedUsers=async(vid)=>{
+
+
+        const response=await userModel.find({ventures:{$elemMatch:{ventureId:vid}}})
+        return response
+    }
     return {
+        getAllConnectedUsers,
         getAllUsers,
         addVentureToUser,
         ventureExist,

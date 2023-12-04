@@ -37,7 +37,9 @@ const useRoutes=(express)=>{
     router.route('/delete/:id').get(controller.remove)
     router.route('/getUser').get(jwtVerfication('ajmal123user-srv'),controller.getUser)
     router.route('/getAllUsers').get(controller.getAllusers)
-
+    
+    //for venture -srv
+    router.route('/getAllConnectedUsers').get(jwtVerfication("ajmal123venture-srv"),controller.getAllConnectedUsers)
 
 
     //PUT METHODS 

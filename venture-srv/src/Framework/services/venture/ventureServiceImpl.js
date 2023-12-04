@@ -23,8 +23,9 @@ const ventureServiceImplements=()=>{
     }
     //Jwt Token Generating
     const generateToken=async(ventureData)=>{
-        
+     
       const token=jwt.sign(ventureData,env.JWT_SECRETKEY)
+     
       return token
           
     }
