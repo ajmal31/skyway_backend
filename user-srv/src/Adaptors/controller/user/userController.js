@@ -33,7 +33,7 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
             }
 
         } catch (err) {
-            
+
             console.log('error ocuured while getin reponse realted user register', err)
         }
 
@@ -46,45 +46,45 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
         let { email, password } = req.body
 
         const response = await userLogin(dbRepository, service, email, password)
-        if (response.password && response.userExist) return res.json({ message: 'user Logged in succesful', authToken: response.token ,username:response.username})
+        if (response.password && response.userExist) return res.json({ message: 'user Logged in succesful', authToken: response.token, username: response.username })
         else if (response.userExist && !response.password) return res.json({ message: 'please enter your valid password' })
         else return res.json({ message: 'user does not exist' })
 
     }
-  
+
     //🏁🏁
     const googleLogin = async (req, res) => {
 
 
-     try{
+        try {
 
-        const { encodedData } = req.body
-        const response = await googleWithLogin(dbRepository, service, encodedData)
-        console.log('response is controller',response)
-        if(response.token) return res.json({message:"user Logged in succesful",authToken:response.token,username:response.username})
-        else return res.json({message:"user does not exist"}) 
+            const { encodedData } = req.body
+            const response = await googleWithLogin(dbRepository, service, encodedData)
+            console.log('response is controller', response)
+            if (response.token) return res.json({ message: "user Logged in succesful", authToken: response.token, username: response.username })
+            else return res.json({ message: "user does not exist" })
 
-     }catch(err){
-        console.log('error occured in controler related while receiving goog login response ',err)
-     }
+        } catch (err) {
+            console.log('error occured in controler related while receiving goog login response ', err)
+        }
 
 
 
     }
 
-    const callRequested=async(req,res)=>{
+    const callRequested = async (req, res) => {
 
-        console.log('user details',req.userdata)
-    
-        const uid=req.userdata.userId
-        const vid=req.body.ventureId
-    
-           const response=await connectUser(dbRepository,uid,vid)
-           console.log('response in controller while making getting response realted user request')
-           return res.json(response)
-     
-           
-    } 
+        console.log('user details', req.userdata)
+
+        const uid = req.userdata.userId
+        const vid = req.body.ventureId
+
+        const response = await connectUser(dbRepository, uid, vid)
+        console.log('response in controller while making getting response realted user request')
+        return res.json(response)
+
+
+    }
 
     //GET METHODS
 
@@ -110,34 +110,36 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
     //update user
     const update = async (req, res) => {
 
-        console.log('update use controler',req.body)
+        console.log('update use controler', req.body)
         const response = await updateUSer(req.body, dbRepository, service)
-        return res.json({response})
+        return res.json({ response })
 
     }
     //taking All users 
-    const getAllusers=async(req,res)=>{
+    const getAllusers = async (req, res) => {
 
-        const response=await takeAllUsers(dbRepository)
-        return res.json({response})
+        const response = await takeAllUsers(dbRepository)
+        return res.json({ response })
     }
 
     //get All connected users
-    const getAllConnectedUsers=async(req,res)=>{
-         
+    const getAllConnectedUsers = async (req, res) => {
 
-        const vid=req?.userdata?._id
-        const response=await takeAllConnectedUsers(dbRepository,vid)
-        if(response) return res.json({users:response,ventureId:vid})
-         
+
+        const vid = req?.userdata?._id
+        const response = await takeAllConnectedUsers(dbRepository, vid)
+        if (response) return res.json({ users: response, ventureId: vid })
+
     }
-   //change user Status
-   const changeUserStatus=async(req,res)=>{
-      
-    console.log("hei body",req?.body)
-      const {userId,status,ventureId}=req?.body
-      const response=await userStatusChange(status,userId,ventureId,dbRepository)
-   }
+    //change user Status
+    const changeUserStatus = async (req, res) => {
+        
+        const ventureId = req?.userdata?._id
+        const { userId, status } = req?.body
+        const response = await userStatusChange(status, userId, ventureId, dbRepository)
+        
+        return res.json(response)
+    }
 
     return {
         changeUserStatus,

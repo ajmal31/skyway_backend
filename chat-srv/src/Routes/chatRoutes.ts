@@ -1,11 +1,15 @@
 import { Router } from "express"
-import { log } from "../controller/chatController"
+import {createChat,sendMessage,getChat } from "../controller/chatController"
 const chatRoutes=(express:any):Router=>{
 
 
     const router=express.Router()
- 
-    router.route('/').get(log)
+   //POST METHODS
+    router.route('/createChat').post(createChat)
+
+    router.route('/sendMessage').post(sendMessage)
+
+    router.route('/getChat').post(getChat)
 
     return router
 

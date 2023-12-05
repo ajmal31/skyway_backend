@@ -41,7 +41,7 @@ const useRoutes=(express)=>{
     //for venture -srv
     router.route('/getAllConnectedUsers').get(jwtVerfication("ajmal123venture-srv"),controller.getAllConnectedUsers)
 
-    router.route('/changeUserStatus').post(controller.changeUserStatus)
+    router.route('/changeUserStatus').post(jwtVerfication("ajmal123venture-srv"),controller.changeUserStatus)
 
 
     //PUT METHODS 
