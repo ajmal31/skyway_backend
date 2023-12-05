@@ -7,7 +7,8 @@ import googleWithLogin from "../../../Application/usecase/user/googleLogin.js"
 import connectUser from "../../../Application/usecase/user/connectUser.js"
 import updateUSer from "../../../Application/usecase/user/update.js"
 import takeAllUsers from "../../../Application/usecase/user/getAllUsers.js"
-import takeAllConnectedUsers from "../../../Application/usecase/takeAllConnectedUsers.js"
+import takeAllConnectedUsers from "../../../Application/usecase/user/takeAllConnectedUsers.js"
+import userStatusChange from "../../../Application/usecase/user/changeUserStatus.js"
 
 
 const userController = (repositoryInterface, repositoryImplements, serviceInterface, userServiceImplements) => {
@@ -127,13 +128,19 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
 
         const vid=req?.userdata?._id
         const response=await takeAllConnectedUsers(dbRepository,vid)
-        if(response) return res.json(response)
+        if(response) return res.json({users:response,ventureId:vid})
          
     }
-
-   
+   //change user Status
+   const changeUserStatus=async(req,res)=>{
+      
+    console.log("hei body",req?.body)
+      const {userId,status,ventureId}=req?.body
+      const response=await userStatusChange(status,userId,ventureId,dbRepository)
+   }
 
     return {
+        changeUserStatus,
         getAllConnectedUsers,
         getAllusers,
         callRequested,

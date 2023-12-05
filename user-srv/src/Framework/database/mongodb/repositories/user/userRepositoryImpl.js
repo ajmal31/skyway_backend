@@ -100,7 +100,16 @@ const userRepositoryImplements = () => {
         const response=await userModel.find({ventures:{$elemMatch:{ventureId:vid}}})
         return response
     }
+    //change user Status
+    const changeUserStatus=async(status,uid,vid)=>{
+
+            const response=await userModel.findOneAndUpdate({_id:uid,'ventures.ventureId':vid},{$set:{'ventures.$.status':status}},{new:true})
+            return response
+            
+        
+    }
     return {
+        changeUserStatus,
         getAllConnectedUsers,
         getAllUsers,
         addVentureToUser,

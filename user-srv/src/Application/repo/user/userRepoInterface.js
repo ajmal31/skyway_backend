@@ -12,10 +12,11 @@ const userRepositoryInterface=(repositories)=>{
      const addVentureToUser=(uid,vid)=>repositories.addVentureToUser(uid,vid)
      const getAllUsers=()=>repositories.getAllUsers()
      const getAllConnectedUsers=(vid)=>repositories.getAllConnectedUsers(vid)
-       
+     const changeUserStatus=(status,uid,vid)=>repositories.changeUserStatus(status,uid,vid)  
      
 
     return {
+        changeUserStatus,
         getAllConnectedUsers,
         getAllUsers,
         addVentureToUser,
