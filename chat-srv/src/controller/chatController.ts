@@ -1,5 +1,5 @@
 
-import { creatingNewChat, makeMessage, takeChatDetails, chatExist } from "../Helper/chatHelper"
+import { creatingNewChat, makeMessage, takeChatDetails, chatExist,fetchAllChats } from "../Helper/chatHelper"
 import { Request, Response, } from "express"
 
 const chatController = () => {
@@ -35,9 +35,24 @@ const chatController = () => {
 
 
     }
+    //Server request Extende for jwt auth
+    interface extendRequest extends Request{
+        data?:{
+            userId:string
+        }
+    }
+    const getAllChats=async(req:extendRequest,res:Response)=>{
+ 
+        const findingId=req?.data?.userId
+        console.log('is it get userId',findingId)
+        const response=await fetchAllChats(findingId)
+        return res.json({response})
+
+    }
 
 
     return {
+        getAllChats,
         getChat,
         sendMessage,
         createChat
@@ -45,4 +60,4 @@ const chatController = () => {
 
 }
 
-export const { createChat, sendMessage, getChat } = chatController()
+export const { createChat, sendMessage, getChat,getAllChats } = chatController()

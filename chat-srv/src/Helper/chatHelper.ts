@@ -32,7 +32,7 @@ const chatHelper = () => {
         if (chatresponse) {
             const response = await chatSchema.findOneAndUpdate({ senderId: senderId, receiverId: receiverId },
                 { $push: { message: chatresponse._id } }, { new: true })
-                return response
+            return response
 
         }
     }
@@ -42,7 +42,7 @@ const chatHelper = () => {
         console.log(senderId)
         const response = await chatSchema.findOne({ senderId: senderId, receiverId: receiverId })
             .populate('message', '-_id -senderId -receiverId')
-        return response   
+        return response
 
     }
     //check IsExist chat or not
@@ -55,12 +55,26 @@ const chatHelper = () => {
 
 
     }
+    //fetch all based on particular user or venture
+    const fetchAllChats = async (findingId: any) => {
+        const response = await chatSchema.find({
+            $or:
+                [
+
+                    { receiverId: findingId },
+                    { senderId: findingId }
+                ]
+        }).select('-message')
+        return response
+        
+    }
 
 
 
 
 
     return {
+        fetchAllChats,
         chatExist,
         takeChatDetails,
         makeMessage,
@@ -70,4 +84,4 @@ const chatHelper = () => {
 
 }
 
-export const { creatingNewChat, makeMessage, takeChatDetails, chatExist } = chatHelper()
+export const { creatingNewChat, makeMessage, takeChatDetails, chatExist, fetchAllChats } = chatHelper()
