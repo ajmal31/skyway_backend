@@ -21,7 +21,7 @@ const ventureRoutes=(express)=>{
     //Passing interface and implments to controller
     const controller=ventureController(ventureRepositoryInterface,ventureRepositoryImplements,ventureServiceInterface,ventureServiceImplements)
 
-    
+       
    //POST methods
    router.route('/register').post(register_validation,controller.register)
    router.route('/login').post(controller.login)

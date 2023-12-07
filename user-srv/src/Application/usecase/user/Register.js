@@ -27,8 +27,8 @@ const registerUser=async(dbrepo,service,body)=>{
 
             const userDetails= await userData(username,email,region,phone,destination,date_of_birth,HashPassword,HashPassword)
             const response=await dbrepo.register(userDetails)
-            const foreign='ADMIN-SRV'
-            const result=await publisher(foreign,response)
+            // const foreign='ADMIN-SRV'
+            // const result=await publisher(foreign,response)
 
             return response
 

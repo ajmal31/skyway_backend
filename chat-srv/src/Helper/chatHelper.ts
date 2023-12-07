@@ -1,6 +1,7 @@
 //import schema if it's needed
 import { chatSchema } from "../Model/chatSchema"
 import { messageSchema } from "../Model/messageSchema"
+import { chatersSchema } from "../Model/chaters"
 import { Types } from "mongoose"
 
 
@@ -66,7 +67,23 @@ const chatHelper = () => {
                 ]
         }).select('-message')
         return response
-        
+
+    }
+    //Insert Chaters Details 
+    const insertChatersDetails = async (data: Record<string, any>) => {
+
+        const chat = new chatersSchema({
+            data
+        })
+        const response = await chat.save()
+        return response
+
+    }
+    //check the the document exist in the chaters
+    const findChater = async (id: string) => {
+
+        const response = chatersSchema.findOne({ "data._id": id })
+        return response
     }
 
 
@@ -74,6 +91,8 @@ const chatHelper = () => {
 
 
     return {
+        findChater,
+        insertChatersDetails,
         fetchAllChats,
         chatExist,
         takeChatDetails,
@@ -84,4 +103,12 @@ const chatHelper = () => {
 
 }
 
-export const { creatingNewChat, makeMessage, takeChatDetails, chatExist, fetchAllChats } = chatHelper()
+export const {
+    findChater,
+    creatingNewChat,
+    makeMessage,
+    takeChatDetails,
+    chatExist,
+    fetchAllChats,
+    insertChatersDetails
+} = chatHelper()

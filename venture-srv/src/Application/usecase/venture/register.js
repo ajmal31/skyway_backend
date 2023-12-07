@@ -53,11 +53,11 @@ const ventureRegister = async (dbrepo, service, data) => {
     if(response) {
         
         
-        const result=await publisher("ADMIN-SRV",response)
+        // const result=await publisher("ADMIN-SRV",response)
         return {success:"venture Registration succesfull"}
     }
     console.log('venture regsiter failed')
-
+  
 
 
 

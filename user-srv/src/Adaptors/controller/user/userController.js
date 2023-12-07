@@ -110,7 +110,7 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
     //update user
     const update = async (req, res) => {
 
-        console.log('update use controler', req.body)
+    
         const response = await updateUSer(req.body, dbRepository, service)
         return res.json({ response })
 
