@@ -7,11 +7,11 @@ const chatRoutes=(express:any):Router=>{
 
 
     const router=express.Router()
-   //POST METHODS
+   //POST METHODS    
     router.route('/createChat').post(createChat)
 
     router.route('/sendMessage').post(sendMessage)
-
+ 
     router.route('/getChat').post(getChat)
 
     //GET METHODS
