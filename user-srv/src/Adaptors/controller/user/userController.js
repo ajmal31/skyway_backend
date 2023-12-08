@@ -9,6 +9,7 @@ import updateUSer from "../../../Application/usecase/user/update.js"
 import takeAllUsers from "../../../Application/usecase/user/getAllUsers.js"
 import takeAllConnectedUsers from "../../../Application/usecase/user/takeAllConnectedUsers.js"
 import userStatusChange from "../../../Application/usecase/user/changeUserStatus.js"
+import takeUserUpdateChat from "../../../Application/usecase/user/getUserUpdateChat.js"
 
 
 const userController = (repositoryInterface, repositoryImplements, serviceInterface, userServiceImplements) => {
@@ -18,7 +19,7 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
     //user service and implements assign service 
     const service = serviceInterface(userServiceImplements())
 
-    //POST METHODS
+    //POST METHODS 👇
 
     //register ❗ ❗ ❗ ❗ update exist should be update
     const register = async (req, res) => {
@@ -52,7 +53,7 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
 
     }
 
-    //🏁🏁
+    //Google Authentication
     const googleLogin = async (req, res) => {
 
 
@@ -86,7 +87,7 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
 
     }
 
-    //GET METHODS
+    //GET METHODS 👇
 
     //delete user (soft delete)
     const remove = async (req, res) => {
@@ -140,8 +141,18 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
         
         return res.json(response)
     }
+    //Take user data and send to chat service
+    const getUserUpdateChat=async (req,res)=>{
+         
+        const {_id}=req.body
+        const response=await takeUserUpdateChat(_id,dbRepository)
+        if(!response)return res.json({message:"data not published to chat service"})
+        else return res.json(response)
+
+    }
 
     return {
+        getUserUpdateChat,
         changeUserStatus,
         getAllConnectedUsers,
         getAllusers,

@@ -2,14 +2,13 @@
 import { userModel } from "../../models/user-models/userSchema.js"
 const userRepositoryImplements = () => {
 
-
+    //Find a Partiulcar user
     const findUser = async (obj) => {
-        console.log(obj)
+       
         const { key, val } = obj
         const query = { [key]: val }
         try {
             const response = await userModel.findOne(query)
-            console.log(response, 'in imp')
             return response
 
         } catch (err) {

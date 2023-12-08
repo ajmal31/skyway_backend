@@ -38,6 +38,9 @@ const useRoutes=(express)=>{
     router.route('/getUser').get(jwtVerfication('ajmal123user-srv'),controller.getUser)
     router.route('/getAllUsers').get(controller.getAllusers)
     
+    //for chat service
+    router.route('/getUserUpdateChat').post(controller.getUserUpdateChat)
+
     //for venture -srv
     router.route('/getAllConnectedUsers').get(jwtVerfication("ajmal123venture-srv"),controller.getAllConnectedUsers)
 
