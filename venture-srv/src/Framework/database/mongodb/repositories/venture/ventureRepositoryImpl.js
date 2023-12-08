@@ -3,7 +3,7 @@ import connectedUserModel from "../../models/venture-models/connected_users.js"
 import ventureModel from "../../models/venture-models/ventures.js"
 const ventureRepositoryImplements = () => {
 
-  //checking while registering new Venture  already is exist or not
+  
   const ventureIdExist = async (vid) => {
 
     const response = await connectedUserModel.exists({ ventureId: vid })

@@ -1,11 +1,16 @@
 import createChannel from "../config";
 
-const consumer=async()=>{
+const consumer = async () => {
 
-    const channel=await createChannel()
-    channel.consume("CHAT-SRV",(data)=>{
+    const channel = await createChannel()
+    channel.consume("CHAT-SRV", (data) => {
+        if (data) {
+            console.log('chat service data consumed', JSON.parse(data?.content?.toString()));
+            channel.ack(data)
 
-        console.log('chat service data consumed',JSON.stringify(data))
+        }
+        else console.log('chat service while consuming data not found')
+        
 
     })
 

@@ -30,6 +30,8 @@ const ventureRoutes=(express)=>{
 
    router.route('/getOneVenture/:id').get(controller.getOneVenture)
 
+   router.route('/getVentureUpdateChat').post(controller.getVentureUpdateChat)
+
 
 
    //GET ALL VENTURES
