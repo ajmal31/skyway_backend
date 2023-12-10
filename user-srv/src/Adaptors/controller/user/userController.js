@@ -166,7 +166,7 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
 
         const {userId}=req?.userdata
         const response=await takeAllConnectedVentures(dbRepository,userId)
-        return res.json(response)
+        return res.json({response})
 
     }
 

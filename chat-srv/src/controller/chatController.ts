@@ -33,23 +33,27 @@ const chatController = () => {
 
 
     }
-    const getChat = async (req: Request, res: Response) => {
-
-        const { senderId, receiverId } = req.body
-
-        const response = await takeChatDetails(senderId, receiverId)
-     
-        return res.json(response)
-
-
-
-    }
     //Server request Extende for jwt auth
     interface extendRequest extends Request {
         data?: {
             userId: string
         }
     }
+    const getChat = async (req: extendRequest, res: Response) => {
+
+        console.log('req body and header',req.body,"header",req.data)
+        const { receiverId } = req.body
+        const senderId=req?.data?.userId
+        console.log('receiveId',receiverId)
+        console.log('senderId',senderId)
+        if(senderId&&receiverId){
+            const response = await takeChatDetails(senderId, receiverId)
+
+            return res.json(response)
+        }else return res.json({message:"receiverId or senderId not found please check it out chat-srv controller"})
+        
+    }
+
     const getAllChats = async (req: extendRequest, res: Response) => {
 
         const findingId = req?.data?.userId
@@ -63,11 +67,11 @@ const chatController = () => {
         const data = req?.body
         console.log(data)
         const existDoc = await findChater(data._id)
-        console.log('response whil check the document exist or not',existDoc)
-        if(existDoc) return console.log('the Document already exist in the chaters')
+        console.log('response whil check the document exist or not', existDoc)
+        if (existDoc) return console.log('the Document already exist in the chaters')
         const response = await insertChatersDetails(data)
-        if(!response)return console.log("did'nt insert the details",response)
-        else return console.log('chater document inserted successfull',response)
+        if (!response) return console.log("did'nt insert the details", response)
+        else return console.log('chater document inserted successfull', response)
 
     }
 

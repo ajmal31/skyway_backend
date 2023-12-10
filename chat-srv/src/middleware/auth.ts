@@ -7,8 +7,9 @@ interface CustomRequest extends Request {
 }
 
 const jwtVerify = (secretKey: any) => {
-    return async (req: CustomRequest, res: Response, next: NextFunction) => {
 
+    return async (req: CustomRequest, res: Response, next: NextFunction) => {
+        console.log('is it reach',req?.body)
         let token = req?.header('Authorization');
 
         // Check if the token is missing

@@ -1,23 +1,34 @@
 import { Router } from "express"
-import {createChat,sendMessage,getChat,getAllChats,updateChatersDetails} from "../controller/chatController"
+import { createChat, sendMessage, getChat, getAllChats, updateChatersDetails } from "../controller/chatController"
 import jwtVerify from "../middleware/auth"
 import env from "../config/env"
+import express from "express"
 
-const chatRoutes=(express:any):Router=>{
+
+const chatRoutes = (expres: any): Router => {
 
 
-    const router=express.Router()
-   //POST METHODS    
+    const router = express.Router()
+    const app = express()
+    //un Validate API's
+
+    //Post Methods    
     router.route('/createChat').post(createChat)
-
     router.route('/sendMessage').post(sendMessage)
- 
-    router.route('/getChat').post(getChat)
-
     router.route('/updateChatersDetails').post(updateChatersDetails)
 
-    //GET METHODS
-    router.route('/getAllChats').get(jwtVerify(env.USER_SRV_TOKEN_SECRET_KEY),getAllChats)
+
+
+    //Validate User Based Methods
+    // app.use(jwtVerify(env.USER_SRV_TOKEN_SECRET_KEY))
+
+    //post methods
+    router.route('/getChat').post(jwtVerify(env.USER_SRV_TOKEN_SECRET_KEY),getChat)
+
+    //Get Methods
+    router.route('/getAllChats').get(getAllChats)
+
+
 
     return router
 

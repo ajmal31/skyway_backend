@@ -80,7 +80,7 @@ const chatHelper = () => {
 
 
     }
-    //fetch all based on particular user or venture
+    //fetch all chat based on particular user or venture
     const fetchAllChats = async (findingId: any) => {
         const response = await chatSchema.find({
             $or:
