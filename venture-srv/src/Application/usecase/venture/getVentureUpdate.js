@@ -1,6 +1,7 @@
 import publisher from "../../../message-broker/publisher/publisher.js"
 const getVentureUpdateChat = async (vid, dbRepo) => {
      
+    console.log('reach use case of the get and update chat service')
     //mongo query cred
     const obj = {
         key: "_id",

@@ -6,6 +6,7 @@ const getUserUpdateChat=async(uid,dbRepo)=>{
         val:uid
     }
     const response=await dbRepo.findUser(obj)
+    console.log('what happend after taking detail of the user ',response)
     const foreign='CHAT-SRV'
     const publish=await publisher(foreign,response)
     return publish

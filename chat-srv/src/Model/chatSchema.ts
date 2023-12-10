@@ -3,8 +3,8 @@ const {Schema}=mongoose
 
 const chatModel=new Schema({
 
-    senderId:{type:Schema.Types.ObjectId,required:true,},
-    receiverId:{type:Schema.Types.ObjectId,required:true},
+    senderId:{type:String,required:true,ref:"chaters"},
+    receiverId:{type:String,required:true, ref:"chaters"},
     message:[
        {
         type:Schema.Types.ObjectId,

@@ -10,6 +10,8 @@ import takeAllUsers from "../../../Application/usecase/user/getAllUsers.js"
 import takeAllConnectedUsers from "../../../Application/usecase/user/takeAllConnectedUsers.js"
 import userStatusChange from "../../../Application/usecase/user/changeUserStatus.js"
 import takeUserUpdateChat from "../../../Application/usecase/user/getUserUpdateChat.js"
+import takeConnectedVenture from "../../../Application/usecase/user/getConnectedVenture.js"
+import takeAllConnectedVentures from "../../../Application/usecase/user/getAllConnectedVentures.js"
 
 
 const userController = (repositoryInterface, repositoryImplements, serviceInterface, userServiceImplements) => {
@@ -72,7 +74,7 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
 
 
     }
-
+     //user make connection request for particular venture
     const callRequested = async (req, res) => {
 
         console.log('user details', req.userdata)
@@ -144,14 +146,33 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
     //Take user data and send to chat service
     const getUserUpdateChat=async (req,res)=>{
          
-        const {_id}=req.body
-        const response=await takeUserUpdateChat(_id,dbRepository)
+        const {userId}=req.body
+        const response=await takeUserUpdateChat(userId,dbRepository)
         if(!response)return res.json({message:"data not published to chat service"})
         else return res.json(response)
 
     }
+    //take connected venture
+    const getConnectedVenture=async (req,res)=>{
+
+
+        const {senderId,receiverId}=req?.body
+        console.log('reach',senderId,receiverId)
+        const response=await takeConnectedVenture(dbRepository,senderId,receiverId)
+        return res.json({response})
+    }
+    //take All Connected Venture Based on user Id
+    const getAllConnectedVentures=async(req,res)=>{
+
+        const {userId}=req?.userdata
+        const response=await takeAllConnectedVentures(dbRepository,userId)
+        return res.json(response)
+
+    }
 
     return {
+        getAllConnectedVentures,
+        getConnectedVenture,
         getUserUpdateChat,
         changeUserStatus,
         getAllConnectedUsers,

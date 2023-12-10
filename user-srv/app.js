@@ -6,6 +6,7 @@ import config from "./src/config/config.js"
 import Routes from "./src/Framework/webserver/Routes/index.js"
 import connection from "./src/Framework/database/connection.js"
 import dotenv from "dotenv"
+import consumer from "./src/Message-broker/consumer/consumer.js"
 
 
 //create instance of Express
@@ -29,6 +30,8 @@ expressConfig(app,express)
 //invoking Routes configuration
 Routes(app,express)
 
+//Invoking RabbitMQ consumer function
+consumer()
 
 
 

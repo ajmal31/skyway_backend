@@ -29,9 +29,17 @@ const chatHelper = () => {
             content: message
         })
         const chatresponse = await data.save()
+        console.log('what happend after inserting', chatresponse)
         //adding to chat the messageId
         if (chatresponse) {
-            const response = await chatSchema.findOneAndUpdate({ senderId: senderId, receiverId: receiverId },
+            const response = await chatSchema.findOneAndUpdate(
+                {
+                    $or:
+                        [
+                            { senderId: senderId, receiverId: receiverId },
+                            { receiverId: senderId, senderId: receiverId }
+                        ]
+                },
                 { $push: { message: chatresponse._id } }, { new: true })
             return response
 
@@ -40,11 +48,27 @@ const chatHelper = () => {
     //getin all details about particular chat
     const takeChatDetails = async (senderId: string, receiverId: string) => {
 
-        console.log(senderId)
-        const response = await chatSchema.findOne({ senderId: senderId, receiverId: receiverId })
-            .populate('message', '-_id -senderId -receiverId')
+        const response = await chatSchema.findOne(
+
+            {
+                $or:
+                    [
+                        { senderId: senderId, receiverId: receiverId },
+                        { receiverId: senderId, senderId: receiverId },
+
+                    ]
+            })
+            .populate('message', '-_id')
+        // const response_two = await chatersSchema.find({ "data._id": { $in: [response_one?.senderId, response_one?.receiverId] }})
+        // .select("-_id data")
+        // const response={
+        //     response_one,
+        //     response_two
+        // }
         return response
 
+
+        // continue 
     }
     //check IsExist chat or not
     const chatExist = async (senderId: string, receiverId: string) => {

@@ -8,6 +8,7 @@ import registerValidation from "../../../../custom-middlewares/user/registerVali
 import loginValidation from "../../../../custom-middlewares/user/loginvalidation.js"
 //my own middleware
 import {jwtVerfication} from "jwt-verification-middleware" 
+const userSecret='ajmal123user-srv'
 
 
 const useRoutes=(express)=>{
@@ -37,6 +38,9 @@ const useRoutes=(express)=>{
     router.route('/delete/:id').get(controller.remove)
     router.route('/getUser').get(jwtVerfication('ajmal123user-srv'),controller.getUser)
     router.route('/getAllUsers').get(controller.getAllusers)
+    router.route('/getConnectedVenture').post(controller.getConnectedVenture)
+    //should be check user valid or not
+    router.route('/getAllConnectedVentures').get(jwtVerfication(userSecret),controller.getAllConnectedVentures)
     
     //for chat service
     router.route('/getUserUpdateChat').post(controller.getUserUpdateChat)
@@ -45,6 +49,7 @@ const useRoutes=(express)=>{
     router.route('/getAllConnectedUsers').get(jwtVerfication("ajmal123venture-srv"),controller.getAllConnectedUsers)
 
     router.route('/changeUserStatus').post(jwtVerfication("ajmal123venture-srv"),controller.changeUserStatus)
+
 
 
     //PUT METHODS 

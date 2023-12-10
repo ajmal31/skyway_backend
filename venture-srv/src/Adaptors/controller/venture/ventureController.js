@@ -100,9 +100,9 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
    } 
   //getParticualar venture and Publish data to chat -service 
   const getVentureUpdateChat=async(req,res)=>{
-    const {_id}=req?.body
-    if(!_id)return res.json({message:"id is not provided"}).status(401)
-    const response=await takeVentureUpdateChat(_id,dbRepo)
+    const {vid}=req?.body
+    if(!vid)return res.json({message:"id is not provided"}).status(401)
+    const response=await takeVentureUpdateChat(vid,dbRepo)
     if(!response) return res.json({message:"data not published to chat-service"})
     else return res.json({message:"data published to chat-service succeful"})
     

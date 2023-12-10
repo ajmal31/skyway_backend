@@ -38,6 +38,7 @@ const chatController = () => {
         const { senderId, receiverId } = req.body
 
         const response = await takeChatDetails(senderId, receiverId)
+     
         return res.json(response)
 
 

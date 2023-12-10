@@ -1,5 +1,6 @@
 //import schemas here
 import { userModel } from "../../models/user-models/userSchema.js"
+import {connectedVenturesSchema} from "../../models/user-models/connectedVenturesSchema.js"
 const userRepositoryImplements = () => {
 
     //Find a Partiulcar user
@@ -107,7 +108,39 @@ const userRepositoryImplements = () => {
             
         
     }
+    //check the venture Already exist or not
+    const findConnectedVenture=async(vid)=>{
+
+        const response=await connectedVenturesSchema.findOne({_id:vid})
+        return response
+    }
+    //insert venture to connected ventures collection
+    const createConnectedVentures=async(data)=>{
+
+        const response=await new connectedVenturesSchema({
+            data
+
+        }).save()
+        return response
+    }
+    //taking one connected venture
+    const getConnectedVenture=async(receiverId,senderId)=>{
+
+          const response=connectedVenturesSchema.findOne({$or:[{'data._id':receiverId},{'data._id':senderId}]})
+          return response
+    }
+    //taking set of ids matched Ventures
+    const getAllConnectedVentures=async(ids)=>{
+
+        const response=await connectedVenturesSchema.find({"data._id":{$in:ids}})
+        return response
+    }
     return {
+        getAllConnectedVentures,
+        getConnectedVenture,
+        getAllConnectedUsers,
+        createConnectedVentures,
+        findConnectedVenture,
         changeUserStatus,
         getAllConnectedUsers,
         getAllUsers,
