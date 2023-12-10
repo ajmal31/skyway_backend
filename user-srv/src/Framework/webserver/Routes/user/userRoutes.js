@@ -9,6 +9,7 @@ import loginValidation from "../../../../custom-middlewares/user/loginvalidation
 //my own middleware
 import {jwtVerfication} from "jwt-verification-middleware" 
 const userSecret='ajmal123user-srv'
+const ventureSecret="ajmal123venture-srv"
 
 
 const useRoutes=(express)=>{
@@ -45,10 +46,14 @@ const useRoutes=(express)=>{
     //for chat service
     router.route('/getUserUpdateChat').post(controller.getUserUpdateChat)
 
-    //for venture -srv
-    router.route('/getAllConnectedUsers').get(jwtVerfication("ajmal123venture-srv"),controller.getAllConnectedUsers)
 
-    router.route('/changeUserStatus').post(jwtVerfication("ajmal123venture-srv"),controller.changeUserStatus)
+    //for venture -srv
+    router.route('/getAllConnectedUsers').get(jwtVerfication(ventureSecret),controller.getAllConnectedUsers)
+
+    router.route('/changeUserStatus').post(jwtVerfication(ventureSecret),controller.changeUserStatus)
+
+    //take all allowed users based on a venture Id for listing in chat ventureside
+    router.route('/getAllGenuineUsers').get(jwtVerfication(ventureSecret),controller.getAllGenuineUsers)
 
 
 

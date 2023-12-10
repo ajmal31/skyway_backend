@@ -12,6 +12,7 @@ import userStatusChange from "../../../Application/usecase/user/changeUserStatus
 import takeUserUpdateChat from "../../../Application/usecase/user/getUserUpdateChat.js"
 import takeConnectedVenture from "../../../Application/usecase/user/getConnectedVenture.js"
 import takeAllConnectedVentures from "../../../Application/usecase/user/getAllConnectedVentures.js"
+import takeAllGenuineUsers from "../../../Application/usecase/user/takeAllGenuineUsers.js"
 
 
 const userController = (repositoryInterface, repositoryImplements, serviceInterface, userServiceImplements) => {
@@ -161,16 +162,27 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
         const response=await takeConnectedVenture(dbRepository,senderId,receiverId)
         return res.json({response})
     }
-    //take All Connected Venture Based on user Id
+    //take All Connected Venture Based on user Id for listing chat in user side
     const getAllConnectedVentures=async(req,res)=>{
 
         const {userId}=req?.userdata
         const response=await takeAllConnectedVentures(dbRepository,userId)
+        console.log('get all conected ventures',response)
+        return res.json({response})
+
+    }
+    const getAllGenuineUsers=async(req,res)=>{
+
+        const vid=req.userdata._id
+        console.log('ventureId',vid)
+        const response=await takeAllGenuineUsers(dbRepository,vid)
+        if(response.length<1)return res.json({message:'no Allowed user for you'})
         return res.json({response})
 
     }
 
     return {
+        getAllGenuineUsers,
         getAllConnectedVentures,
         getConnectedVenture,
         getUserUpdateChat,

@@ -135,7 +135,14 @@ const userRepositoryImplements = () => {
         const response=await connectedVenturesSchema.find({"data._id":{$in:ids}})
         return response
     }
+    //get all allowed users based on the ventureId
+    const getAllGenuineUsers=async(vid)=>{
+
+        const response=await userModel.find({ventures:{$elemMatch:{ventureId:vid,status:'allowed'}}})
+        return response
+    }
     return {
+        getAllGenuineUsers,
         getAllConnectedVentures,
         getConnectedVenture,
         getAllConnectedUsers,

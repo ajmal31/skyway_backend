@@ -17,9 +17,11 @@ const userRepositoryInterface=(repositories)=>{
      const createConnectedVentures=(data)=>repositories.createConnectedVentures(data)
      const getConnectedVenture=(receiverId,ventureId)=>repositories.getConnectedVenture(receiverId,ventureId)
      const getAllConnectedVentures=(ids)=>repositories.getAllConnectedVentures(ids)
+     const getAllGenuineUsers=(vid)=>repositories.getAllGenuineUsers(vid)
      
 
     return {
+        getAllGenuineUsers,
         getAllConnectedVentures,
         getConnectedVenture,
         createConnectedVentures,

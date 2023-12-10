@@ -50,7 +50,7 @@ const chatController = () => {
             const response = await takeChatDetails(senderId, receiverId)
 
             return res.json(response)
-        }else return res.json({message:"receiverId or senderId not found please check it out chat-srv controller"})
+        }else return console.log('not found')
         
     }
 
@@ -59,6 +59,7 @@ const chatController = () => {
         const findingId = req?.data?.userId
         console.log('is it get userId', findingId)
         const response = await fetchAllChats(findingId)
+        console.log('all chating ventures',response)
         return res.json({ response })
 
     }
