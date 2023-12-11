@@ -36,19 +36,27 @@ const chatController = () => {
     //Server request Extende for jwt auth
     interface extendRequest extends Request {
         data?: {
-            userId: string
+            userId: string,
+            _id:string
         }
     }
     const getChat = async (req: extendRequest, res: Response) => {
 
-        console.log('req body and header',req.body,"header",req.data)
+        let senderId
         const { receiverId } = req.body
-        const senderId=req?.data?.userId
-        console.log('receiveId',receiverId)
-        console.log('senderId',senderId)
+        
+        if(req?.body?.roll==="venture")senderId=req?.data?._id
+
+        
+        else senderId=req?.data?.userId
+        console.log('current roll',req.body)
+        console.log("senderId in chat controller of chat-service line 50",senderId)  
+        console.log("receiverId in chat controller of chat-service line 51",receiverId)  
+
+
         if(senderId&&receiverId){
             const response = await takeChatDetails(senderId, receiverId)
-
+            console.log('response of while taking chat',response) 
             return res.json(response)
         }else return console.log('not found')
         

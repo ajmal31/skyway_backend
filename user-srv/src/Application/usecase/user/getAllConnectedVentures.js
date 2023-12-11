@@ -21,6 +21,7 @@ const getAllConnectedVentures = async (dbRepo, userId) => {
     }
     if (ventureIds.length < 1) return console.log('no Ids Allowed ventures Found')
     //take venture using id from connected ventures collection✅
+    console.log('ventureIds',ventureIds)
     const response = await dbRepo.getAllConnectedVentures(ventureIds)
     return response
 

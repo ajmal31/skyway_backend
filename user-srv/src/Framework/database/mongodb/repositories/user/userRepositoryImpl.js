@@ -111,7 +111,7 @@ const userRepositoryImplements = () => {
     //check the venture Already exist or not
     const findConnectedVenture=async(vid)=>{
 
-        const response=await connectedVenturesSchema.findOne({_id:vid})
+        const response=await connectedVenturesSchema.findOne({"data._id":vid})
         return response
     }
     //insert venture to connected ventures collection
@@ -133,6 +133,7 @@ const userRepositoryImplements = () => {
     const getAllConnectedVentures=async(ids)=>{
 
         const response=await connectedVenturesSchema.find({"data._id":{$in:ids}})
+        console.log('db response while taking getAll connected ventures',response)
         return response
     }
     //get all allowed users based on the ventureId

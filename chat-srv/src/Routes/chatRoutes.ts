@@ -23,7 +23,8 @@ const chatRoutes = (expres: any): Router => {
     // app.use(jwtVerify(env.USER_SRV_TOKEN_SECRET_KEY))
 
     //post methods
-    router.route('/getChat').post(jwtVerify(env.USER_SRV_TOKEN_SECRET_KEY),getChat)
+    router.route('/getChat/user').post(jwtVerify(env.USER_SRV_TOKEN_SECRET_KEY),getChat)
+    router.route('/getChat/venture').post(jwtVerify(env.VENTURE_SRV_TOKEN_SECRET_KEY),getChat)
 
     //Get Methods
     router.route('/getAllChats').get(getAllChats)

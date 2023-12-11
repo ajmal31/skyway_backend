@@ -78,10 +78,11 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
      //user make connection request for particular venture
     const callRequested = async (req, res) => {
 
-        console.log('user details', req.userdata)
+        
 
         const uid = req.userdata.userId
         const vid = req.body.ventureId
+        console.log('user details', req.userdata,"ventureId",vid)
 
         const response = await connectUser(dbRepository, uid, vid)
         console.log('response in controller while making getting response realted user request')
@@ -132,6 +133,7 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
 
         const vid = req?.userdata?._id
         const response = await takeAllConnectedUsers(dbRepository, vid)
+        console.log('all connected users',response)
         if (response) return res.json({ users: response, ventureId: vid })
 
     }
@@ -167,7 +169,6 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
 
         const {userId}=req?.userdata
         const response=await takeAllConnectedVentures(dbRepository,userId)
-        console.log('get all conected ventures',response)
         return res.json({response})
 
     }

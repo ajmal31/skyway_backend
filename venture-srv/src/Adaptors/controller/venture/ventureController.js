@@ -83,8 +83,11 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
   }
   //Taking One Venture Details
   const getOneVenture = async (req, res) => {
-
-    const vid = req.params.id
+    
+    let vid 
+    if(req?.params?.id) vid=req.params.id
+    else vid= req?.userdata?._id
+    console.log("venture id",vid)
     const response = await takeOneVenture(dbRepo, vid)
     if (!response) return console.log('vnture details not found')
     return res.json(response)

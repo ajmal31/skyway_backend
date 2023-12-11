@@ -28,7 +28,11 @@ const ventureRoutes=(express)=>{
    //working
    router.route('/updateVentureStatus').post(controller.updateVentureStatus)
 
+   //for self service 👇
+   router.route('/getOneVenture').get(jwtVerfication(env.JWT_SECRETKEY),controller.getOneVenture)
+   //for other services👇
    router.route('/getOneVenture/:id').get(controller.getOneVenture)
+   
 
    router.route('/getVentureUpdateChat').post(controller.getVentureUpdateChat)
 

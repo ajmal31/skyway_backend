@@ -13,7 +13,9 @@ const connectUser = async (dbrepo, uid, vid) => {
 
     //when user requesting add user db to ventureId
     //chech venture Already exist or not
+    console.log('ventureId',vid)
     const ventureExist=await dbrepo.ventureExist(uid,vid)
+    console.log('venture exist???????????',ventureExist)
     if(ventureExist) return message1
 
    //it new company the user perspective ..so adding venture id to users collection
