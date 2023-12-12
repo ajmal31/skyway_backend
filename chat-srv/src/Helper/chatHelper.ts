@@ -29,9 +29,9 @@ const chatHelper = () => {
             content: message
         })
         const chatresponse = await data.save()
-        console.log('what happend after inserting', chatresponse)
         //adding to chat the messageId
         if (chatresponse) {
+          
             const response = await chatSchema.findOneAndUpdate(
                 {
                     $or:
@@ -40,7 +40,7 @@ const chatHelper = () => {
                             { receiverId: senderId, senderId: receiverId }
                         ]
                 },
-                { $push: { message: chatresponse._id } }, { new: true })
+                { $push: { message: chatresponse._id } },{ new: true })
             return response
 
         }

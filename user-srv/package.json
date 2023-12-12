@@ -25,6 +25,7 @@
     "mongoose": "^8.0.0",
     "morgan": "^1.10.0",
     "nodemon": "^3.0.1",
+    "socket.io": "^4.7.2",
     "x-xss-protection": "^2.0.0"
   }
 }

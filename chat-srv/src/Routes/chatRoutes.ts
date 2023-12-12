@@ -14,7 +14,9 @@ const chatRoutes = (expres: any): Router => {
 
     //Post Methods    
     router.route('/createChat').post(createChat)
-    router.route('/sendMessage').post(sendMessage)
+    router.route('/sendMessage/user').post(jwtVerify(env.USER_SRV_TOKEN_SECRET_KEY),sendMessage)
+    router.route('/sendMessage/venture').post(jwtVerify(env.VENTURE_SRV_TOKEN_SECRET_KEY),sendMessage)
+    
     router.route('/updateChatersDetails').post(updateChatersDetails)
 
 

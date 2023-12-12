@@ -9,7 +9,7 @@ const ExpressConfig=(app:Express)=>{
     app.use(express.json())
 
     //For communicate diffrent servers
-    app.use(cors())
+    app.use(cors({origin:"*"}))
 
     //Protect HTTP Headers
     app.use(helmet())
