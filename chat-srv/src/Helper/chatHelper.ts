@@ -28,9 +28,14 @@ const chatHelper = () => {
             receiverId: receiverId,
             content: message
         })
-        const chatresponse = await data.save()
+        const messageResponse = await data.save()
+        const filterResponse={
+            senderId:messageResponse?.senderId,
+            receiverId:messageResponse?.receiverId,
+            content:messageResponse?.content
+        }
         //adding to chat the messageId
-        if (chatresponse) {
+        if (messageResponse) {
           
             const response = await chatSchema.findOneAndUpdate(
                 {
@@ -40,35 +45,42 @@ const chatHelper = () => {
                             { receiverId: senderId, senderId: receiverId }
                         ]
                 },
-                { $push: { message: chatresponse._id } },{ new: true })
-            return response
+                { $push: { message: messageResponse._id } },{ new: true })
+            return {message:filterResponse,chatId:response?._id}
 
         }
     }
+
     //getin all details about particular chat
     const takeChatDetails = async (senderId: string, receiverId: string) => {
 
-        const response = await chatSchema.findOne(
-
+        const response = await chatSchema.findOneAndUpdate(
             {
+               //check the chat exist or not 
                 $or:
                     [
                         { senderId: senderId, receiverId: receiverId },
-                        { receiverId: senderId, senderId: receiverId },
-
+                        { receiverId: senderId, senderId: receiverId }
                     ]
-            })
-            .populate('message', '-_id')
-        // const response_two = await chatersSchema.find({ "data._id": { $in: [response_one?.senderId, response_one?.receiverId] }})
-        // .select("-_id data")
-        // const response={
-        //     response_one,
-        //     response_two
-        // }
-        return response
 
-
-        // continue 
+            },
+            {
+                //if it not exist create new document for a chat
+                $setOnInsert:
+                {
+                    senderId: senderId,
+                    receiverId: receiverId,
+                    message: []
+                }
+                //upsert if it not insert
+                //run validator if inserting new by default the schema validations is false 
+                //setDefault insert ..if we configured by default in schema shoule be wanna insert 
+                //return after all process document details by default it return previous document
+            },{upsert:true,runValidators:true,setDefaultsOnInsert:true,new:true})
+            .populate('message','-_id')
+            console.log('response in helper',response)
+            return response
+       
     }
     //check IsExist chat or not
     const chatExist = async (senderId: string, receiverId: string) => {

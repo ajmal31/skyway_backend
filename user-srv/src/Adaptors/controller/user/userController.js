@@ -50,7 +50,8 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
         let { email, password } = req.body
 
         const response = await userLogin(dbRepository, service, email, password)
-        if (response.password && response.userExist) return res.json({ message: 'user Logged in succesful', authToken: response.token, username: response.username })
+        const {username,token,userId}=response
+        if (response.password && response.userExist) return res.json({ message: 'user Logged in succesful', authToken: token, username: username,userId })
         else if (response.userExist && !response.password) return res.json({ message: 'please enter your valid password' })
         else return res.json({ message: 'user does not exist' })
 

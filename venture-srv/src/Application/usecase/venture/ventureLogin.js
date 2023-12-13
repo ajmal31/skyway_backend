@@ -19,7 +19,8 @@ const ventureLogin=async(dbRepo,service,data)=>{
             token:false,
             pending:null,
             ventureName:emailExist?.ventureName,
-            status:emailExist?.admin_allowed
+            status:emailExist?.admin_allowed,
+            ventureId:null
     
         }
  
@@ -45,6 +46,7 @@ const ventureLogin=async(dbRepo,service,data)=>{
         obj.loggedIn=true
         obj.password_one=true
         obj.password_two=true
+        obj.ventureId=emailExist._id
         const ventureData={
             _id:emailExist._id,
             ventureName:emailExist.ventureName

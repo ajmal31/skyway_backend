@@ -66,9 +66,9 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
 
     if (response === null) return res.json({ message: 'venture does not exist' })
 
-    const { token, ventureName, pending } = response
+    const { token, ventureName, pending,ventureId } = response
 
-    if (response?.loggedIn) return res.json({ message: 'venture login succesful', token, ventureName, pending })
+    if (response?.loggedIn) return res.json({ message: 'venture login succesful', token, ventureName, pending,ventureId})
     else if (response?.password_one) return res.json({ message: 'please check you second Password' })
     return res.json({ message: 'please check your first password' })
   }
@@ -87,7 +87,6 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
     let vid 
     if(req?.params?.id) vid=req.params.id
     else vid= req?.userdata?._id
-    console.log("venture id",vid)
     const response = await takeOneVenture(dbRepo, vid)
     if (!response) return console.log('vnture details not found')
     return res.json(response)
