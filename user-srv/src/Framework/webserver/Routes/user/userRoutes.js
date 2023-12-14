@@ -20,8 +20,9 @@ const useRoutes=(express)=>{
 
     //Passing interface and implments to controller
     const controller=userController(userRepositoryInterface,userRepositoryImplements,userServiceInterface,userServiceImplements)
+     
 
-    //POST METHODS
+    //Authentication base methods
     router.route('/register').post(registerValidation,controller.register) 
     router.route('/login').post(loginValidation,controller.login)
     router.route('/googleLogin').post(controller.googleLogin)
@@ -32,35 +33,38 @@ const useRoutes=(express)=>{
     //MIDDLEWARE/  !!!notice!! this is not working while setup globally but it working while writing along with each route
     app.use(jwtVerfication('ajmal123user-srv'))
 
-    router.route('/callRequested').post(jwtVerfication('ajmal123user-srv'),controller.callRequested)
+    //User Requesting to a venture for connecting
+    router.route('/callRequested').post(jwtVerfication(userSecret),controller.callRequested)
 
-    //GET METHODS
+    //USER-SERVICE👇
 
+    //delete user account (soft delete)
     router.route('/delete/:id').get(controller.remove)
-    router.route('/getUser').get(jwtVerfication('ajmal123user-srv'),controller.getUser)
+    //take one user
+    router.route('/getUser').get(jwtVerfication(userSecret),controller.getUser)
+    //taking all users
     router.route('/getAllUsers').get(controller.getAllusers)
+    //take one venture (from replicated venture data)
     router.route('/getConnectedVenture').post(controller.getConnectedVenture)
     //should be check user valid or not
     router.route('/getAllConnectedVentures').get(jwtVerfication(userSecret),controller.getAllConnectedVentures)
-    
-    //for chat service
+    //taking user details and publish data to chat-srv - CHAT-SERVICE
     router.route('/getUserUpdateChat').post(controller.getUserUpdateChat)
+    //verified phone number
+    router.route('/numberVerified').get(jwtVerfication(userSecret),controller.numberVerified)
 
 
-    //for venture -srv
+    //FOR VENTURE SERVICE👇
+
+    //taking all usres
     router.route('/getAllConnectedUsers').get(jwtVerfication(ventureSecret),controller.getAllConnectedUsers)
-
+    //venture allowed user request 
     router.route('/changeUserStatus').post(jwtVerfication(ventureSecret),controller.changeUserStatus)
-
-    //take all allowed users based on a venture Id for listing in chat ventureside
+    //take all allowed users based on a venture Id for listing in chat
     router.route('/getAllGenuineUsers').get(jwtVerfication(ventureSecret),controller.getAllGenuineUsers)
 
 
 
-    //PUT METHODS 
-
-
-    //!! more update required related this route depend on the frontend work 
     router.route('/updateUser').post(registerValidation ,controller.update)
 
 

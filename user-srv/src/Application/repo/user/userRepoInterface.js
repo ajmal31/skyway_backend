@@ -18,9 +18,13 @@ const userRepositoryInterface=(repositories)=>{
      const getConnectedVenture=(receiverId,ventureId)=>repositories.getConnectedVenture(receiverId,ventureId)
      const getAllConnectedVentures=(ids)=>repositories.getAllConnectedVentures(ids)
      const getAllGenuineUsers=(vid)=>repositories.getAllGenuineUsers(vid)
+     const phoneNumberVerified=(obj)=>repositories.updateUserField(obj)
+     const phoneNumberRejected=(obj)=>repositories.updateUserField(obj)
      
 
     return {
+        phoneNumberRejected,
+        phoneNumberVerified,
         getAllGenuineUsers,
         getAllConnectedVentures,
         getConnectedVenture,

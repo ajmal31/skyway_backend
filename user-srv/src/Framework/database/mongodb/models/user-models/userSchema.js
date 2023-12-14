@@ -13,6 +13,7 @@ const userSchema=new Schema({
     password:{type:String,required:true},
     confirm_password:{type: String, required:true},
     soft_delete: {type: Boolean ,default:false},
+    phone_verification:{type:Boolean ,default :false},
     ventures:[
         
     ]

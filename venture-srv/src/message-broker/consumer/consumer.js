@@ -25,7 +25,7 @@ const consumer = async () => {
     const service = ventureServiceInterface(ventureServiceImplements())
 
     const channel = await createChannel()
-    channel.consume('VENTURE_SRV', async(message) => {
+    channel?.consume('VENTURE_SRV', async(message) => {
 
         const data = JSON.parse(message.content)
         console.log('data consuming in venture-srv', data)

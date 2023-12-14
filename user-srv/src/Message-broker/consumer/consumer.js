@@ -18,20 +18,7 @@ const consumer = async () => {
 
     const channel = await createChannel()
 
-    // channel.consume('USER-SRV', (message) => {
-
-    //     let data = JSON.parse(message?.content)
-    //     data = util.inspect(data, false, null, true)
-    //     console.log(`consuming data in user service${data}`)
-    //     console.log(data?.ventureName)
-    //     if (data?.ventureName) {
-    //         console.log('enter expected')
-    //         connectedVentures(dbRepo, data)
-    //     }
-    //     channel.ack(message)
-
-    // })
-    channel.consume('USER-SRV', (message) => {
+    channel?.consume('USER-SRV', (message) => {
         let data = JSON.parse(message?.content);
         // data = JSON.stringify(data);
         let obj=data

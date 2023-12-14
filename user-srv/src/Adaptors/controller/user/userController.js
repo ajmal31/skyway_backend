@@ -13,7 +13,7 @@ import takeUserUpdateChat from "../../../Application/usecase/user/getUserUpdateC
 import takeConnectedVenture from "../../../Application/usecase/user/getConnectedVenture.js"
 import takeAllConnectedVentures from "../../../Application/usecase/user/getAllConnectedVentures.js"
 import takeAllGenuineUsers from "../../../Application/usecase/user/takeAllGenuineUsers.js"
-
+import phoneNumberVerified from "../../../Application/usecase/user/phoneNumberVerified.js"
 
 const userController = (repositoryInterface, repositoryImplements, serviceInterface, userServiceImplements) => {
 
@@ -22,9 +22,8 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
     //user service and implements assign service 
     const service = serviceInterface(userServiceImplements())
 
-    //POST METHODS 👇
 
-    //register ❗ ❗ ❗ ❗ update exist should be update
+    //register
     const register = async (req, res) => {
 
         try {
@@ -43,7 +42,7 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
 
 
     }
-    //login ❗ ❗ ❗ ❗  update exist should be update
+    //login
     const login = async (req, res) => {
 
 
@@ -83,10 +82,9 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
 
         const uid = req.userdata.userId
         const vid = req.body.ventureId
-        console.log('user details', req.userdata,"ventureId",vid)
+        
 
         const response = await connectUser(dbRepository, uid, vid)
-        console.log('response in controller while making getting response realted user request')
         return res.json(response)
 
 
@@ -118,6 +116,7 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
 
     
         const response = await updateUSer(req.body, dbRepository, service)
+        console.log('response in controller',response)
         return res.json({ response })
 
     }
@@ -173,17 +172,25 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
         return res.json({response})
 
     }
+    //taking All genuine user based on partiulcar ventureId
     const getAllGenuineUsers=async(req,res)=>{
 
         const vid=req.userdata._id
-        console.log('ventureId',vid)
         const response=await takeAllGenuineUsers(dbRepository,vid)
         if(response.length<1)return res.json({message:'no Allowed user for you'})
         return res.json({response})
 
     }
+    const numberVerified=async(req,res)=>{
+
+        const {userId}=req.userdata
+        console.log('userId in controler',userId)
+        const response=await phoneNumberVerified(dbRepository,userId)
+        return res.json(response)
+    }
 
     return {
+        numberVerified,
         getAllGenuineUsers,
         getAllConnectedVentures,
         getConnectedVenture,

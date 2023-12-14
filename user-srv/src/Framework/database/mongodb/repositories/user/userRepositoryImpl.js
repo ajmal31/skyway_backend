@@ -1,13 +1,14 @@
 //import schemas here
 import { userModel } from "../../models/user-models/userSchema.js"
-import {connectedVenturesSchema} from "../../models/user-models/connectedVenturesSchema.js"
+import { connectedVenturesSchema } from "../../models/user-models/connectedVenturesSchema.js"
 const userRepositoryImplements = () => {
 
     //Find a Partiulcar user
-    const findUser = async (obj) => {
-       
-        const { key, val } = obj
-        const query = { [key]: val }
+    const findUser = async ({key,val,neVal=null}) => {
+
+        const query = { 
+            [key]: val ,
+            ["_id"]:{$ne:neVal}}
         try {
             const response = await userModel.findOne(query)
             return response
@@ -61,13 +62,13 @@ const userRepositoryImplements = () => {
             region: userdata?.getRegion(),
             phone: userdata?.getPhone(),
             destination: userdata?.getDestination(),
-            date_of_birth:userdata?.getDate_of_birth()
+            date_of_birth: userdata?.getDate_of_birth()
 
         }
         const { username, email, region, phone, destination } = obj
 
         const response = await userModel.findOneAndUpdate({ _id: uid },
-            { $set: { username: username, email: email, region: region, phone: phone, destination: destination} },
+            { $set: { username: username, email: email, region: region, phone: phone, destination: destination } },
             { returnOriginal: false })
         return response
 
@@ -88,61 +89,78 @@ const userRepositoryImplements = () => {
         return response
     }
     //getAllUsers
-    const getAllUsers=async()=>{
+    const getAllUsers = async () => {
 
-        const response=await userModel.find()
+        const response = await userModel.find()
         return response
     }
     //get All connected users Based on a Particular venture
-    const getAllConnectedUsers=async(vid)=>{
+    const getAllConnectedUsers = async (vid) => {
 
 
-        const response=await userModel.find({ventures:{$elemMatch:{ventureId:vid}}})
+        const response = await userModel.find({ ventures: { $elemMatch: { ventureId: vid } } })
         return response
     }
     //change user Status
-    const changeUserStatus=async(status,uid,vid)=>{
+    const changeUserStatus = async (status, uid, vid) => {
 
-            const response=await userModel.findOneAndUpdate({_id:uid,'ventures.ventureId':vid},{$set:{'ventures.$.status':status}},{new:true})
-            return response
-            
-        
+        const response = await userModel.findOneAndUpdate({ _id: uid, 'ventures.ventureId': vid }, { $set: { 'ventures.$.status': status } }, { new: true })
+        return response
+
+
     }
     //check the venture Already exist or not
-    const findConnectedVenture=async(vid)=>{
+    const findConnectedVenture = async (vid) => {
 
-        const response=await connectedVenturesSchema.findOne({"data._id":vid})
+        const response = await connectedVenturesSchema.findOne({ "data._id": vid })
         return response
     }
     //insert venture to connected ventures collection
-    const createConnectedVentures=async(data)=>{
+    const createConnectedVentures = async (data) => {
 
-        const response=await new connectedVenturesSchema({
+        const response = await new connectedVenturesSchema({
             data
 
         }).save()
         return response
     }
     //taking one connected venture
-    const getConnectedVenture=async(receiverId,senderId)=>{
+    const getConnectedVenture = async (receiverId, senderId) => {
 
-          const response=connectedVenturesSchema.findOne({$or:[{'data._id':receiverId},{'data._id':senderId}]})
-          return response
+        const response = connectedVenturesSchema.findOne({ $or: [{ 'data._id': receiverId }, { 'data._id': senderId }] })
+        return response
     }
     //taking set of ids matched Ventures
-    const getAllConnectedVentures=async(ids)=>{
+    const getAllConnectedVentures = async (ids) => {
 
-        const response=await connectedVenturesSchema.find({"data._id":{$in:ids}})
-        console.log('db response while taking getAll connected ventures',response)
+        const response = await connectedVenturesSchema.find({ "data._id": { $in: ids } })
+        console.log('db response while taking getAll connected ventures', response)
         return response
     }
     //get all allowed users based on the ventureId
-    const getAllGenuineUsers=async(vid)=>{
+    const getAllGenuineUsers = async (vid) => {
 
-        const response=await userModel.find({ventures:{$elemMatch:{ventureId:vid,status:'allowed'}}})
+        const response = await userModel.find({ ventures: { $elemMatch: { ventureId: vid, status: 'allowed' } } })
         return response
     }
+    //update user document on field
+    const updateUserField = async (obj) => {
+
+        const { findKey, findVal, key, val } = obj
+        console.log(obj)
+        const find = { [findKey]: findVal }
+        const update = { [key]: val }
+        const response = await userModel.findOneAndUpdate(find, { $set: update }, { upsert: true, new: true, returnOriginal: false });
+        return response
+    }
+    
+
+
+
+
+
     return {
+        updateUserField,
         getAllGenuineUsers,
         getAllConnectedVentures,
         getConnectedVenture,
