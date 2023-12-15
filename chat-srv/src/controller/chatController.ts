@@ -49,14 +49,9 @@ const chatController = () => {
 
         
         else senderId=req?.data?.userId
-        // console.log('current roll',req.body)
-        // console.log("senderId in chat controller of chat-service line 50",senderId)  
-        // console.log("receiverId in chat controller of chat-service line 51",receiverId)  
-
-        console.log('taking chat',senderId,receiverId)
+       
         if(senderId&&receiverId){
             const response = await takeChatDetails(senderId, receiverId)
-            console.log('chat response in controller',response)
             return res.json(response)
         }else return console.log('not found')
         

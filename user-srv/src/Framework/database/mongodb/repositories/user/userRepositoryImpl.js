@@ -5,12 +5,19 @@ const userRepositoryImplements = () => {
 
     //Find a Partiulcar user
     const findUser = async ({key,val,neVal=null}) => {
-
-        const query = { 
+        console.log('cred',key,val,neVal)
+        
+        const query_one = { 
+            [key]: val 
+           
+        }
+        const query_two = { 
             [key]: val ,
-            ["_id"]:{$ne:neVal}}
+            ["_id"]:{$ne:neVal}
+        }
         try {
-            const response = await userModel.findOne(query)
+            const response = await userModel.findOne(!neVal?query_one:query_two)
+            console.log('response in hlper',response)
             return response
 
         } catch (err) {

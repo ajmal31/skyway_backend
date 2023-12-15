@@ -189,6 +189,7 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
         return res.json(response)
     }
 
+
     return {
         numberVerified,
         getAllGenuineUsers,

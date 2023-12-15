@@ -78,7 +78,6 @@ const chatHelper = () => {
                 //return after all process document details by default it return previous document
             },{upsert:true,runValidators:true,setDefaultsOnInsert:true,new:true})
             .populate('message','-_id')
-            console.log('response in helper',response)
             return response
        
     }

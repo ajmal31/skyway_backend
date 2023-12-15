@@ -97,6 +97,7 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
 
 
     const response=await ventureStatusUpdate(dbRepo,req?.body)
+    console.log('heloiam veture status updated')
     if(response) return res.json(response)
 
    } 

@@ -54,16 +54,20 @@ const useRoutes=(express)=>{
     router.route('/numberVerified').get(jwtVerfication(userSecret),controller.numberVerified)
 
 
+
     //FOR VENTURE SERVICE👇
 
     //taking all usres
     router.route('/getAllConnectedUsers').get(jwtVerfication(ventureSecret),controller.getAllConnectedUsers)
     //venture allowed user request 
     router.route('/changeUserStatus').post(jwtVerfication(ventureSecret),controller.changeUserStatus)
+
+    //FOR CHAT SERVICE
+
     //take all allowed users based on a venture Id for listing in chat
     router.route('/getAllGenuineUsers').get(jwtVerfication(ventureSecret),controller.getAllGenuineUsers)
 
-
+   
 
     router.route('/updateUser').post(registerValidation ,controller.update)
 
