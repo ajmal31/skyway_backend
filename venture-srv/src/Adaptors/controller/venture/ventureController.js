@@ -6,8 +6,8 @@ import ventureLogin from "../../../Application/usecase/venture/ventureLogin.js"
 import takeAllUsers from "../../../Application/usecase/venture/takeAllUsers.js"
 import takeOneVenture from "../../../Application/usecase/venture/takeOneVenture.js"
 import takeVentureUpdateChat from "../../../Application/usecase/venture/getVentureUpdate.js"
-import { uploadS3 } from "../../../multer/index.js"
-import { getUrl } from "../../../multer/index.js"
+import {uploadFile} from "../../../../src//multer/index.js"
+
 import ventureStatusUpdate from "../../../Application/usecase/venture/updateVentureStatus.js"
 const ventureController = (repositoryInterface, repositoryImplements, serviceInterface, ServiceImplements) => {
 
@@ -30,11 +30,12 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
   //test route written check whether it uploading to s3 is working or not
   const upload = async (req, res) => {
 
-    const { file } = req
+    const file = req.files
+   
     console.log('file', file)
-    const { error, key } = getUrl()
-    if (error) console.log('error occured while uploading to s3 in controller', error)
-    else console.log('succesfull uploaded to s3 ', key)
+    const result=await uploadFile(file)
+    console.log('after uploading ',result)
+    
 
 
 

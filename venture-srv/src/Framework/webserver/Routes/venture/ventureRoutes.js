@@ -9,8 +9,8 @@ import register_validation from "../../../../custome-middlewares/Register_valida
 import multer,{memoryStorage} from "multer"
 import env from "../../../../config/env.js"
 
-const storage=memoryStorage()
-const upload=multer({storage})
+
+const upload = multer({ storage: multer.memoryStorage() });
 
 const ventureRoutes=(express)=>{
   
@@ -46,7 +46,7 @@ const ventureRoutes=(express)=>{
 
    //test route
 //    router.route('/upload').post(uploadImage.array('file',2),controller.upload)
-   router.route('/upload').post(upload.single("file"),controller.upload)
+   router.route('/upload').post(upload.array("file"),controller.upload)
 
 
     return router
