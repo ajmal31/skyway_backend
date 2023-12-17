@@ -4,7 +4,8 @@ const createChannel = async () => {
 
     try {
 
-        const uri = 'amqp://localhost'
+        const uri = 'amqp://host.docker.internal'
+        // const uri = 'amqp://localhost'
         const connection = await amqp.connect(uri)
         const channel = await connection.createChannel()
         const queueName = 'VENTURE_SRV'

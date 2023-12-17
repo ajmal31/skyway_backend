@@ -8,14 +8,14 @@ const consumer = async () => {
     channel.consume("CHAT-SRV", async (data) => {
         if (data) {
             const message = JSON.parse(data?.content?.toString());
-            console.log('chat service consuming',message)
+            console.log('chat service consuming', message)
+
             //These conditon handling Venture and User data for updating chaters
-            if (message?.ventureName||message?.username) {
+            if (message?.ventureName || message?.username) {
 
                 const existDoc = await findChater(message._id)
                 //check whether Document already Exist or not
                 if (existDoc) {
-                    console.log('the Document already exist in the chaters')
                     return channel.ack(data)
                 }
                 const response = await insertChatersDetails(message)
