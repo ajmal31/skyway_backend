@@ -4,8 +4,8 @@ const createChannel = async () => {
 
 
     try {
-        // const url = "amqp://localhost"
-        const url = "amqp://host.docker.internal:5672"
+        const url = "amqp://localhost"
+        // const url = "amqp://host.docker.internal:5672"
         const connection = await amqp.connect(url)
         const channel = await connection.createChannel()
         const queueName = 'USER-SRV'

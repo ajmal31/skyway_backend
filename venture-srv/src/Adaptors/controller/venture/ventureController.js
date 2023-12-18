@@ -6,7 +6,7 @@ import ventureLogin from "../../../Application/usecase/venture/ventureLogin.js"
 import takeAllUsers from "../../../Application/usecase/venture/takeAllUsers.js"
 import takeOneVenture from "../../../Application/usecase/venture/takeOneVenture.js"
 import takeVentureUpdateChat from "../../../Application/usecase/venture/getVentureUpdate.js"
-import {uploadFile} from "../../../../src//multer/index.js"
+import { uploadFile } from "../../../s3/index.js"
 
 import ventureStatusUpdate from "../../../Application/usecase/venture/updateVentureStatus.js"
 const ventureController = (repositoryInterface, repositoryImplements, serviceInterface, ServiceImplements) => {
@@ -31,11 +31,14 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
   const upload = async (req, res) => {
 
     const file = req.files
-   
+    // console.log('govId', file[0])
+    // console.log('adhar card', file[1])
+    // console.log('pan', file[2])
+    // console.log('passport', file[3])
     console.log('file', file)
     const result=await uploadFile(file)
     console.log('after uploading ',result)
-    
+
 
 
 
@@ -56,7 +59,7 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
   }
   //Taking all Venture Details
   const getAllVentures = async (req, res) => {
-    const response = await listVentures(dbRepo,req?.body?.type)
+    const response = await listVentures(dbRepo, req?.body?.type)
     return res.json({ response })
 
   }
@@ -67,9 +70,9 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
 
     if (response === null) return res.json({ message: 'venture does not exist' })
 
-    const { token, ventureName, pending,ventureId } = response
+    const { token, ventureName, pending, ventureId } = response
 
-    if (response?.loggedIn) return res.json({ message: 'venture login succesful', token, ventureName, pending,ventureId})
+    if (response?.loggedIn) return res.json({ message: 'venture login succesful', token, ventureName, pending, ventureId })
     else if (response?.password_one) return res.json({ message: 'please check you second Password' })
     return res.json({ message: 'please check your first password' })
   }
@@ -84,32 +87,32 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
   }
   //Taking One Venture Details
   const getOneVenture = async (req, res) => {
-    
-    let vid 
-    if(req?.params?.id) vid=req.params.id
-    else vid= req?.userdata?._id
+
+    let vid
+    if (req?.params?.id) vid = req.params.id
+    else vid = req?.userdata?._id
     const response = await takeOneVenture(dbRepo, vid)
     if (!response) return console.log('vnture details not found')
     return res.json(response)
 
   }
   //Update venture status if venture allowed or no
-  const updateVentureStatus=async(req,res)=>{
+  const updateVentureStatus = async (req, res) => {
 
 
-    const response=await ventureStatusUpdate(dbRepo,req?.body)
+    const response = await ventureStatusUpdate(dbRepo, req?.body)
     console.log('heloiam veture status updated')
-    if(response) return res.json(response)
+    if (response) return res.json(response)
 
-   } 
+  }
   //getParticualar venture and Publish data to chat -service 
-  const getVentureUpdateChat=async(req,res)=>{
-    const {vid}=req?.body
-    if(!vid)return res.json({message:"id is not provided"}).status(401)
-    const response=await takeVentureUpdateChat(vid,dbRepo)
-    if(!response) return res.json({message:"data not published to chat-service"})
-    else return res.json({message:"data published to chat-service succeful"})
-    
+  const getVentureUpdateChat = async (req, res) => {
+    const { vid } = req?.body
+    if (!vid) return res.json({ message: "id is not provided" }).status(401)
+    const response = await takeVentureUpdateChat(vid, dbRepo)
+    if (!response) return res.json({ message: "data not published to chat-service" })
+    else return res.json({ message: "data published to chat-service succeful" })
+
   }
 
 

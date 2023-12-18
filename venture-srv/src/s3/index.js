@@ -7,19 +7,20 @@ const s3 = new S3Client({
     accessKeyId: env.AWS_ACCESSKEY,
     secretAccessKey: env.AWS_SECRETKEY,
   },
-  region: "us-east-1",
+  region: "eu-north-1",
 });
 
 
 export const uploadFile = async (files) => {
 
-  const bucketName = "focuspoint-dev"
+  const bucketName = "skyway.innovative"
+  const folderName="user-documents"
 
 
   try {
     const result = files.map(async (file) => {
 
-      const key = file.originalname
+      const key = `${folderName}/${file.originalname}`
       const command = new PutObjectCommand({
         Bucket: bucketName,
         Key: key, // Corrected key
@@ -28,7 +29,8 @@ export const uploadFile = async (files) => {
       });
 
       const response = await s3.send(command);
-      const url = `https://focuspoint-dev.s3.amazonaws.com/${key}`;
+      // const url = `https://${bucketName}.s3.amazonaws.com/${key}`;
+      const url = `https://s3.eu-north-1.amazonaws.com/${bucketName}/${key}`;
       return url; // Return the response from S3
 
     })
