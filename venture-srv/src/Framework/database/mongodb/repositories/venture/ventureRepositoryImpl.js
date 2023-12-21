@@ -120,9 +120,9 @@ const ventureRepositoryImplements = () => {
 
 
   }
-  const updateVentureStatus = async (id) => {
+  const updateVentureStatus = async (id,status) => {
 
-    const response = await ventureModel.findOneAndUpdate({ _id: id }, { $set: { admin_allowed: 'allowed' } }, { new: true });
+    const response = await ventureModel.findOneAndUpdate({ _id: id }, { $set: { admin_allowed: status } }, { new: true });
     return response
   }
   //Taking Some Users From Who Connected a Particular Venture

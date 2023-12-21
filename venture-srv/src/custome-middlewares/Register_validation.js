@@ -19,7 +19,7 @@ const register_validation = [
     body('venture_category').notEmpty().withMessage('category is required'),
     body('description').notEmpty().withMessage('description is required'),
     body('expertise_contries').notEmpty().withMessage('expertise_contries is required'),
-    body('min_max_service_amount').notEmpty().withMessage('average Amount is required'),
+    // body('min_max_service_amount').notEmpty().withMessage('average Amount is required'),
     body('official_portfolio').notEmpty().withMessage('official_portfolio Amount is required'),
     body('website_link').notEmpty().withMessage('website reference is required'),
     body('register_number').notEmpty().withMessage('register number  is required'),

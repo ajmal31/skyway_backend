@@ -14,6 +14,7 @@ import takeConnectedVenture from "../../../Application/usecase/user/getConnected
 import takeAllConnectedVentures from "../../../Application/usecase/user/getAllConnectedVentures.js"
 import takeAllGenuineUsers from "../../../Application/usecase/user/takeAllGenuineUsers.js"
 import phoneNumberVerified from "../../../Application/usecase/user/phoneNumberVerified.js"
+import { uploadFile } from "../../../s3/index.js"
 
 const userController = (repositoryInterface, repositoryImplements, serviceInterface, userServiceImplements) => {
 
@@ -188,9 +189,25 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
         const response=await phoneNumberVerified(dbRepository,userId)
         return res.json(response)
     }
+    //document uploading
+      //test route written check whether it uploading to s3 is working or not
+    const upload = async (req, res) => {
+
+    const file = req.files
+    // console.log('govId', file[0])
+    // console.log('adhar card', file[1])
+    // console.log('pan', file[2])
+    // console.log('passport', file[3])
+    console.log('file', file)
+    const result=await uploadFile(file)
+    console.log('after uploading ',result)
+
+
+    }
 
 
     return {
+        upload,
         numberVerified,
         getAllGenuineUsers,
         getAllConnectedVentures,

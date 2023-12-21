@@ -43,6 +43,7 @@ const socketConfguration = (server: any) => {
         })
 
         socket.on('joinRoom', (chatId) => {
+            console.log('receive join room event')
             console.log(`joined a particular rooom${chatId}`)
             socket.join(chatId)
 

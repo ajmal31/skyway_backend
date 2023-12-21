@@ -17,10 +17,11 @@ const ventureLogin=async(dbRepo,service,data)=>{
             password_one:false,
             password_two:false,
             token:false,
-            pending:null,
+            admin_allowed:null,
             ventureName:emailExist?.ventureName,
             status:emailExist?.admin_allowed,
-            ventureId:null
+            ventureId:null,
+  
     
         }
  
@@ -29,9 +30,10 @@ const ventureLogin=async(dbRepo,service,data)=>{
   
         //this situtation i can't use boolean (localstorage)
         if(emailExist?.admin_allowed==='pending'){
-            obj.pending="true"
+            obj.admin_allowed="pending"
             
-        }else obj.pending="false"
+        }else if(emailExist?.admin_allowed==="rejected")obj.admin_allowed="rejected"
+        else obj.admin_allowed="allowed"
 
     const dbPasword_one=emailExist.password_one
     const dbPasword_two=emailExist.password_two

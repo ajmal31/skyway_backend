@@ -10,7 +10,7 @@ const ventureRepositoryInterface=(repositories)=>{
      const registerNumberExist=(obj)=>repositories.ventureExist(obj)
      const licenseNumberExist=(obj)=>repositories.ventureExist(obj)
      const getAllVentures=(type)=>repositories.getAllVentures(type)
-     const updateVentureStatus=(id)=>repositories.updateVentureStatus(id)
+     const updateVentureStatus=(id,status)=>repositories.updateVentureStatus(id,status)
      const getAllUsers=(vid)=>repositories.getAllUsers(vid)
      const getOneVenture=(obj)=>repositories.ventureExist(obj)
      const updateConnectUser=(obj)=>repositories.updateConnectUser(obj)

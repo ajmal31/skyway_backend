@@ -6,12 +6,15 @@ import userServiceInterface from "../../../../Application/srv/user/userSrvInterf
 import userServiceImplements from "../../../services/user/userServiceImpl.js"
 import registerValidation from "../../../../custom-middlewares/user/registerValidation.js"
 import loginValidation from "../../../../custom-middlewares/user/loginvalidation.js"
+import multer from "multer"
+
+
 //my own middleware
 import {jwtVerfication} from "jwt-verification-middleware" 
 const userSecret='ajmal123user-srv'
 const ventureSecret="ajmal123venture-srv"
 
-
+const upload = multer({ storage: multer.memoryStorage() });
 const useRoutes=(express)=>{
   
 
@@ -67,9 +70,11 @@ const useRoutes=(express)=>{
     //take all allowed users based on a venture Id for listing in chat
     router.route('/getAllGenuineUsers').get(jwtVerfication(ventureSecret),controller.getAllGenuineUsers)
 
-   
-
     router.route('/updateUser').post(registerValidation ,controller.update)
+
+
+    //document uploading
+    router.route('/upload').post(upload.array("file"),controller.upload)
 
 
  

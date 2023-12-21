@@ -25,28 +25,19 @@ const ventureRoutes=(express)=>{
    //POST methods
    router.route('/register').post(register_validation,controller.register)
    router.route('/login').post(controller.login)
-   //working
    router.route('/updateVentureStatus').post(controller.updateVentureStatus)
-
-   //for self service 👇
-   router.route('/getOneVenture').get(jwtVerfication(env.JWT_SECRETKEY),controller.getOneVenture)
-   //for other services👇
-   router.route('/getOneVenture/:id').get(controller.getOneVenture)
-   
-
    router.route('/getVentureUpdateChat').post(controller.getVentureUpdateChat)
-
-
-
-   //GET ALL VENTURES
    router.route('/getAllventures').post(controller.getAllVentures)
+
+
+
+   router.route('/getOneVenture').get(jwtVerfication(env.JWT_SECRETKEY),controller.getOneVenture)
+   router.route('/getOneVenture/:id').get(controller.getOneVenture)
    router.route('/getAllUsers').get(jwtVerfication(env.JWT_SECRETKEY),controller.getAllUsers)
    
    
-
-   //test route
-//    router.route('/upload').post(uploadImage.array('file',2),controller.upload)
-   router.route('/upload').post(upload.array("file"),controller.upload)
+    //test route
+     router.route('/upload').post(upload.array("file"),controller.upload)
 
 
     return router

@@ -70,12 +70,13 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
 
     if (response === null) return res.json({ message: 'venture does not exist' })
 
-    const { token, ventureName, pending, ventureId } = response
+    const { token, ventureName, admin_allowed, ventureId,rejected } = response
 
-    if (response?.loggedIn) return res.json({ message: 'venture login succesful', token, ventureName, pending, ventureId })
+    if (response?.loggedIn) return res.json({ message: 'venture login succesful', token, ventureName, admin_allowed, ventureId,rejected })
     else if (response?.password_one) return res.json({ message: 'please check you second Password' })
     return res.json({ message: 'please check your first password' })
   }
+  
   //Take all users Based on Particular Venture 
   const getAllUsers = async (req, res) => {
 
@@ -101,7 +102,7 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
 
 
     const response = await ventureStatusUpdate(dbRepo, req?.body)
-    console.log('heloiam veture status updated')
+    
     if (response) return res.json(response)
 
   }
