@@ -76,7 +76,7 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
     else if (response?.password_one) return res.json({ message: 'please check you second Password' })
     return res.json({ message: 'please check your first password' })
   }
-  
+
   //Take all users Based on Particular Venture 
   const getAllUsers = async (req, res) => {
 
@@ -116,8 +116,11 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
 
   }
 
+  
+
 
   return {
+
     getVentureUpdateChat,
     updateVentureStatus,
     upload,

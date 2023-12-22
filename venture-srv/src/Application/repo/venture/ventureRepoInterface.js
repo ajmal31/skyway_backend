@@ -14,6 +14,7 @@ const ventureRepositoryInterface=(repositories)=>{
      const getAllUsers=(vid)=>repositories.getAllUsers(vid)
      const getOneVenture=(obj)=>repositories.ventureExist(obj)
      const updateConnectUser=(obj)=>repositories.updateConnectUser(obj)
+     
 
 
      

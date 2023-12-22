@@ -15,6 +15,7 @@ import takeAllConnectedVentures from "../../../Application/usecase/user/getAllCo
 import takeAllGenuineUsers from "../../../Application/usecase/user/takeAllGenuineUsers.js"
 import phoneNumberVerified from "../../../Application/usecase/user/phoneNumberVerified.js"
 import { uploadFile } from "../../../s3/index.js"
+import FailedOtp from "../../../Application/usecase/user/otpFailed.js"
 
 const userController = (repositoryInterface, repositoryImplements, serviceInterface, userServiceImplements) => {
 
@@ -204,9 +205,16 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
 
 
     }
+    const otpFailed=async(req,res)=>{
+
+        const{userId}=req.userdata
+        const response=await FailedOtp(dbRepository,userId)
+   
+     }
 
 
     return {
+        otpFailed,
         upload,
         numberVerified,
         getAllGenuineUsers,

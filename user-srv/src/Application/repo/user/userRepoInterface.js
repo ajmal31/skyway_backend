@@ -20,9 +20,11 @@ const userRepositoryInterface=(repositories)=>{
      const getAllGenuineUsers=(vid)=>repositories.getAllGenuineUsers(vid)
      const phoneNumberVerified=(obj)=>repositories.updateUserField(obj)
      const phoneNumberRejected=(obj)=>repositories.updateUserField(obj)
+     const otpFailed=(uid)=>repositories.otpFailed(uid)
      
 
     return {
+        otpFailed,
         phoneNumberRejected,
         phoneNumberVerified,
         getAllGenuineUsers,

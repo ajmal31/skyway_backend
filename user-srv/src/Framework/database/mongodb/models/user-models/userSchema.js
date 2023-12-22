@@ -14,6 +14,7 @@ const userSchema=new Schema({
     confirm_password:{type: String, required:true},
     soft_delete: {type: Boolean ,default:false},
     phone_verification:{type:Boolean ,default :false},
+    last_otp:{type:Date},
     ventures:[
         
     ]

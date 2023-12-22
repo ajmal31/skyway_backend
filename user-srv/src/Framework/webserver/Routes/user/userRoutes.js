@@ -55,6 +55,7 @@ const useRoutes=(express)=>{
     router.route('/getUserUpdateChat').post(controller.getUserUpdateChat)
     //verified phone number
     router.route('/numberVerified').get(jwtVerfication(userSecret),controller.numberVerified)
+    router.route('/otpFailed').get(jwtVerfication(userSecret),controller.otpFailed)
 
 
 

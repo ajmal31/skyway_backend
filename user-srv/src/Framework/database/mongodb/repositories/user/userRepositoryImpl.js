@@ -160,13 +160,14 @@ const userRepositoryImplements = () => {
         const response = await userModel.findOneAndUpdate(find, { $set: update }, { upsert: true, new: true, returnOriginal: false });
         return response
     }
+    const otpFailed=async(uid)=>{
+      
+        const response=await userModel.findOneAndUpdate({_id:uid},{$set:{last_otp:new Date()}},{new:true})
+        return response
+    }
     
-
-
-
-
-
     return {
+        otpFailed,
         updateUserField,
         getAllGenuineUsers,
         getAllConnectedVentures,
