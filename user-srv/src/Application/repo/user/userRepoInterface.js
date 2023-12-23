@@ -21,9 +21,11 @@ const userRepositoryInterface=(repositories)=>{
      const phoneNumberVerified=(obj)=>repositories.updateUserField(obj)
      const phoneNumberRejected=(obj)=>repositories.updateUserField(obj)
      const otpFailed=(uid)=>repositories.otpFailed(uid)
+     const documentUploading=(documents,uid)=>repositories.documentUploading(documents,uid)
      
 
     return {
+        documentUploading,
         otpFailed,
         phoneNumberRejected,
         phoneNumberVerified,

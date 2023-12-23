@@ -165,8 +165,16 @@ const userRepositoryImplements = () => {
         const response=await userModel.findOneAndUpdate({_id:uid},{$set:{last_otp:new Date()}},{new:true})
         return response
     }
+    const documentUploading=async(documents,uid)=>{
+
+   
+        let response=await userModel.findOneAndUpdate({_id:uid},{$addToSet:{documents:documents}},{new:true})
+        console.log('response in implements',response)
+        return response
+    }
     
     return {
+        documentUploading,
         otpFailed,
         updateUserField,
         getAllGenuineUsers,

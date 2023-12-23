@@ -16,6 +16,7 @@ import takeAllGenuineUsers from "../../../Application/usecase/user/takeAllGenuin
 import phoneNumberVerified from "../../../Application/usecase/user/phoneNumberVerified.js"
 import { uploadFile } from "../../../s3/index.js"
 import FailedOtp from "../../../Application/usecase/user/otpFailed.js"
+import documentUploading from "../../../Application/usecase/user/documentUploading.js"
 
 const userController = (repositoryInterface, repositoryImplements, serviceInterface, userServiceImplements) => {
 
@@ -195,14 +196,12 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
     const upload = async (req, res) => {
 
     const file = req.files
-    // console.log('govId', file[0])
-    // console.log('adhar card', file[1])
-    // console.log('pan', file[2])
-    // console.log('passport', file[3])
-    console.log('file', file)
     const result=await uploadFile(file)
-    console.log('after uploading ',result)
+    
+    const {userId}=req.userdata
+    let response=await documentUploading(dbRepository,result,userId)
 
+    return res.json(response)
 
     }
     const otpFailed=async(req,res)=>{

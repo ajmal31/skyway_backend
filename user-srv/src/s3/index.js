@@ -1,6 +1,7 @@
 
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import env from "../config/env.js";
+import {v4} from "uuid"
 
 const s3 = new S3Client({
   credentials: {
@@ -20,7 +21,7 @@ export const uploadFile = async (files) => {
   try {
     const result = files.map(async (file) => {
 
-      const key = `${folderName}/${file.originalname}`
+      const key = `${folderName}/${v4()}`
       const command = new PutObjectCommand({
         Bucket: bucketName,
         Key: key, // Corrected key
@@ -29,7 +30,7 @@ export const uploadFile = async (files) => {
       });
 
       const response = await s3.send(command);
-      // const url = `https://${bucketName}.s3.amazonaws.com/${key}`;
+     
       const url = `https://s3.eu-north-1.amazonaws.com/${bucketName}/${key}`;
       return url; // Return the response from S3
 

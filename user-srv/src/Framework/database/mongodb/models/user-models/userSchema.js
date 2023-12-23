@@ -17,6 +17,9 @@ const userSchema=new Schema({
     last_otp:{type:Date},
     ventures:[
         
+    ],
+    documents:[
+        
     ]
     
 
