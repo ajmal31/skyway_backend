@@ -13,6 +13,7 @@ import multer from "multer"
 import { jwtVerfication } from "jwt-verification-middleware"
 const userSecret = 'ajmal123user-srv'
 const ventureSecret = "ajmal123venture-srv"
+const adminSecret= "ajmal123admin-srv"
 
 const upload = multer({ storage: multer.memoryStorage() });
 const useRoutes = (express) => {
@@ -58,6 +59,7 @@ const useRoutes = (express) => {
     router.route('/otpFailed').get(jwtVerfication(userSecret), controller.otpFailed)
     //document uploading
     router.route('/upload').post(jwtVerfication(userSecret), upload.array("file"), controller.upload)
+    
 
 
 
@@ -74,6 +76,15 @@ const useRoutes = (express) => {
     router.route('/getAllGenuineUsers').get(jwtVerfication(ventureSecret), controller.getAllGenuineUsers)
 
     router.route('/updateUser').post(registerValidation, controller.update)
+
+
+    //Admin service
+
+
+    //taking users-count based ventureId and status
+    router.route('/venture/users/:status/count/:vid').get(jwtVerfication(adminSecret),controller.getVentureRelatedUsersCount)
+    //taking all user-count based on ventureId no matter which status
+    router.route("/venture/all/users/count/:vid").get(jwtVerfication(adminSecret),controller.getAllConnectedUsersCount)
 
 
 

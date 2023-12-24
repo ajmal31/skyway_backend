@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const serviceImplements = () => {
-    const secret_key = 'adminsrv123';
+    const secret_key = "ajmal123admin-srv";
     const tokenGenerate = async (data) => {
         const token = await jsonwebtoken_1.default.sign(data, secret_key);
         return token;

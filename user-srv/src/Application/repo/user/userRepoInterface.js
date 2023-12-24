@@ -22,9 +22,13 @@ const userRepositoryInterface=(repositories)=>{
      const phoneNumberRejected=(obj)=>repositories.updateUserField(obj)
      const otpFailed=(uid)=>repositories.otpFailed(uid)
      const documentUploading=(documents,uid)=>repositories.documentUploading(documents,uid)
+     const getVentureRelatedUsersCount=(vid,status)=>repositories.getVentureRelatedUsers(vid,status)
+     const getAllConnectedUsersCount=(vid)=>repositories.getAllConnectedUsersCount(vid)
      
 
     return {
+        getAllConnectedUsersCount,
+        getVentureRelatedUsersCount,
         documentUploading,
         otpFailed,
         phoneNumberRejected,

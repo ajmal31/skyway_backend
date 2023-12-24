@@ -137,7 +137,7 @@ const userRepositoryImplements = () => {
         const response = connectedVenturesSchema.findOne({ $or: [{ 'data._id': receiverId }, { 'data._id': senderId }] })
         return response
     }
-    //taking set of ids matched Ventures
+    //taking set of ids matched Ventures (for listing chat-side bar)
     const getAllConnectedVentures = async (ids) => {
 
         const response = await connectedVenturesSchema.find({ "data._id": { $in: ids } })
@@ -172,8 +172,21 @@ const userRepositoryImplements = () => {
         console.log('response in implements',response)
         return response
     }
+    //get all allowed users count based on the ventureId
+    const getVentureRelatedUsers=async(vid,status)=>{
+        
+        const response = await userModel.countDocuments({ ventures: { $elemMatch: { ventureId: vid, status: status } } })
+        return response
+    }
+    const getAllConnectedUsersCount=async(vid)=>{
+
+        const response = await userModel.countDocuments({ ventures: { $elemMatch: { ventureId: vid } } })
+        return response
+    }
     
     return {
+        getAllConnectedUsersCount,
+        getVentureRelatedUsers,
         documentUploading,
         otpFailed,
         updateUserField,

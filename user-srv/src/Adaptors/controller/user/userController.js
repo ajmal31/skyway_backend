@@ -17,6 +17,8 @@ import phoneNumberVerified from "../../../Application/usecase/user/phoneNumberVe
 import { uploadFile } from "../../../s3/index.js"
 import FailedOtp from "../../../Application/usecase/user/otpFailed.js"
 import documentUploading from "../../../Application/usecase/user/documentUploading.js"
+import countOfVentureRelatedUsers from "../../../Application/usecase/user/ventureRelatedUsersCount.js"
+import countOfAllConnectedUsers from "../../../Application/usecase/user/allConnectedUsersCount.js"
 
 const userController = (repositoryInterface, repositoryImplements, serviceInterface, userServiceImplements) => {
 
@@ -210,9 +212,23 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
         const response=await FailedOtp(dbRepository,userId)
    
      }
+    const getVentureRelatedUsersCount=async(req,res)=>{
+
+        const {vid,status}=req.params
+        const response=await countOfVentureRelatedUsers(dbRepository,vid,status)
+        return res.json(response)
+    } 
+    const getAllConnectedUsersCount=async(req,res)=>{
+
+        const {vid}=req.params
+        const response=await countOfAllConnectedUsers(dbRepository,vid)
+        return res.json(response)
+    }
 
 
     return {
+        getAllConnectedUsersCount,
+        getVentureRelatedUsersCount,
         otpFailed,
         upload,
         numberVerified,

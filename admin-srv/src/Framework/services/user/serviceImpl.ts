@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 const serviceImplements=()=>{
 
-    const secret_key='adminsrv123'
+    const secret_key="ajmal123admin-srv"
 
    const tokenGenerate=async(data:Record<string,any>)=>{
 
