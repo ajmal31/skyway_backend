@@ -1,6 +1,5 @@
 //import entities
 import ventureEntity from "../../../Entities/venture/ventureEntities.js"
-import publisher from "../../../message-broker/publisher/publisher.js"
 const ventureRegister = async (dbrepo, service, data) => {
 
 

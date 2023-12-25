@@ -21,6 +21,7 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
 
   const register = async (req, res) => {
 
+
     const response = await ventureRegister(dbRepo, service, req.body)
     console.log(response, 'response in controller')
     if (response?.error) return res.json({ error: response?.error })

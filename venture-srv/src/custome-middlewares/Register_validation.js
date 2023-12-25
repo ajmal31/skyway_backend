@@ -25,12 +25,12 @@ const register_validation = [
     body('register_number').notEmpty().withMessage('register number  is required'),
     body('license_number').notEmpty().withMessage('license number  is required'),
     body('social_media').notEmpty().withMessage('social media  is required'),
-    body('insurance_img').notEmpty().withMessage('social media  is required'),
-    body('license_img').notEmpty().withMessage('social media  is required'),
-    body('password_one').notEmpty().withMessage('social media  is required'),
-    body('password_two').notEmpty().withMessage('social media  is required'),
-    body('confirm_password_two').notEmpty().withMessage('social media  is required'),
-    body('confirm_password_one').notEmpty().withMessage('social media  is required'),
+    body('insurance_file_link').notEmpty().withMessage('insurance link  is required'),
+    body('license_file_link').notEmpty().withMessage('license link  is required'),
+    body('password_one').notEmpty().withMessage('password_one  is required'),
+    body('password_two').notEmpty().withMessage('password_two  is required'),
+    body('confirm_password_two').notEmpty().withMessage('confirm_password_one is required'),
+    body('confirm_password_one').notEmpty().withMessage('confirm_password_two  is required'),
     
     
 

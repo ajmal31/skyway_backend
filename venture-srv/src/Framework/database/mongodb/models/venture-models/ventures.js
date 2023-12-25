@@ -39,8 +39,8 @@ const ventureSchema = new Schema({
     register_number: { type: Number, required: true, unique: true },
     license_number: { type: Number, required: true, unique: true },
     social_media: { type: String, required: true },
-    insurance_img: { type: String, required: true },
-    license_img: { type: String, required: true },
+    insurance_file_link: { type: String, required: true },
+    license_file_link: { type: String, required: true },
 
     //password Section
     password_one: { type: String, required: true,  validate: (value) => value?.length > 6 },

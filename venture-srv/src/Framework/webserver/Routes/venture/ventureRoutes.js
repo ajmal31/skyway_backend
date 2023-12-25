@@ -32,7 +32,8 @@ const ventureRoutes=(express)=>{
 
 
    router.route('/getOneVenture').get(jwtVerfication(env.JWT_SECRETKEY),controller.getOneVenture)
-   router.route('/getOneVenture/:id').get(jwtVerfication(env.JWT_ADMIN_SECRET_KEY),controller.getOneVenture)
+   router.route('/getOneVenture/admin/:id').get(jwtVerfication(env.JWT_ADMIN_SECRET_KEY),controller.getOneVenture)
+   router.route('/getOneVenture/:id').get(controller.getOneVenture)
    router.route('/getAllUsers').get(jwtVerfication(env.JWT_SECRETKEY),controller.getAllUsers)
    
    

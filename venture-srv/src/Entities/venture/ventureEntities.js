@@ -16,8 +16,8 @@ const ventureEntity=(data,hashedPasswords)=>{
         register_number,
         license_number,
         social_media,
-        insurance_img,
-        license_img,    
+        insurance_file_link,
+        license_file_link,    
 
     }=data
     const {password_one,password_two}=hashedPasswords
@@ -40,8 +40,8 @@ const ventureEntity=(data,hashedPasswords)=>{
     register_number:()=>register_number,
     license_number:()=>license_number,
     social_media:()=>social_media,
-    insurance_img:()=>insurance_img,
-    license_img:()=>license_img,
+    insurance_file_link:()=>insurance_file_link,
+    license_file_link:()=>license_file_link,
     password_one:()=>password_one,
     confirm_password_one:()=>password_one,
     password_two:()=>password_two,
