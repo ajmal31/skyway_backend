@@ -45,8 +45,12 @@ const chatHelper = () => {
                             { receiverId: senderId, senderId: receiverId }
                         ]
                 },
-                { $push: { message: messageResponse._id } },{ new: true })
-            return {message:filterResponse,chatId:response?._id}
+                { 
+                    $push: { message: messageResponse._id },
+                    $set:{lastMessage:messageResponse._id}                
+                
+                },{ new: true })
+             return {message:filterResponse,chatId:response?._id}
 
         }
     }
@@ -100,7 +104,9 @@ const chatHelper = () => {
                     { receiverId: findingId },
                     { senderId: findingId }
                 ]
-        }).select('-message')
+        })
+        .populate('lastMessage')
+        .select('-message')
         return response
 
     }

@@ -59,10 +59,11 @@ const chatController = () => {
 
     const getAllChats = async (req: extendRequest, res: Response) => {
 
-        const findingId = req?.data?.userId
-        console.log('is it get userId', findingId)
+        const findingId = req?.params.id
+        
+        console.log('hei iam i',findingId)
         const response = await fetchAllChats(findingId)
-        console.log('all chating ventures',response)
+       console.log('response all chats',response)
         return res.json({ response })
 
     }

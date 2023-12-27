@@ -15,14 +15,13 @@ const socketConfguration = (server: any) => {
     })
 
     //connection establishing
-    io.on('connection', (socket) => {
+    io.on('connection', (socket:any) => {
 
         console.log('connection established succesful', socket.id)
 
         //incoming messages
-        socket.on('message', async (data) => {
+        socket.on('message', async (data:{senderId:string,receiverId:string,content:string}) => {
 
-            console.log('message received in backend socket configuration', data)
             const { senderId, receiverId, content } = data
 
             const response = await makeMessage(receiverId, senderId, content)
@@ -30,7 +29,6 @@ const socketConfguration = (server: any) => {
 
                 let roomId = response?.chatId.toString()
                 let content=response?.message
-                console.log("rresponse room id",roomId)
                 socket.to(roomId).emit("received",content)
                 // socket.emit("received",content)
             }
@@ -41,8 +39,15 @@ const socketConfguration = (server: any) => {
 
 
         })
+          
+        //typing idicator
+        socket.on("typing",(chatId:string)=>{
 
-        socket.on('joinRoom', (chatId) => {
+            console.log('server side typing event occured',chatId)
+            socket.to(chatId).emit("typing")
+        })
+
+        socket.on('joinRoom', (chatId:string) => {
             console.log('receive join room event')
             console.log(`joined a particular rooom${chatId}`)
             socket.join(chatId)

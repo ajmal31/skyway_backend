@@ -10,7 +10,8 @@ const chatModel=new Schema({
         type:Schema.Types.ObjectId,
         ref:"messages"
        }
-    ]
+    ],
+    lastMessage:{type:Schema.Types.ObjectId ,required:true ,ref:"messages"}
 
 },{
     timestamps:true

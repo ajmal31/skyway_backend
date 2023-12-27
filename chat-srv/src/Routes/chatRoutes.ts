@@ -20,9 +20,9 @@ const chatRoutes = (expres: any): Router => {
     
     router.route('/updateChatersDetails').post(updateChatersDetails)
 
+    
 
-
-    //Validate User Based Methods
+    // Validate User Based Methods
     // app.use(jwtVerify(env.USER_SRV_TOKEN_SECRET_KEY))
 
     //post methods
@@ -30,7 +30,8 @@ const chatRoutes = (expres: any): Router => {
     router.route('/getChat/venture').post(jwtVerify(env.VENTURE_SRV_TOKEN_SECRET_KEY),getChat)
 
     //Get Methods
-    router.route('/getAllChats').get(getAllChats)
+    router.route('/all/chats/user/:id').get(jwtVerify(env.USER_SRV_TOKEN_SECRET_KEY),getAllChats)
+    router.route('/all/chats/venture/:id').get( jwtVerify(env.VENTURE_SRV_TOKEN_SECRET_KEY), getAllChats)
 
 
 
