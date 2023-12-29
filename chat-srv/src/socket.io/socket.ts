@@ -1,9 +1,8 @@
 import { Server } from "socket.io"
-import { connect } from "socket.io-client"
-
 
 //Helper if it's needed
-import { makeMessage } from "../Helper/chatHelper"
+import { makeMessage,incrementUnreadcount } from "../Helper/chatHelper"
+
 
 const socketConfguration = (server: any) => {
 
@@ -20,16 +19,22 @@ const socketConfguration = (server: any) => {
         console.log('connection established succesful', socket.id)
 
         //incoming messages
-        socket.on('message', async (data:{senderId:string,receiverId:string,content:string}) => {
+        socket.on('message', async (data:{senderId:string,receiverId:string,content:string,receiver:string}) => {
 
-            const { senderId, receiverId, content } = data
+            const { senderId, receiverId, content,receiver } = data
 
+            
             const response = await makeMessage(receiverId, senderId, content)
+            const response_two=await incrementUnreadcount(receiver,senderId,receiverId)
             if (response?.chatId) {
-
+                
                 let roomId = response?.chatId.toString()
                 let content=response?.message
-                socket.to(roomId).emit("received",content)
+                const payload={
+                    chatId:roomId,
+                    content:content
+                }
+                socket.to(roomId).emit("received",payload)
                 // socket.emit("received",content)
             }
 

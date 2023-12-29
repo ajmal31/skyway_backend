@@ -26,7 +26,8 @@ const ventureRoutes=(express)=>{
    router.route('/register').post(register_validation,controller.register)
    router.route('/login').post(controller.login)
    router.route('/updateVentureStatus').post(controller.updateVentureStatus)
-   router.route('/getVentureUpdateChat').post(controller.getVentureUpdateChat)
+   router.route('/getVentureUpdateChat/user').post(jwtVerfication(env.JWT_USER_SECRET_KEY),controller.getVentureUpdateChat)
+   router.route('/getVentureUpdateChat/venture').post(jwtVerfication(env.JWT_SECRETKEY),controller.getVentureUpdateChat)
    router.route('/getAllventures').post(controller.getAllVentures)
 
 

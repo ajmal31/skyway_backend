@@ -53,7 +53,8 @@ const useRoutes = (express) => {
     //should be check user valid or not
     router.route('/getAllConnectedVentures').get(jwtVerfication(userSecret), controller.getAllConnectedVentures)
     //taking user details and publish data to chat-srv - CHAT-SERVICE
-    router.route('/getUserUpdateChat').post(controller.getUserUpdateChat)
+    router.route('/getUserUpdateChat/user').post( jwtVerfication(userSecret), controller.getUserUpdateChat)
+    router.route('/getUserUpdateChat/venture').post(jwtVerfication(ventureSecret),controller.getUserUpdateChat)
     //verified phone number
     router.route('/numberVerified').get(jwtVerfication(userSecret), controller.numberVerified)
     router.route('/otpFailed').get(jwtVerfication(userSecret), controller.otpFailed)

@@ -1,20 +1,29 @@
 import mongoose from 'mongoose'
-const {Schema}=mongoose
+const { Schema } = mongoose
 
-const chatModel=new Schema({
+const chatModel = new Schema({
 
-    senderId:{type:String,required:true,ref:"chaters"},
-    receiverId:{type:String,required:true, ref:"chaters"},
-    message:[
-       {
-        type:Schema.Types.ObjectId,
-        ref:"messages"
-       }
+    participants: [
+        {
+            userId:{type:String,required:true },
+            userUnReadMessages:{type:Number , required:true, default:0},
+            ventureId:{type:String,required:true },
+            ventureUnReadMessages:{type:Number , required:true, default:0}
+
+        }
+       
+
     ],
-    lastMessage:{type:Schema.Types.ObjectId ,required:true ,ref:"messages"}
+    message: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "messages"
+        }
+    ],
+    lastMessage: { type: Schema.Types.ObjectId, ref: "messages" }
 
-},{
-    timestamps:true
+}, {
+    timestamps: true
 })
 
-export const chatSchema=mongoose.model('chats',chatModel)
+export const chatSchema = mongoose.model('chats', chatModel)
