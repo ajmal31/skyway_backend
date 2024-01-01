@@ -31,7 +31,6 @@ const chatController = () => {
   const sendMessage = async (req: Request, res: Response) => {
 
     const { receiverId, senderId, message } = req.body
-    console.log(receiverId, senderId, message)
     const response = await makeMessage(receiverId, senderId, message)
     if (response) return res.json({ response })
 
@@ -60,7 +59,7 @@ const chatController = () => {
 
     const findingId = req?.params.id
     const {field}=req.body
-    console.log('field',field)
+   
     const response = await fetchAllChats(findingId,field)
    
     return res.json({ response })

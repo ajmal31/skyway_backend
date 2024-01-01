@@ -196,7 +196,7 @@ const chatHelper = () => {
             },
             { new: true }
         )
-        console.log('after increment ', field, "response", response)
+        
     }
     const readedAllMessages = async (field: string, vid: string, userId: string) => {
 
