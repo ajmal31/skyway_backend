@@ -5,7 +5,7 @@ import serverConfig from "./src/Framework/webserver/server.js"
 import config from "./src/config/config.js"
 import Routes from "./src/Framework/webserver/Routes/index.js"
 import connection from "./src/Framework/database/connection.js"
-import dotenv from "dotenv"
+import env from "./src/config/env.js"
 import consumer from "./src/Message-broker/consumer/consumer.js"
 
 
@@ -18,11 +18,9 @@ const server=http.createServer(app)
 //start Server
 serverConfig(server,config).startServer()
 
-//env configuration
-dotenv.config()
 
 //connect db 
-connection(config)
+connection(env.MONGO_URI)
 
 //invoking express configurationn
 expressConfig(app,express)

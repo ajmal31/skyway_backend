@@ -1,9 +1,9 @@
 import mongoose from "mongoose"
-const connection=(config)=>{
+const connection=(mongo_uri)=>{
 
    
 
-    mongoose.connect(config.mongo_uri)
+    mongoose.connect(mongo_uri)
 
     mongoose.connection.once("open",()=>{
 

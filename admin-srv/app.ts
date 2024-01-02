@@ -7,7 +7,7 @@ import config from "./src/config/config"
 import Routes from "./src/Framework/webserver/Routes"
 import connection from "./src/Framework/database/connection"
 import consumer from "./src/message-broker/consumer/consumer"
-
+import env from "./src/config/env"
 
 
 //Create Instance Of Express
@@ -27,7 +27,7 @@ expressConfig(app)
 Routes(app,express)
 
 //connect Db
-connection(config.mongodb_uri)
+connection(env.MONGO_URI)
 
 //Invoking Consumer Function
 consumer()

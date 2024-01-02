@@ -11,6 +11,7 @@ const config_1 = __importDefault(require("./src/config/config"));
 const Routes_1 = __importDefault(require("./src/Framework/webserver/Routes"));
 const connection_1 = __importDefault(require("./src/Framework/database/connection"));
 const consumer_1 = __importDefault(require("./src/message-broker/consumer/consumer"));
+const env_1 = __importDefault(require("./src/config/env"));
 //Create Instance Of Express
 const app = (0, express_1.default)();
 //Create Server Instance
@@ -22,6 +23,6 @@ const server = http_1.default.createServer(app);
 //Connecting Routes 
 (0, Routes_1.default)(app, express_1.default);
 //connect Db
-(0, connection_1.default)(config_1.default.mongodb_uri);
+(0, connection_1.default)(env_1.default.MONGO_URI);
 //Invoking Consumer Function
 (0, consumer_1.default)();
