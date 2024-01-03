@@ -19,6 +19,8 @@ import FailedOtp from "../../../Application/usecase/user/otpFailed.js"
 import documentUploading from "../../../Application/usecase/user/documentUploading.js"
 import countOfVentureRelatedUsers from "../../../Application/usecase/user/ventureRelatedUsersCount.js"
 import countOfAllConnectedUsers from "../../../Application/usecase/user/allConnectedUsersCount.js"
+import createNewComment from "../../../Application/usecase/user/createComments.js"
+import takeAllComments from "../../../Application/usecase/user/getAllComments.js"
 
 const userController = (repositoryInterface, repositoryImplements, serviceInterface, userServiceImplements) => {
 
@@ -121,7 +123,6 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
 
     
         const response = await updateUSer(req.body, dbRepository, service)
-        console.log('response in controller',response)
         return res.json({ response })
 
     }
@@ -224,9 +225,22 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
         const response=await countOfAllConnectedUsers(dbRepository,vid)
         return res.json(response)
     }
+    const createComment=async(req,res)=>{
+        
+       
+        const response=await createNewComment(dbRepository,req.body,req.userdata)
+        return res.json(response)
+    }
+    const getAllComments=async(req,res)=>{
+
+        const response=await takeAllComments(dbRepository)
+        return res.json(response)
+    }
 
 
     return {
+        getAllComments,
+        createComment,
         getAllConnectedUsersCount,
         getVentureRelatedUsersCount,
         otpFailed,

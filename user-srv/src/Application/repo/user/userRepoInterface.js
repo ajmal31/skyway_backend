@@ -24,9 +24,13 @@ const userRepositoryInterface=(repositories)=>{
      const documentUploading=(documents,uid)=>repositories.documentUploading(documents,uid)
      const getVentureRelatedUsersCount=(vid,status)=>repositories.getVentureRelatedUsers(vid,status)
      const getAllConnectedUsersCount=(vid)=>repositories.getAllConnectedUsersCount(vid)
+     const createComment=(uid,content)=>repositories.createComment(uid,content)
+     const getAllComments=()=>repositories.getAllComments()
      
 
     return {
+        getAllComments,
+        createComment,
         getAllConnectedUsersCount,
         getVentureRelatedUsersCount,
         documentUploading,

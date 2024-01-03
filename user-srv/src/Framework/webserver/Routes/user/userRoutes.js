@@ -60,6 +60,8 @@ const useRoutes = (express) => {
     router.route('/otpFailed').get(jwtVerfication(userSecret), controller.otpFailed)
     //document uploading
     router.route('/upload').post(jwtVerfication(userSecret), upload.array("file"), controller.upload)
+    router.route('/create/comment').post(jwtVerfication(userSecret),controller.createComment)
+    router.route('/get/all/comment').get(controller.getAllComments)
     
 
 

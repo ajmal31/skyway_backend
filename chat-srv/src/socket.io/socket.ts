@@ -34,14 +34,17 @@ const socketConfguration = (server: any) => {
                     chatId: roomId,
                     content: content
                 }
+                 // for all clients exclude sender
+                // socket.to(roomId).emit("received",payload)
 
-                socket.to(roomId).emit("received",payload)
+                //for all client include sender as well 
+                io.to(roomId).emit("received",payload)
+                
                 socket.broadcast.emit("notification", {helo:"helo"});
+
               
-
-
                 // socket.emit("received",content)
-            }
+            }   
 
 
 

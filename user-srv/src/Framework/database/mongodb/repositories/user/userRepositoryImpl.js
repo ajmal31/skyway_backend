@@ -1,23 +1,24 @@
 //import schemas here
 import { userModel } from "../../models/user-models/userSchema.js"
 import { connectedVenturesSchema } from "../../models/user-models/connectedVenturesSchema.js"
+import { commentSchema } from "../../models/user-models/commentSchema.js"
 const userRepositoryImplements = () => {
 
     //Find a Partiulcar user
-    const findUser = async ({key,val,neVal=null}) => {
-        console.log('cred',key,val,neVal)
-        
-        const query_one = { 
-            [key]: val 
-           
+    const findUser = async ({ key, val, neVal = null }) => {
+        console.log('cred', key, val, neVal)
+
+        const query_one = {
+            [key]: val
+
         }
-        const query_two = { 
-            [key]: val ,
-            ["_id"]:{$ne:neVal}
+        const query_two = {
+            [key]: val,
+            ["_id"]: { $ne: neVal }
         }
         try {
-            const response = await userModel.findOne(!neVal?query_one:query_two)
-            console.log('response in hlper',response)
+            const response = await userModel.findOne(!neVal ? query_one : query_two)
+            console.log('response in hlper', response)
             return response
 
         } catch (err) {
@@ -160,31 +161,48 @@ const userRepositoryImplements = () => {
         const response = await userModel.findOneAndUpdate(find, { $set: update }, { upsert: true, new: true, returnOriginal: false });
         return response
     }
-    const otpFailed=async(uid)=>{
-      
-        const response=await userModel.findOneAndUpdate({_id:uid},{$set:{last_otp:new Date()}},{new:true})
+    const otpFailed = async (uid) => {
+
+        const response = await userModel.findOneAndUpdate({ _id: uid }, { $set: { last_otp: new Date() } }, { new: true })
         return response
     }
-    const documentUploading=async(documents,uid)=>{
+    const documentUploading = async (documents, uid) => {
 
-   
-        let response=await userModel.findOneAndUpdate({_id:uid},{$addToSet:{documents:documents}},{new:true})
-        console.log('response in implements',response)
+
+        let response = await userModel.findOneAndUpdate({ _id: uid }, { $addToSet: { documents: documents } }, { new: true })
+        console.log('response in implements', response)
         return response
     }
     //get all allowed users count based on the ventureId
-    const getVentureRelatedUsers=async(vid,status)=>{
-        
+    const getVentureRelatedUsers = async (vid, status) => {
+
         const response = await userModel.countDocuments({ ventures: { $elemMatch: { ventureId: vid, status: status } } })
         return response
     }
-    const getAllConnectedUsersCount=async(vid)=>{
+    const getAllConnectedUsersCount = async (vid) => {
 
         const response = await userModel.countDocuments({ ventures: { $elemMatch: { ventureId: vid } } })
         return response
     }
-    
+    const createComment = async (userId, content) => {
+
+        const comment = new commentSchema({
+           userId,
+           content
+
+        })
+        const response=await comment.save()
+        return response
+
+    }
+    const getAllComments=async()=>{
+
+        const response=await commentSchema.find()
+        return response
+    }
     return {
+        getAllComments,
+        createComment,
         getAllConnectedUsersCount,
         getVentureRelatedUsers,
         documentUploading,
