@@ -72,6 +72,9 @@ const useRoutes = (express) => {
     router.route('/getAllConnectedUsers').get(jwtVerfication(ventureSecret), controller.getAllConnectedUsers)
     //venture allowed user request 
     router.route('/changeUserStatus').post(jwtVerfication(ventureSecret), controller.changeUserStatus)
+    //get one user based on userId
+    router.route('/get/one/user/:userId').get(jwtVerfication(ventureSecret),controller.getUser)
+    router.route('/venture/service/start').post(jwtVerfication(ventureSecret),controller.ventureServiceStart)
 
     //FOR CHAT SERVICE
 

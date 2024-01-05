@@ -21,6 +21,7 @@ import countOfVentureRelatedUsers from "../../../Application/usecase/user/ventur
 import countOfAllConnectedUsers from "../../../Application/usecase/user/allConnectedUsersCount.js"
 import createNewComment from "../../../Application/usecase/user/createComments.js"
 import takeAllComments from "../../../Application/usecase/user/getAllComments.js"
+import startVentureService from "../../../Application/usecase/user/ventureServiceStart.js"
 
 const userController = (repositoryInterface, repositoryImplements, serviceInterface, userServiceImplements) => {
 
@@ -72,7 +73,7 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
             const { encodedData } = req.body
             const response = await googleWithLogin(dbRepository, service, encodedData)
             console.log('response is controller', response)
-            if (response.token) return res.json({ message: "user Logged in succesful", authToken: response.token, username: response.username })
+            if (response.token) return res.json({ message: "user Logged in succesful", authToken: response.token, username: response.username,userId:response.userId })
             else return res.json({ message: "user does not exist" })
 
         } catch (err) {
@@ -110,7 +111,8 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
     }
     //get particular user
     const getUser = async (req, res) => {
-        const userId = req?.userdata?.userId
+        let userId = req?.userdata?.userId
+        if(!userId)userId=req.params.userId
         console.log(userId)
         const response = await findOneUser(userId, dbRepository)
         return response ? res.json({ response }) : res.json({ message: "did'nt get user details" })
@@ -236,9 +238,18 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
         const response=await takeAllComments(dbRepository)
         return res.json(response)
     }
+    const ventureServiceStart=async(req,res)=>{
+       
 
+        const {ventureId,userId}=req.body
+        const response=await startVentureService(dbRepository,ventureId,userId)
+        return res.json(response)
 
+    }
+
+ 
     return {
+        ventureServiceStart,
         getAllComments,
         createComment,
         getAllConnectedUsersCount,

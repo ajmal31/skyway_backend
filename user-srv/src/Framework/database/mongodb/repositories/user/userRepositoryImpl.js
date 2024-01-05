@@ -187,20 +187,43 @@ const userRepositoryImplements = () => {
     const createComment = async (userId, content) => {
 
         const comment = new commentSchema({
-           userId,
-           content
+            userId,
+            content
 
         })
-        const response=await comment.save()
+        const response = await comment.save()
         return response
 
     }
-    const getAllComments=async()=>{
+    const getAllComments = async () => {
 
-        const response=await commentSchema.find()
+        const response = await commentSchema.find()
+        return response
+    }
+    const ventureServiceStart = async (vid, uid) => {
+
+
+        const response = await userModel.findOneAndUpdate(
+            {
+                _id: uid, ventures:
+                {
+                    $elemMatch:
+                    {
+                        ventureId: vid
+                    }
+                }
+            },
+            {
+                $set:
+                {
+                    "ventures.$.service_start_by": new Date()
+                }
+            },
+            { upsert: true, new: true })
         return response
     }
     return {
+        ventureServiceStart,
         getAllComments,
         createComment,
         getAllConnectedUsersCount,

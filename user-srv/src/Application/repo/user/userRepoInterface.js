@@ -26,9 +26,11 @@ const userRepositoryInterface=(repositories)=>{
      const getAllConnectedUsersCount=(vid)=>repositories.getAllConnectedUsersCount(vid)
      const createComment=(uid,content)=>repositories.createComment(uid,content)
      const getAllComments=()=>repositories.getAllComments()
+     const ventureServiceStart=(vid,uid)=>repositories.ventureServiceStart(vid,uid)
      
 
     return {
+        ventureServiceStart,
         getAllComments,
         createComment,
         getAllConnectedUsersCount,

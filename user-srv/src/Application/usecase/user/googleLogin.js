@@ -11,7 +11,8 @@ const googleWithLogin=async(dbRepo,service,data)=>{
     }
      const response={
         token:null,
-        username:null
+        username:null,
+        userId:null
      }
     const user=await dbRepo.userExist(obj)
     //checkgin whether user exist or not if it's not return null (user variable value) 
@@ -23,6 +24,7 @@ const googleWithLogin=async(dbRepo,service,data)=>{
         const token=await service.generateToken(_id,username)
         response.token=token
         response.username=username
+        response.userId=_id
         return response
     }
 }
