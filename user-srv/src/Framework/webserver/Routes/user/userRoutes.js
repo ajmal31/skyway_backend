@@ -51,7 +51,7 @@ const useRoutes = (express) => {
     //take one venture (from replicated venture data)
     router.route('/getConnectedVenture').post(controller.getConnectedVenture)
     //should be check user valid or not
-    router.route('/getAllConnectedVentures').get(jwtVerfication(userSecret), controller.getAllConnectedVentures)
+    router.route('/get/all/connected/Ventures').get(jwtVerfication(userSecret), controller.getAllConnectedVentures)
     //taking user details and publish data to chat-srv - CHAT-SERVICE
     router.route('/getUserUpdateChat/user').post( jwtVerfication(userSecret), controller.getUserUpdateChat)
     router.route('/getUserUpdateChat/venture').post(jwtVerfication(ventureSecret),controller.getUserUpdateChat)
@@ -75,6 +75,8 @@ const useRoutes = (express) => {
     //get one user based on userId
     router.route('/get/one/user/:userId').get(jwtVerfication(ventureSecret),controller.getUser)
     router.route('/venture/service/start').post(jwtVerfication(ventureSecret),controller.ventureServiceStart)
+    router.route('/venture/service/completed').post(jwtVerfication(ventureSecret),controller.ventureServiceCompleted)
+
 
     //FOR CHAT SERVICE
 

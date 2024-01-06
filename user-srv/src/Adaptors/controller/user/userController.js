@@ -22,6 +22,7 @@ import countOfAllConnectedUsers from "../../../Application/usecase/user/allConne
 import createNewComment from "../../../Application/usecase/user/createComments.js"
 import takeAllComments from "../../../Application/usecase/user/getAllComments.js"
 import startVentureService from "../../../Application/usecase/user/ventureServiceStart.js"
+import completeVentureService from "../../../Application/usecase/user/completeVentureService.js"
 
 const userController = (repositoryInterface, repositoryImplements, serviceInterface, userServiceImplements) => {
 
@@ -246,9 +247,18 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
         return res.json(response)
 
     }
+    const ventureServiceCompleted=async(req,res)=>{
+       
+
+        const {ventureId,userId}=req.body
+        const response=await completeVentureService(dbRepository,ventureId,userId)
+        return res.json(response)
+
+    }
 
  
     return {
+        ventureServiceCompleted,
         ventureServiceStart,
         getAllComments,
         createComment,

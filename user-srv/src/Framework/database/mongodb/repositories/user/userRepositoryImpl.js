@@ -142,7 +142,6 @@ const userRepositoryImplements = () => {
     const getAllConnectedVentures = async (ids) => {
 
         const response = await connectedVenturesSchema.find({ "data._id": { $in: ids } })
-        console.log('db response while taking getAll connected ventures', response)
         return response
     }
     //get all allowed users based on the ventureId
@@ -200,9 +199,11 @@ const userRepositoryImplements = () => {
         const response = await commentSchema.find()
         return response
     }
-    const ventureServiceStart = async (vid, uid) => {
+    const ventureService = async (vid, uid,data) => {
 
-
+        const {key,val}=data
+        let field=`ventures.$.${key}`
+        console.log('datas',vid,uid,data,field)
         const response = await userModel.findOneAndUpdate(
             {
                 _id: uid, ventures:
@@ -216,14 +217,15 @@ const userRepositoryImplements = () => {
             {
                 $set:
                 {
-                    "ventures.$.service_start_by": new Date()
+                    [field]: val
                 }
             },
             { upsert: true, new: true })
+            console.log('response ',response)
         return response
     }
     return {
-        ventureServiceStart,
+        ventureService,
         getAllComments,
         createComment,
         getAllConnectedUsersCount,
