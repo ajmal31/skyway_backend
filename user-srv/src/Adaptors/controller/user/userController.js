@@ -254,7 +254,7 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
         const response=await completeVentureService(dbRepository,ventureId,userId)
         return res.json(response)
 
-    }
+    } 
 
  
     return {
