@@ -7,6 +7,8 @@ import takeAllUsers from "../../../Application/usecase/venture/takeAllUsers.js"
 import takeOneVenture from "../../../Application/usecase/venture/takeOneVenture.js"
 import takeVentureUpdateChat from "../../../Application/usecase/venture/getVentureUpdate.js"
 import { uploadFile } from "../../../s3/index.js"
+import venturesTotalCount from "../../../Application/usecase/venture/ventureTotal.js"
+import countVenturesBasedOnStatus from "../../../Application/usecase/venture/ventureCountByStatus.js"
 
 import ventureStatusUpdate from "../../../Application/usecase/venture/updateVentureStatus.js"
 const ventureController = (repositoryInterface, repositoryImplements, serviceInterface, ServiceImplements) => {
@@ -37,8 +39,8 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
     // console.log('pan', file[2])
     // console.log('passport', file[3])
     console.log('file', file)
-    const result=await uploadFile(file)
-    console.log('after uploading ',result)
+    const result = await uploadFile(file)
+    console.log('after uploading ', result)
 
 
 
@@ -71,9 +73,9 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
 
     if (response === null) return res.json({ message: 'venture does not exist' })
 
-    const { token, ventureName, admin_allowed, ventureId,rejected } = response
+    const { token, ventureName, admin_allowed, ventureId, rejected } = response
 
-    if (response?.loggedIn) return res.json({ message: 'venture login succesful', token, ventureName, admin_allowed, ventureId,rejected })
+    if (response?.loggedIn) return res.json({ message: 'venture login succesful', token, ventureName, admin_allowed, ventureId, rejected })
     else if (response?.password_one) return res.json({ message: 'please check you second Password' })
     return res.json({ message: 'please check your first password' })
   }
@@ -103,7 +105,7 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
 
 
     const response = await ventureStatusUpdate(dbRepo, req?.body)
-    
+
     if (response) return res.json(response)
 
   }
@@ -116,12 +118,25 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
     else return res.json({ message: "data published to chat-service succeful" })
 
   }
+  const totalVentures = async (req, res) => {
 
-  
+    const response = await venturesTotalCount(dbRepo)
+    return res.json(response)
+
+  }
+  const venutureCountByStatus = async (req, res) => {
+
+    const { status } = req.body
+    const response = await countVenturesBasedOnStatus(dbRepo,status)
+    return res.json(response)
+  }
+
+
 
 
   return {
-
+    venutureCountByStatus,
+    totalVentures,
     getVentureUpdateChat,
     updateVentureStatus,
     upload,

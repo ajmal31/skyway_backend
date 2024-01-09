@@ -28,7 +28,6 @@ const consumer = async () => {
         console.log('is it', obj.ventureName);
     
         if (data.ventureName) {
-            console.log('enter expected');
             connectedVentures(dbRepo, data);
         }
     

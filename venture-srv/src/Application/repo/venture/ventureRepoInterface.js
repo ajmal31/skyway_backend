@@ -14,12 +14,16 @@ const ventureRepositoryInterface=(repositories)=>{
      const getAllUsers=(vid)=>repositories.getAllUsers(vid)
      const getOneVenture=(obj)=>repositories.ventureExist(obj)
      const updateConnectUser=(obj)=>repositories.updateConnectUser(obj)
+     const totalVentures=()=>repositories.totalVentures()
+     const ventureCountByStatus=(status)=>repositories.ventureCountByStatus(status)
      
 
 
      
 
     return {
+        ventureCountByStatus,
+        totalVentures,
         updateConnectUser,
         getOneVenture,
         getAllUsers,

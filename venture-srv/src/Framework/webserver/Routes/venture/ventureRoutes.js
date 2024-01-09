@@ -30,12 +30,14 @@ const ventureRoutes=(express)=>{
    router.route('/getVentureUpdateChat/venture').post(jwtVerfication(env.JWT_SECRETKEY),controller.getVentureUpdateChat)
    router.route('/getAllventures').post(controller.getAllVentures)
 
-
+   //GET methods
 
    router.route('/getOneVenture').get(jwtVerfication(env.JWT_SECRETKEY),controller.getOneVenture)
    router.route('/getOneVenture/admin/:id').get(jwtVerfication(env.JWT_ADMIN_SECRET_KEY),controller.getOneVenture)
    router.route('/getOneVenture/:id').get(controller.getOneVenture)
    router.route('/getAllUsers').get(jwtVerfication(env.JWT_SECRETKEY),controller.getAllUsers)
+   router.route('/ventures/count').get(jwtVerfication(env.JWT_ADMIN_SECRET_KEY),controller.totalVentures)
+   router.route('/venture/count/by/status').post(jwtVerfication(env.JWT_ADMIN_SECRET_KEY),controller.venutureCountByStatus)
    
    
     //test route

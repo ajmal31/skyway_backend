@@ -3,7 +3,7 @@ import connectedUserModel from "../../models/venture-models/connected_users.js"
 import ventureModel from "../../models/venture-models/ventures.js"
 const ventureRepositoryImplements = () => {
 
-  
+
   const ventureIdExist = async (vid) => {
 
     const response = await connectedUserModel.exists({ ventureId: vid })
@@ -111,16 +111,16 @@ const ventureRepositoryImplements = () => {
   //get All Ventures
   const getAllVentures = async (type) => {
     let query
-    if (type === 'allowed')query = { admin_allowed: type }
-    else if(type==='all') query={}
-    
+    if (type === 'allowed') query = { admin_allowed: type }
+    else if (type === 'all') query = {}
+
     const response = await ventureModel.find(query)
     return response
 
 
 
   }
-  const updateVentureStatus = async (id,status) => {
+  const updateVentureStatus = async (id, status) => {
 
     const response = await ventureModel.findOneAndUpdate({ _id: id }, { $set: { admin_allowed: status } }, { new: true });
     return response
@@ -141,11 +141,23 @@ const ventureRepositoryImplements = () => {
     return response
 
   }
+  const totalVentures = async (data) => {
 
+    const response = await ventureModel.countDocuments()
+    return response
+  }
+  const ventureCountByStatus=async(status)=>{
+
+    const response=await ventureModel.find({admin_allowed:status}).count()
+    console.log(status ,"ventures",response)
+    return response
+  }
 
 
 
   return {
+    ventureCountByStatus,
+    totalVentures,
     updateConnectUser,
     getAllUsers,
     updateVentureStatus,

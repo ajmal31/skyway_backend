@@ -23,6 +23,8 @@ import createNewComment from "../../../Application/usecase/user/createComments.j
 import takeAllComments from "../../../Application/usecase/user/getAllComments.js"
 import startVentureService from "../../../Application/usecase/user/ventureServiceStart.js"
 import completeVentureService from "../../../Application/usecase/user/completeVentureService.js"
+import usersTotal from "../../../Application/usecase/user/totalUsers.js"
+
 
 const userController = (repositoryInterface, repositoryImplements, serviceInterface, userServiceImplements) => {
 
@@ -114,7 +116,7 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
     const getUser = async (req, res) => {
         let userId = req?.userdata?.userId
         if(!userId)userId=req.params.userId
-        console.log(userId)
+       
         const response = await findOneUser(userId, dbRepository)
         return response ? res.json({ response }) : res.json({ message: "did'nt get user details" })
     }
@@ -231,7 +233,7 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
     const createComment=async(req,res)=>{
         
        
-        const response=await createNewComment(dbRepository,req.body,req.userdata)
+        const response=await createNewComment(dbRepository,req?.body,req?.userdata)
         return res.json(response)
     }
     const getAllComments=async(req,res)=>{
@@ -255,9 +257,17 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
         return res.json(response)
 
     } 
+    const totalUsers=async(req,res)=>{
+
+        const response=await usersTotal(dbRepository)
+        return res.json(response)
+        
+    }
+
 
  
     return {
+        totalUsers,
         ventureServiceCompleted,
         ventureServiceStart,
         getAllComments,

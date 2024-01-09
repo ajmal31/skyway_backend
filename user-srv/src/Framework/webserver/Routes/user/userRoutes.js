@@ -63,6 +63,7 @@ const useRoutes = (express) => {
     router.route('/create/comment').post(jwtVerfication(userSecret),controller.createComment)
     router.route('/get/all/comment').get(controller.getAllComments)
     
+    
 
 
 
@@ -82,7 +83,6 @@ const useRoutes = (express) => {
 
     //take all allowed users based on a venture Id for listing in chat
     router.route('/getAllGenuineUsers').get(jwtVerfication(ventureSecret), controller.getAllGenuineUsers)
-
     router.route('/updateUser').post(registerValidation, controller.update)
 
 
@@ -93,6 +93,7 @@ const useRoutes = (express) => {
     router.route('/venture/users/:status/count/:vid').get(jwtVerfication(adminSecret),controller.getVentureRelatedUsersCount)
     //taking all user-count based on ventureId no matter which status
     router.route("/venture/all/users/count/:vid").get(jwtVerfication(adminSecret),controller.getAllConnectedUsersCount)
+    router.route('/users/count').get(jwtVerfication(adminSecret),controller.totalUsers)
 
 
 

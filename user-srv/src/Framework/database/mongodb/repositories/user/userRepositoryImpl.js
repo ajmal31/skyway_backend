@@ -196,14 +196,14 @@ const userRepositoryImplements = () => {
     }
     const getAllComments = async () => {
 
-        const response = await commentSchema.find()
+        const response = await commentSchema.find().populate("userId","username").sort({"updatedAt":-1})
+        console.log(response)
         return response
     }
     const ventureService = async (vid, uid,data) => {
 
         const {key,val}=data
         let field=`ventures.$.${key}`
-        console.log('datas',vid,uid,data,field)
         const response = await userModel.findOneAndUpdate(
             {
                 _id: uid, ventures:
@@ -221,10 +221,16 @@ const userRepositoryImplements = () => {
                 }
             },
             { upsert: true, new: true })
-            console.log('response ',response)
+            
+        return response
+    }
+    const totalUsers=async()=>{
+
+        const response=await userModel.countDocuments()
         return response
     }
     return {
+        totalUsers,
         ventureService,
         getAllComments,
         createComment,
