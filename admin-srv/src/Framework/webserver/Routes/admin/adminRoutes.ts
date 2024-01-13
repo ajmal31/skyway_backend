@@ -20,8 +20,10 @@ const adminRoutes = (express: any): Router => {
 
     //GET METHODS
 
-    router.route('/getAllventures').get(controller.getAllventures)
+    // router.route('/getAllventures').get(controller.getAllventures)
 
+    router.route('/getWalletAmount').get(controller.getWalletAmount)
+    
 
 
     //PUT METHODS

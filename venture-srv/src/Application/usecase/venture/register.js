@@ -3,13 +3,13 @@ import ventureEntity from "../../../Entities/venture/ventureEntities.js"
 const ventureRegister = async (dbrepo, service, data) => {
 
 
-    //check the venture name is registred or not 
+    // check the venture name is registred or not 
 
     const nameObj={
         key:"ventureName",
         value:data.ventureName
     }
-   
+
     const nameExist=await dbrepo.ventureNameExist(nameObj)
     if(nameExist) return {error:'This Venture Name already used'}
 
@@ -32,7 +32,7 @@ const ventureRegister = async (dbrepo, service, data) => {
 
 
     //check the license number whether it is register or not
-   
+
     const licenseObj={
         key:"license_number",
         value:data.license_number
@@ -42,21 +42,31 @@ const ventureRegister = async (dbrepo, service, data) => {
 
 
 
-  
+
 
     const hashedPasswords = await service.passwordHash(data.password_one, data?.password_two)
 
-    const ventureData = ventureEntity(data,hashedPasswords)
 
-    const response=await dbrepo.register(ventureData)
-    if(response) {
-        
-        
+    const ventureData = ventureEntity(data, hashedPasswords)
+
+    let countries = data.expertise_contries.toLowerCase().split(",")
+
+
+    const countryExist = await dbrepo.findCountries()
+
+    let countriesAdded
+    if (countryExist) countriesAdded = await dbrepo.updateContries(countries)
+    else  countriesAdded = await dbrepo.insertContries(countries)
+
+    const response = await dbrepo.register(ventureData)
+    if (response) {
+
+
         // const result=await publisher("ADMIN-SRV",response)
-        return {success:"venture Registration succesfull"}
+        return { success: "venture Registration succesfull" }
     }
     console.log('venture regsiter failed')
-  
+
 
 
 

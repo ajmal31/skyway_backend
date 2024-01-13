@@ -1,6 +1,7 @@
 import ventureReplicationSchema from "../models/allVentures"
 import admin from "../models/admin-cred"
 import user_replication from "../models/users"
+import { wallet } from "../models/wallet"
 const repositoryImplements = () => {
 
     const insertVentureData = async (data: Record<string, any>) => {
@@ -27,6 +28,11 @@ const repositoryImplements = () => {
     const insertUserData = async (data: Record<string, any>) => {
 
         const response= await user_replication.updateOne({"data._id":data._id},{$set:{data}},{upsert:true})
+
+    }
+    const getWalletAmount=async()=>{
+              
+        const response=await wallet.find()
 
     }
 

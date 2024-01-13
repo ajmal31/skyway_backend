@@ -29,6 +29,7 @@ const ventureRoutes=(express)=>{
    router.route('/getVentureUpdateChat/user').post(jwtVerfication(env.JWT_USER_SECRET_KEY),controller.getVentureUpdateChat)
    router.route('/getVentureUpdateChat/venture').post(jwtVerfication(env.JWT_SECRETKEY),controller.getVentureUpdateChat)
    router.route('/getAllventures').post(controller.getAllVentures)
+   router.route('/get/ventures/by/country/:country').post(controller.getVenturesByContries)
 
    //GET methods
 

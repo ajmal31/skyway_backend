@@ -5,11 +5,13 @@ const adminRepInterface=(repositories:any)=>{
   const adminExist=(email:string)=>repositories.findAdmin(email)
   const ventureList=()=>repositories.findAllventures()
   const userHandler=(data:Record<string,any>)=>repositories.insertUserData(data)
+  const getWalletAmount=()=>repositories.getWalletAmount()
 
   
 
 
   return {
+    getWalletAmount,
     userHandler,
     ventureList,
     adminExist,

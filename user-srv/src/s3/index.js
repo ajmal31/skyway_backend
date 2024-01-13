@@ -27,7 +27,7 @@ export const uploadFile = async (files) => {
         Key: key, // Corrected key
         Body: file.buffer,
         ContentType: file.mimetype,
-      });
+      }); 
 
       const response = await s3.send(command);
      

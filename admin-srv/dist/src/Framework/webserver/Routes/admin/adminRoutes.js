@@ -16,7 +16,8 @@ const adminRoutes = (express) => {
     //POST METHODS
     router.route('/login').post(controller.login);
     //GET METHODS
-    router.route('/getAllventures').get(controller.getAllventures);
+    // router.route('/getAllventures').get(controller.getAllventures)
+    router.route('/getWalletAmount').get(controller.getWalletAmount);
     //PUT METHODS
     return router;
 };

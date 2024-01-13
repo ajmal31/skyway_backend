@@ -16,12 +16,20 @@ const ventureRepositoryInterface=(repositories)=>{
      const updateConnectUser=(obj)=>repositories.updateConnectUser(obj)
      const totalVentures=()=>repositories.totalVentures()
      const ventureCountByStatus=(status)=>repositories.ventureCountByStatus(status)
+     const getVenturesByCountry=(type,country)=>repositories.getVenturesByCountry(type,country)
+     const updateContries=(countries)=>repositories.updateContries(countries)
+     const findCountries=()=>repositories.findCountries()
+     const insertContries=(countries)=>repositories.insertContries(countries)
      
 
 
      
 
     return {
+        insertContries,
+        findCountries,
+        updateContries,
+        getVenturesByCountry,
         ventureCountByStatus,
         totalVentures,
         updateConnectUser,

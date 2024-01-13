@@ -30,9 +30,10 @@ const ventureSchema = new Schema({
         unique: true,
         validate: (value) => value.length < 30
     },
+    industry_experience:{type:Number, required:true},
     venture_category: { type: String, required: true },
     description: { type: String, required: true, validate: (value) => value.length >= 50 },
-    expertise_contries: { type: String, required: true },
+    expertise_contries:[ { type: String, required: true }],
     min_max_service_amount: { type: String },
     official_portfolio: { type: String, required: true},
     website_link: { type: String, required: true},

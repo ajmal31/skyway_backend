@@ -19,6 +19,7 @@ const register_validation = [
     body('venture_category').notEmpty().withMessage('category is required'),
     body('description').notEmpty().withMessage('description is required'),
     body('expertise_contries').notEmpty().withMessage('expertise_contries is required'),
+    body('industry_experience').notEmpty().withMessage('industry_experience  is required'),
     // body('min_max_service_amount').notEmpty().withMessage('average Amount is required'),
     body('official_portfolio').notEmpty().withMessage('official_portfolio Amount is required'),
     body('website_link').notEmpty().withMessage('website reference is required'),
@@ -33,6 +34,7 @@ const register_validation = [
     body('confirm_password_one').notEmpty().withMessage('confirm_password_two  is required'),
     
     
+    
 
     //checking input values length whether it is valid or not
     body('ventureName').isLength({ min:2, }).withMessage('enter valid venture name'),
@@ -42,7 +44,7 @@ const register_validation = [
    
     body('official_email').isLength({ max: 30, }).withMessage('invalid email '),
     body('venture_category').isLength({ min: 5 }).withMessage('category must be at least 5 letter'),
-    body('description').isLength({ min: 1400 ,max:1430}).withMessage('description must be at least 50 charactors'),
+    body('description').isLength({ min: 1350 ,max:1430}).withMessage('description must be at least 1400 charactors'),
     body('password_one').isLength({min:6}).withMessage('enter a valid password'),    
     body('confirm_password_one').isLength({min:6}).withMessage('enter a valid password'),   
     body('password_two').isLength({min:6}).withMessage('enter a valid password'),   

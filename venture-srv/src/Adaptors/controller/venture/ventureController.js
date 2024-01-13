@@ -9,6 +9,7 @@ import takeVentureUpdateChat from "../../../Application/usecase/venture/getVentu
 import { uploadFile } from "../../../s3/index.js"
 import venturesTotalCount from "../../../Application/usecase/venture/ventureTotal.js"
 import countVenturesBasedOnStatus from "../../../Application/usecase/venture/ventureCountByStatus.js"
+import takeVenturesByContry from "../../../Application/usecase/venture/getVenturesByCountry.js"
 
 import ventureStatusUpdate from "../../../Application/usecase/venture/updateVentureStatus.js"
 const ventureController = (repositoryInterface, repositoryImplements, serviceInterface, ServiceImplements) => {
@@ -130,11 +131,20 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
     const response = await countVenturesBasedOnStatus(dbRepo,status)
     return res.json(response)
   }
+  const getVenturesByContries=async(req,res)=>{
+
+    const {type}=req.body
+    const {country}=req.params
+
+    const response=await takeVenturesByContry(dbRepo,type,country)
+    return res.json(response)
+  }
 
 
 
 
   return {
+    getVenturesByContries,
     venutureCountByStatus,
     totalVentures,
     getVentureUpdateChat,

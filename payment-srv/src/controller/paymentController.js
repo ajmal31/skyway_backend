@@ -8,7 +8,7 @@ const paymentController = async (req, res) => {
    const stripe=new Stripe(env.STRIPE_SECRET_KEY)
 
    
-
+  const {ventureName,vid}=req.body
 
   const session=await stripe.checkout.sessions.create({
 
@@ -17,18 +17,19 @@ const paymentController = async (req, res) => {
         price_data:{
             currency:"inr",
             product_data:{
-                name:'service',
+                name:ventureName,
             },
             unit_amount:1000,
         },
         quantity:1
     }],
     mode:'payment',
-    success_url:"http://localhost:5173/profile",
-    cancel_url:"http://localhost:5173/profile"
+    success_url:"http://localhost:5173/userProfile",
+    cancel_url:"http://localhost:5173/userPprofile"
 
   })
    
+  console.log('session ',session)
   return res.json({sessionId:session.id})
 
 }

@@ -1,6 +1,7 @@
 //import schemas here
 import connectedUserModel from "../../models/venture-models/connected_users.js"
 import ventureModel from "../../models/venture-models/ventures.js"
+import { contriesSchema } from "../../models/venture-models/contries.js"
 const ventureRepositoryImplements = () => {
 
 
@@ -51,6 +52,7 @@ const ventureRepositoryImplements = () => {
       venture_category,
       description,
       expertise_contries,
+      industry_experience,
       min_max_service_amount,
       official_portfolio,
       website_link,
@@ -65,6 +67,30 @@ const ventureRepositoryImplements = () => {
       confirm_password_two
     } = data
 
+    console.log(firstName(),
+      lastName(),
+      ventureName(),
+      phone_one(),
+      phone_two(),
+      official_email(),
+      official_email(),
+      venture_category(),
+      expertise_contries(),
+      min_max_service_amount(),
+      industry_experience(),
+      official_portfolio(),
+      website_link(),
+      register_number(),
+      license_number(),
+      social_media(),
+      insurance_file_link(),
+      license_file_link(),
+      password_one(),
+      confirm_password_one(),
+      password_two(),
+      confirm_password_two(),
+    )
+
     const venture = new ventureModel({
 
       firstName: firstName(),
@@ -76,6 +102,7 @@ const ventureRepositoryImplements = () => {
       venture_category: venture_category(),
       description: description(),
       expertise_contries: expertise_contries(),
+      industry_experience:industry_experience(),
       min_max_service_amount: min_max_service_amount(),
       official_portfolio: official_portfolio(),
       website_link: website_link(),
@@ -146,16 +173,42 @@ const ventureRepositoryImplements = () => {
     const response = await ventureModel.countDocuments()
     return response
   }
-  const ventureCountByStatus=async(status)=>{
+  const ventureCountByStatus = async (status) => {
 
-    const response=await ventureModel.find({admin_allowed:status}).count()
-    console.log(status ,"ventures",response)
+    const response = await ventureModel.find({ admin_allowed: status }).count()
+    console.log(status, "ventures", response)
+    return response
+  }
+  const getVenturesByCountry=async(type,country)=>{
+
+    const response=await ventureModel.find({admin_allowed:type, expertise_contries:{$in:[country]}}) 
+    return response
+
+  }
+  const updateContries=async(countries)=>{
+
+    const response=await contriesSchema.updateOne({},{$addToSet:{countries:{$each:countries}}})
+    return response
+  }
+  const findCountries=async()=>{
+
+    const response=await contriesSchema.findOne({})
+    return response
+  }
+  const insertContries=async(countries)=>{
+
+    const response=await contriesSchema.create({countries:countries})
     return response
   }
 
+  
 
 
   return {
+    insertContries,
+    findCountries,
+    updateContries,
+    getVenturesByCountry,
     ventureCountByStatus,
     totalVentures,
     updateConnectUser,

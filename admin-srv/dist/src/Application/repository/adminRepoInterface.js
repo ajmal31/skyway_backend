@@ -6,7 +6,9 @@ const adminRepInterface = (repositories) => {
     const adminExist = (email) => repositories.findAdmin(email);
     const ventureList = () => repositories.findAllventures();
     const userHandler = (data) => repositories.insertUserData(data);
+    const getWalletAmount = () => repositories.getWalletAmount();
     return {
+        getWalletAmount,
         userHandler,
         ventureList,
         adminExist,
