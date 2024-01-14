@@ -10,6 +10,9 @@ import { uploadFile } from "../../../s3/index.js"
 import venturesTotalCount from "../../../Application/usecase/venture/ventureTotal.js"
 import countVenturesBasedOnStatus from "../../../Application/usecase/venture/ventureCountByStatus.js"
 import takeVenturesByContry from "../../../Application/usecase/venture/getVenturesByCountry.js"
+import findAllContries from "../../../Application/srv/venture/getAllContries.js"
+import addNewComment from "../../../Application/usecase/venture/createComment.js"
+import takeAllComments from "../../../Application/usecase/venture/getAllComments.js"
 
 import ventureStatusUpdate from "../../../Application/usecase/venture/updateVentureStatus.js"
 const ventureController = (repositoryInterface, repositoryImplements, serviceInterface, ServiceImplements) => {
@@ -135,15 +138,41 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
 
     const {type}=req.body
     const {country}=req.params
-
+    console.log(country,type)
     const response=await takeVenturesByContry(dbRepo,type,country)
+    console.log("response based on country",response)
     return res.json(response)
+  }
+  const getAllContries=async(req,res)=>{
+
+
+    const response=await findAllContries(dbRepo)
+
+    return res.json({response})
+  }
+  const createComment=async(req,res)=>{
+
+    const {userId}=req.userdata
+    console.log(userId)
+    const response=await addNewComment(dbRepo,req.body,userId)
+    return res.json(response)
+  }
+  //taking all comment based on ventureId
+  const getAllComments=async(req,res)=>{
+
+     const {vid}=req.params
+     const response=await takeAllComments(dbRepo,vid)
+     return res.json(response)
+    
   }
 
 
 
 
   return {
+    getAllComments,
+    createComment,
+    getAllContries,
     getVenturesByContries,
     venutureCountByStatus,
     totalVentures,

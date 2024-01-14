@@ -2,6 +2,7 @@
 import connectedUserModel from "../../models/venture-models/connected_users.js"
 import ventureModel from "../../models/venture-models/ventures.js"
 import { contriesSchema } from "../../models/venture-models/contries.js"
+import { commentSchema } from "../../models/venture-models/commentSchema.js"
 const ventureRepositoryImplements = () => {
 
 
@@ -180,8 +181,10 @@ const ventureRepositoryImplements = () => {
     return response
   }
   const getVenturesByCountry=async(type,country)=>{
-
+     
+    console.log(type,country)
     const response=await ventureModel.find({admin_allowed:type, expertise_contries:{$in:[country]}}) 
+    
     return response
 
   }
@@ -200,11 +203,23 @@ const ventureRepositoryImplements = () => {
     const response=await contriesSchema.create({countries:countries})
     return response
   }
+  const createComment=async(content,vid,userName,uid)=>{
+
+    const response=await commentSchema.create({ventureId:vid,userId:uid,userName:userName,content:content})
+    return response
+  }
+  const getAllComments=async(vid)=>{
+
+    const response=await commentSchema.find({ventureId:vid}).sort({updatedAt:-1})
+    return response
+  }
 
   
 
 
   return {
+    getAllComments,
+    createComment,
     insertContries,
     findCountries,
     updateContries,

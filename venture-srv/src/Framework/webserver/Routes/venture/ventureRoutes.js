@@ -30,6 +30,9 @@ const ventureRoutes=(express)=>{
    router.route('/getVentureUpdateChat/venture').post(jwtVerfication(env.JWT_SECRETKEY),controller.getVentureUpdateChat)
    router.route('/getAllventures').post(controller.getAllVentures)
    router.route('/get/ventures/by/country/:country').post(controller.getVenturesByContries)
+   router.route('/venture/count/by/status').post(jwtVerfication(env.JWT_ADMIN_SECRET_KEY),controller.venutureCountByStatus)
+   router.route('/create/comment').post( jwtVerfication(env.JWT_USER_SECRET_KEY),controller.createComment)
+  
 
    //GET methods
 
@@ -38,11 +41,10 @@ const ventureRoutes=(express)=>{
    router.route('/getOneVenture/:id').get(controller.getOneVenture)
    router.route('/getAllUsers').get(jwtVerfication(env.JWT_SECRETKEY),controller.getAllUsers)
    router.route('/ventures/count').get(jwtVerfication(env.JWT_ADMIN_SECRET_KEY),controller.totalVentures)
-   router.route('/venture/count/by/status').post(jwtVerfication(env.JWT_ADMIN_SECRET_KEY),controller.venutureCountByStatus)
+   router.route('/get/all/contries').get(controller.getAllContries)
+   router.route('/get/all/comments/:vid').get(controller.getAllComments)
    
    
-    //test route
-     router.route('/upload').post(upload.array("file"),controller.upload)
 
 
     return router

@@ -20,12 +20,12 @@ const ventureRepositoryInterface=(repositories)=>{
      const updateContries=(countries)=>repositories.updateContries(countries)
      const findCountries=()=>repositories.findCountries()
      const insertContries=(countries)=>repositories.insertContries(countries)
+     const createComment=(content,vid,userName,uid)=>repositories.createComment(content,vid,userName,uid)
+     const getAllComments=(vid)=>repositories.getAllComments(vid)
      
-
-
-     
-
     return {
+        getAllComments,
+        createComment,
         insertContries,
         findCountries,
         updateContries,
