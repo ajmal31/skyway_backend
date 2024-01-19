@@ -182,7 +182,7 @@ const ventureRepositoryImplements = () => {
   }
   const getVenturesByCountry=async(type,country)=>{
      
-    console.log(type,country)
+
     const response=await ventureModel.find({admin_allowed:type, expertise_contries:{$in:[country]}}) 
     
     return response
@@ -203,9 +203,9 @@ const ventureRepositoryImplements = () => {
     const response=await contriesSchema.create({countries:countries})
     return response
   }
-  const createComment=async(content,vid,userName,uid)=>{
+  const createComment=async(content,vid,userName,uid,rating)=>{
 
-    const response=await commentSchema.create({ventureId:vid,userId:uid,userName:userName,content:content})
+    const response=await commentSchema.create({ventureId:vid,userId:uid,userName:userName,content:content,rating:rating})
     return response
   }
   const getAllComments=async(vid)=>{
@@ -213,11 +213,25 @@ const ventureRepositoryImplements = () => {
     const response=await commentSchema.find({ventureId:vid}).sort({updatedAt:-1})
     return response
   }
+  const getOneComment=async(uid,vid)=>{
+
+      const response=await commentSchema.find({userId:uid,ventureId:vid}).sort({updatedAt:-1}).limit(1)
+      console.log("latest comment",response)
+      return response
+  }
+  const incrementVenture=async(vid,value,key)=>{
+    console.log(vid,value,key)
+    const response=await ventureModel.updateOne({_id:vid},{$inc:{[key]:value}},{upsert:true})
+    console.log("rating sum incremented",response)
+    return response
+  }
 
   
 
 
   return {
+    incrementVenture,
+    getOneComment,
     getAllComments,
     createComment,
     insertContries,

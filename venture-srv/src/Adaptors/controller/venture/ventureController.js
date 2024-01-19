@@ -153,7 +153,7 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
   const createComment=async(req,res)=>{
 
     const {userId}=req.userdata
-    console.log(userId)
+
     const response=await addNewComment(dbRepo,req.body,userId)
     return res.json(response)
   }

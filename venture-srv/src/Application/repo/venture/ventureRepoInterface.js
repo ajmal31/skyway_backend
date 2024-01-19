@@ -20,10 +20,18 @@ const ventureRepositoryInterface=(repositories)=>{
      const updateContries=(countries)=>repositories.updateContries(countries)
      const findCountries=()=>repositories.findCountries()
      const insertContries=(countries)=>repositories.insertContries(countries)
-     const createComment=(content,vid,userName,uid)=>repositories.createComment(content,vid,userName,uid)
+     const createComment=(content,vid,userName,uid,rating)=>repositories.createComment(content,vid,userName,uid,rating)
      const getAllComments=(vid)=>repositories.getAllComments(vid)
+     const getOneComment=(uid,vid)=>repositories.getOneComment(uid,vid)
+     const updateVentureRatingSum=(vid,rating,key)=>repositories.incrementVenture(vid,rating,key)
+     const updateVentureRatedUsersCount=(vid,rating,key)=>repositories.incrementVenture(vid,rating,key)
+     const updateVentureConnectionsCount=(vid,count,key)=>repositories.incrementVenture(vid,count,key)
      
     return {
+        updateVentureConnectionsCount,
+        updateVentureRatedUsersCount,
+        updateVentureRatingSum,
+        getOneComment,
         getAllComments,
         createComment,
         insertContries,
