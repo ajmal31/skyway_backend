@@ -77,6 +77,7 @@ const useRoutes = (express) => {
     router.route('/get/one/user/:userId').get(jwtVerfication(ventureSecret),controller.getUser)
     router.route('/venture/service/start').post(jwtVerfication(ventureSecret),controller.ventureServiceStart)
     router.route('/venture/service/completed').post(jwtVerfication(ventureSecret),controller.ventureServiceCompleted)
+    router.route("/users/count/by/venture").get(jwtVerfication(ventureSecret),controller.usersCountByVenture)
 
 
     //FOR CHAT SERVICE
@@ -87,8 +88,7 @@ const useRoutes = (express) => {
 
 
     //Admin service
-
-
+    
     //taking users-count based ventureId and status
     router.route('/venture/users/:status/count/:vid').get(jwtVerfication(adminSecret),controller.getVentureRelatedUsersCount)
     //taking all user-count based on ventureId no matter which status

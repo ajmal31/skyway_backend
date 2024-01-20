@@ -229,7 +229,14 @@ const userRepositoryImplements = () => {
         const response=await userModel.countDocuments()
         return response
     }
+    const usersCountByVenture=async(vid)=>{
+
+        const response=await userModel.countDocuments({ventures:{$elemMatch:{ventureId:vid}}})
+        console.log('users count by venture',response)
+        return response
+    }
     return {
+        usersCountByVenture,
         totalUsers,
         ventureService,
         getAllComments,

@@ -12,6 +12,7 @@ const adminController=(dbrepInterface:any,dbRepoImplements:any,serviceInterface:
     const login=async(req:Request,res:Response)=>{
           
         const response=await loginUsecase(dbRepo,service,req.body)
+        console.log("login response",response)
         return res.json(response)
         
     }

@@ -138,7 +138,7 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
 
     const {type}=req.body
     const {country}=req.params
-    console.log(country,type)
+
     const response=await takeVenturesByContry(dbRepo,type,country)
     console.log("response based on country",response)
     return res.json(response)

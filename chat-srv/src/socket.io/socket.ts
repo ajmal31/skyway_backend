@@ -8,6 +8,7 @@ const socketConfguration = (server: any) => {
 
     //create server instance of socket.io
     const io = new Server(server, {
+        pingTimeout:60000,
         cors: {
             origin: "*",
         }

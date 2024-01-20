@@ -28,9 +28,11 @@ const userRepositoryInterface=(repositories)=>{
      const getAllComments=()=>repositories.getAllComments()
      const ventureService=(vid,uid,data)=>repositories.ventureService(vid,uid,data)
      const totalUsers=()=>repositories.totalUsers()
+     const usersCountByVenture=(vid)=>repositories.usersCountByVenture(vid)
      
 
     return {
+        usersCountByVenture,
         totalUsers,
         ventureService,
         getAllComments,

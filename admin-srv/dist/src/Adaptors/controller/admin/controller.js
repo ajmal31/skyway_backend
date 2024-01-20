@@ -12,6 +12,7 @@ const adminController = (dbrepInterface, dbRepoImplements, serviceInterface, ser
     //POST METHODS
     const login = async (req, res) => {
         const response = await (0, login_1.default)(dbRepo, service, req.body);
+        console.log("login response", response);
         return res.json(response);
     };
     //GET METHODS

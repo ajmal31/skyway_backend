@@ -24,6 +24,7 @@ import takeAllComments from "../../../Application/usecase/user/getAllComments.js
 import startVentureService from "../../../Application/usecase/user/ventureServiceStart.js"
 import completeVentureService from "../../../Application/usecase/user/completeVentureService.js"
 import usersTotal from "../../../Application/usecase/user/totalUsers.js"
+import countOfUsersByVenture from "../../../Application/usecase/user/usersCountByVenture.js"
 
 
 const userController = (repositoryInterface, repositoryImplements, serviceInterface, userServiceImplements) => {
@@ -38,6 +39,8 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
     const register = async (req, res) => {
 
         try {
+            // console.log("body",req.body),
+            // console.log("file",req.file)
             const response = await registerUser(dbRepository, service, req.body)
 
             if (!response.message) res.json({ response }).status(200)
@@ -263,10 +266,18 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
         return res.json(response)
         
     }
+    const usersCountByVenture=async(req,res)=>{
+
+        //'it ventureId
+        const {_id}=req.userdata
+        const response=await countOfUsersByVenture(dbRepository,_id)
+        return res.json(response)
+    }
 
 
  
     return {
+        usersCountByVenture,
         totalUsers,
         ventureServiceCompleted,
         ventureServiceStart,
