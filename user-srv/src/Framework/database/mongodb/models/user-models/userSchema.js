@@ -5,6 +5,7 @@ const {Schema}=mongoose
 const userSchema=new Schema({
 
     username: {type: String ,required: true},
+    profile_image:{type:String},
     email: { type: String ,required :true ,unique:true },
     phone:{type: Number, required:true ,unique:true},
     region:{ type: String , required:true },

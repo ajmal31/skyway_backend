@@ -25,6 +25,7 @@ import startVentureService from "../../../Application/usecase/user/ventureServic
 import completeVentureService from "../../../Application/usecase/user/completeVentureService.js"
 import usersTotal from "../../../Application/usecase/user/totalUsers.js"
 import countOfUsersByVenture from "../../../Application/usecase/user/usersCountByVenture.js"
+import profileImageUpload from "../../../Application/usecase/user/uploadProfileImage.js"
 
 
 const userController = (repositoryInterface, repositoryImplements, serviceInterface, userServiceImplements) => {
@@ -206,11 +207,11 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
       //test route written check whether it uploading to s3 is working or not
     const upload = async (req, res) => {
 
-    const file = req.files
-    const result=await uploadFile(file)
+    const files = req.files
+
     
     const {userId}=req.userdata
-    let response=await documentUploading(dbRepository,result,userId)
+    let response=await documentUploading(dbRepository,userId,files)
 
     return res.json(response)
 
@@ -273,10 +274,20 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
         const response=await countOfUsersByVenture(dbRepository,_id)
         return res.json(response)
     }
+    //Upload Profile Image
+    const uploadProfileImage=async(req,res)=>{
+ 
+        const file=req.file
+        const {userId}=req.userdata
+        const response=await profileImageUpload(dbRepository,file,userId)
+        console.log("response in controller",response)
+        return res.json(response)
+    }
 
 
  
     return {
+        uploadProfileImage,
         usersCountByVenture,
         totalUsers,
         ventureServiceCompleted,

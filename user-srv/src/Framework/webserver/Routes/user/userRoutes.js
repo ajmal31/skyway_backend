@@ -37,31 +37,33 @@ const useRoutes = (express) => {
     //MIDDLEWARE/  !!!notice!! this is not working while setup globally but it working while writing along with each route
     app.use(jwtVerfication('ajmal123user-srv'))
 
-    //User Requesting to a venture for connecting
+    //User Requesting to a Venture for Connecting
     router.route('/callRequested').post(jwtVerfication(userSecret), controller.callRequested)
 
     //USER-SERVICE👇
 
-    //delete user account (soft delete)
+    //Delete User Account (soft delete)
     router.route('/delete/:id').get(controller.remove)
-    //take one user
+    //Take One User
     router.route('/getUser').get(jwtVerfication(userSecret), controller.getUser)
-    //taking all users
+    //Taking All users
     router.route('/getAllUsers').get(controller.getAllusers)
-    //take one venture (from replicated venture data)
+    //Take One Venture (from replicated venture data)
     router.route('/getConnectedVenture').post(controller.getConnectedVenture)
-    //should be check user valid or not
+    //Should be Check User Valid or Not
     router.route('/get/all/connected/Ventures').get(jwtVerfication(userSecret), controller.getAllConnectedVentures)
-    //taking user details and publish data to chat-srv - CHAT-SERVICE
+    //Taking User Details and Publish Data to Chat-srv - CHAT-SERVICE
     router.route('/getUserUpdateChat/user').post( jwtVerfication(userSecret), controller.getUserUpdateChat)
     router.route('/getUserUpdateChat/venture').post(jwtVerfication(ventureSecret),controller.getUserUpdateChat)
-    //verified phone number
+    //Verified Phone number
     router.route('/numberVerified').get(jwtVerfication(userSecret), controller.numberVerified)
     router.route('/otpFailed').get(jwtVerfication(userSecret), controller.otpFailed)
-    //document uploading
+    //Document Uploading
     router.route('/upload').post(jwtVerfication(userSecret), upload.array("file"), controller.upload)
     router.route('/create/comment').post(jwtVerfication(userSecret),controller.createComment)
     router.route('/get/all/comment').get(controller.getAllComments)
+    //Uploading User Profile Image
+    router.route("/upload/user/profile/image").post(jwtVerfication(userSecret),upload.single("profile-image"),controller.uploadProfileImage)
     
     
 

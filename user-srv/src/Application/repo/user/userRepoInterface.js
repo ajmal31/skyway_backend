@@ -29,9 +29,11 @@ const userRepositoryInterface=(repositories)=>{
      const ventureService=(vid,uid,data)=>repositories.ventureService(vid,uid,data)
      const totalUsers=()=>repositories.totalUsers()
      const usersCountByVenture=(vid)=>repositories.usersCountByVenture(vid)
+     const uploadProfileImage=(key,imgLink,verifyingKey,uid)=>repositories.updateOneUserField(key,imgLink,verifyingKey,uid)
      
 
     return {
+        uploadProfileImage,
         usersCountByVenture,
         totalUsers,
         ventureService,

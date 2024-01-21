@@ -12,11 +12,7 @@ const s3 = new S3Client({
 });
 
 
-export const uploadFile = async (files) => {
-
-  const bucketName = "skyway.innovative"
-  const folderName="user-documents"
-
+export const uploadFile = async (files,bucketName,folderName) => {
 
   try {
     const result = files.map(async (file) => {
@@ -24,11 +20,12 @@ export const uploadFile = async (files) => {
       const key = `${folderName}/${v4()}`
       const command = new PutObjectCommand({
         Bucket: bucketName,
-        Key: key, // Corrected key
+        Key: key, 
         Body: file.buffer,
         ContentType: file.mimetype,
       }); 
 
+      //Adding to S3 Bucket
       const response = await s3.send(command);
      
       const url = `https://s3.eu-north-1.amazonaws.com/${bucketName}/${key}`;
