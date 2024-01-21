@@ -5,7 +5,6 @@ const listVentures = async (dbRepo, type) => {
      const Allventures = await dbRepo.getAllVentures(type)
 
     const payload= ventureListAlgorithm(Allventures)
-    console.log("payload",payload)
      if (!Allventures) return { find: false }
      return payload
 

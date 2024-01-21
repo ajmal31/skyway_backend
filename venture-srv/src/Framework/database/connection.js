@@ -7,7 +7,7 @@ const connection=(config)=>{
 
     mongoose.connection.once("open",()=>{
 
-        console.log('mongodb connection success')
+        console.log('mongodb connection success 🐶🦴')
 
     })
     mongoose.connection.on('error',(err)=>{
