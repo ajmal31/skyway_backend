@@ -6,7 +6,6 @@ import ventureLogin from "../../../Application/usecase/venture/ventureLogin.js"
 import takeAllUsers from "../../../Application/usecase/venture/takeAllUsers.js"
 import takeOneVenture from "../../../Application/usecase/venture/takeOneVenture.js"
 import takeVentureUpdateChat from "../../../Application/usecase/venture/getVentureUpdate.js"
-import { uploadFile } from "../../../s3/index.js"
 import venturesTotalCount from "../../../Application/usecase/venture/ventureTotal.js"
 import countVenturesBasedOnStatus from "../../../Application/usecase/venture/ventureCountByStatus.js"
 import takeVenturesByContry from "../../../Application/usecase/venture/getVenturesByCountry.js"
@@ -32,22 +31,6 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
     console.log(response, 'response in controller')
     if (response?.error) return res.json({ error: response?.error })
     return res.json({ success: response?.success })
-
-  }
-  //test route written check whether it uploading to s3 is working or not
-  const upload = async (req, res) => {
-
-    const file = req.files
-    // console.log('govId', file[0])
-    // console.log('adhar card', file[1])
-    // console.log('pan', file[2])
-    // console.log('passport', file[3])
-    console.log('file', file)
-    const result = await uploadFile(file)
-    console.log('after uploading ', result)
-
-
-
 
   }
   //❗❗❗
@@ -178,7 +161,6 @@ const ventureController = (repositoryInterface, repositoryImplements, serviceInt
     totalVentures,
     getVentureUpdateChat,
     updateVentureStatus,
-    upload,
     getOneVenture,
     getAllUsers,
     getAllVentures,

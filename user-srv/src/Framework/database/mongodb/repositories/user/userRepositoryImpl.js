@@ -239,7 +239,15 @@ const userRepositoryImplements = () => {
         const response=await userModel.updateOne({[verifyingKey]:verifyingValue},{[key]:value},{upsert:true,new:true})
         return response
     }
+    const usersCountByVentureByStatus=async(vid,status)=>{
+
+        const response=await userModel.countDocuments({ventures:{$elemMatch:{ventureId:vid,status:status}}})
+        console.log("user count by venture by status",response)
+        return response
+
+    }
     return {
+        usersCountByVentureByStatus,
         updateOneUserField,
         usersCountByVenture,
         totalUsers,

@@ -68,29 +68,29 @@ const ventureRepositoryImplements = () => {
       confirm_password_two
     } = data
 
-    console.log(firstName(),
-      lastName(),
-      ventureName(),
-      phone_one(),
-      phone_two(),
-      official_email(),
-      official_email(),
-      venture_category(),
-      expertise_contries(),
-      min_max_service_amount(),
-      industry_experience(),
-      official_portfolio(),
-      website_link(),
-      register_number(),
-      license_number(),
-      social_media(),
-      insurance_file_link(),
-      license_file_link(),
-      password_one(),
-      confirm_password_one(),
-      password_two(),
-      confirm_password_two(),
-    )
+    // console.log(firstName(),
+    //   lastName(),
+    //   ventureName(),
+    //   phone_one(),
+    //   phone_two(),
+    //   official_email(),
+    //   official_email(),
+    //   venture_category(),
+    //   expertise_contries(),
+    //   min_max_service_amount(),
+    //   industry_experience(),
+    //   official_portfolio(),
+    //   website_link(),
+    //   register_number(),
+    //   license_number(),
+    //   social_media(),
+    //   insurance_file_link(),
+    //   license_file_link(),
+    //   password_one(),
+    //   confirm_password_one(),
+    //   password_two(),
+    //   confirm_password_two(),
+    // )
 
     const venture = new ventureModel({
 
@@ -142,7 +142,7 @@ const ventureRepositoryImplements = () => {
     if (type === 'allowed') query = { admin_allowed: type }
     else if (type === 'all') query = {}
 
-    const response = await ventureModel.find(query)
+    const response = await ventureModel.find(query).select("ventureName expertise_contries rated_users_count connections_count rating_sum admin_allowed")
     return response
 
 
@@ -220,12 +220,10 @@ const ventureRepositoryImplements = () => {
       return response
   }
   const incrementVenture=async(vid,value,key)=>{
-    console.log(vid,value,key)
+  
     const response=await ventureModel.updateOne({_id:vid},{$inc:{[key]:value}},{upsert:true})
-    console.log("rating sum incremented",response)
     return response
   }
-
   
 
 

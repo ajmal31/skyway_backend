@@ -21,7 +21,7 @@ export const uploadFile = async (files,bucketName,folderName) => {
       const command = new PutObjectCommand({
         Bucket: bucketName,
         Key: key, 
-        Body: file.buffer,
+        Body: file?.buffer,
         ContentType: file.mimetype,
       }); 
 

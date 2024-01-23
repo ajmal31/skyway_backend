@@ -26,6 +26,7 @@ import completeVentureService from "../../../Application/usecase/user/completeVe
 import usersTotal from "../../../Application/usecase/user/totalUsers.js"
 import countOfUsersByVenture from "../../../Application/usecase/user/usersCountByVenture.js"
 import profileImageUpload from "../../../Application/usecase/user/uploadProfileImage.js"
+import usersCountByStatusByVenture from "../../../Application/usecase/user/usersCountByVentureByStatus.js"
 
 
 const userController = (repositoryInterface, repositoryImplements, serviceInterface, userServiceImplements) => {
@@ -283,10 +284,18 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
         console.log("response in controller",response)
         return res.json(response)
     }
+    const usersCountByVentureByStatus=async(req,res)=>{
+         
+        const {_id}=req.userdata
+        const {status}=req.params
+        const response=await usersCountByStatusByVenture(dbRepository,_id,status)
+        return res.json(response)
+    }
 
 
  
     return {
+       usersCountByVentureByStatus,
         uploadProfileImage,
         usersCountByVenture,
         totalUsers,

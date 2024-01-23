@@ -80,6 +80,8 @@ const useRoutes = (express) => {
     router.route('/venture/service/start').post(jwtVerfication(ventureSecret),controller.ventureServiceStart)
     router.route('/venture/service/completed').post(jwtVerfication(ventureSecret),controller.ventureServiceCompleted)
     router.route("/users/count/by/venture").get(jwtVerfication(ventureSecret),controller.usersCountByVenture)
+    router.route("/users/count/by/venture").get(jwtVerfication(ventureSecret),controller.usersCountByVenture)
+    router.route("/users/count/by/venture/:status").get(jwtVerfication(ventureSecret),controller.usersCountByVentureByStatus)
 
 
     //FOR CHAT SERVICE
