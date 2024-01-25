@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admin-srv-deployment
+  labels:
+    app: admin-srv
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: admin-srv
+  template:
+    metadata:
+      labels:
+        app: admin-srv
+    spec:
+      containers:
+        - name: admin-srv
+          image: muhammedajmal/skyway-admin-srv:v1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: admin-srv-service
+spec:
+  selector:
+    app: admin-srv
+  ports:
+    - protocol: TCP
+      port: 3002
+      targetPort: 3002

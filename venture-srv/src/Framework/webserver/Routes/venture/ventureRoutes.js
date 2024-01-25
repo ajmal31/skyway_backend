@@ -6,11 +6,9 @@ import ventureRepositoryImplements from "../../../database/mongodb/repositories/
 import ventureServiceImplements from "../../../services/venture/ventureServiceImpl.js"
 import {jwtVerfication} from "jwt-verification-middleware"
 import register_validation from "../../../../custome-middlewares/Register_validation.js"
-import multer,{memoryStorage} from "multer"
 import env from "../../../../config/env.js"
 
 
-const upload = multer({ storage: multer.memoryStorage() });
 
 const ventureRoutes=(express)=>{
   
