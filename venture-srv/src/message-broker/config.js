@@ -3,10 +3,10 @@ import amqp from 'amqplib'
 const createChannel = async () => {
 
     try {
-
-        const uri = 'amqp://host.docker.internal:5672'
-        // const uri = 'amqp://localhost'
-        const connection = await amqp.connect(uri)
+        const url="amqp://rabbitmq-service"// service name
+        // const url = 'amqp://host.docker.internal:5672'
+        // const url = 'amqp://localhost'
+        const connection = await amqp.connect(url)
         const channel = await connection.createChannel()
         const queueName = 'VENTURE_SRV'
         const queue = await channel.assertQueue(queueName)

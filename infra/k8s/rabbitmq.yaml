@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: admin-srv-deployment
+  name: rabbitmq-deployment
   labels:
-    app: admin-srv
+    app: rabbitmq
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: admin-srv
+      app: rabbitmq
   template:
     metadata:
       labels:
-        app: admin-srv
+        app: rabbitmq
     spec:
       containers:
-        - name: admin-srv
-          image: muhammedajmal/skyway-admin-srv:v2
+        - name: rabbitmq
+          image: rabbitmq:latest
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: admin-srv-service
+  name: rabbitmq-service
 spec:
   selector:
-    app: admin-srv
+    app: rabbitmq
   ports:
     - protocol: TCP
-      port: 3002
-      targetPort: 3002
+      port: 5672
+      targetPort: 5672

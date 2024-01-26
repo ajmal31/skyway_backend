@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: venture-srv
-          image: muhammedajmal/skyway-venture-srv:v1
+          image: muhammedajmal/skyway-venture-srv:v2
 ---
 apiVersion: v1
 kind: Service
