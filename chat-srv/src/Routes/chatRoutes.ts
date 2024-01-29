@@ -15,13 +15,15 @@ import express from "express"
 
 
 const chatRoutes = (expres: any): Router => {
-
-
+    
+    
     const router = express.Router()
     const app = express()
     //un Validate API's
-
-    //Post Methods    
+    
+  
+    
+    //Post Methods  
     router.route('/createChat/user').post(jwtVerify(env.USER_SRV_TOKEN_SECRET_KEY),createChat)
     router.route('/createChat/venture').post(jwtVerify(env.VENTURE_SRV_TOKEN_SECRET_KEY),createChat)
     router.route('/sendMessage/user').post(jwtVerify(env.USER_SRV_TOKEN_SECRET_KEY), sendMessage)
@@ -46,12 +48,12 @@ const chatRoutes = (expres: any): Router => {
     router.route('/clear/unRead/messages/venture').post(jwtVerify(env.VENTURE_SRV_TOKEN_SECRET_KEY),clearUnreadMessages)
     router.route('/take/unRead/chat/count/user').post(jwtVerify(env.USER_SRV_TOKEN_SECRET_KEY),unReadChatCount)
     
-
+    
     //cloud testing Route
     router.route('/').get(test)
-
+    
     return router
-
+    
 }
 
 export default chatRoutes

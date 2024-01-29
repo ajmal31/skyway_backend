@@ -7,6 +7,6 @@ const server = async(app: any, port: any) => {
         else console.log(`Chat service listening on Port ${port}`);
     });
     //invkoking socket configrations
-    if(response)socketConfguration(response)
+    // if(response)socketConfguration(response)
 }
 export default server
