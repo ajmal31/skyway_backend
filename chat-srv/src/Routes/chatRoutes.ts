@@ -6,7 +6,8 @@ import {
     getAllChats,
     updateChatersDetails,
     clearUnreadMessages,
-    unReadChatCount
+    unReadChatCount,
+    test
 } from "../controller/chatController"
 import jwtVerify from "../middleware/auth"
 import env from "../config/env"
@@ -44,7 +45,10 @@ const chatRoutes = (expres: any): Router => {
     router.route('/clear/unRead/messages/user').post(jwtVerify(env.USER_SRV_TOKEN_SECRET_KEY),clearUnreadMessages)
     router.route('/clear/unRead/messages/venture').post(jwtVerify(env.VENTURE_SRV_TOKEN_SECRET_KEY),clearUnreadMessages)
     router.route('/take/unRead/chat/count/user').post(jwtVerify(env.USER_SRV_TOKEN_SECRET_KEY),unReadChatCount)
+    
 
+    //cloud testing Route
+    router.route('/').get(test)
 
     return router
 

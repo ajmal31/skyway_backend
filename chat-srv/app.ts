@@ -21,6 +21,9 @@ ExpressConfig(app)
 //Invoking Routes Config
 RoutesConfig(app,express)
 
+//RabbitMQ consumer
+consumer()
+
 //Invokign Database configuration function
 connection(env.MONGO_URI)
 
@@ -29,8 +32,6 @@ server(httpServer,env.PORT)
 
 
 
-//RabbitMQ consumer
-consumer()
 
 //Socket connection
 // socketConfguration()

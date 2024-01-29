@@ -56,12 +56,12 @@ const chatController = () => {
   }
 
   const getAllChats = async (req: extendRequest, res: Response) => {
-
+    
     const findingId = req?.params.id
     const {field}=req.body
    
     const response = await fetchAllChats(findingId,field)
-   
+   console.log("all chat s!!!!!!!!!!!!",response)
     return res.json({ response })
 
   }
@@ -92,9 +92,15 @@ const chatController = () => {
     
 
   }
+  const test=(req:Request,res:Response)=>{
+
+    console.log("hei ima the tester Route 🕺🎯💨")
+    res.send("it working in chat-service")
+  }
 
 
   return {
+    test,
     unReadChatCount,
     clearUnreadMessages,
     updateChatersDetails,
@@ -107,6 +113,7 @@ const chatController = () => {
 }
 
 export const {
+  test,
   unReadChatCount,
   clearUnreadMessages,
   createChat,

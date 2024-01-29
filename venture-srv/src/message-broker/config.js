@@ -3,7 +3,7 @@ import amqp from 'amqplib'
 const createChannel = async () => {
 
     try {
-        const url="amqp://rabbitmq-service"// service name
+        const url="amqp://rabbitmq-service:5672"// service name
         // const url = 'amqp://host.docker.internal:5672'
         // const url = 'amqp://localhost'
         const connection = await amqp.connect(url)

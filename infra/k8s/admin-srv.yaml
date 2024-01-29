@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: admin-srv
-          image: muhammedajmal/skyway-admin-srv:v2
+          image: muhammedajmal/skyway-admin-srv:v3
 ---
 apiVersion: v1
 kind: Service
@@ -26,6 +26,7 @@ spec:
   selector:
     app: admin-srv
   ports:
-    - protocol: TCP
+    - name: admin-srv
+      protocol: TCP
       port: 3002
       targetPort: 3002

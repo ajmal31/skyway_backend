@@ -8,7 +8,6 @@ const consumer = async () => {
     channel.consume("CHAT-SRV", async (data) => {
         if (data) {
             const message = JSON.parse(data?.content?.toString());
-            console.log('chat service consuming', message)
 
             //These conditon handling Venture and User data for updating chaters
             if (message?.ventureName || message?.username) {
