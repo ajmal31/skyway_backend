@@ -14,9 +14,11 @@ spec:
       labels:
         app: venture-srv
     spec:
+      restartPolicy: Always
       containers:
         - name: venture-srv
-          image: muhammedajmal/skyway-venture-srv:v3
+          image: muhammedajmal/skyway-venture-srv:v6
+          
 ---
 apiVersion: v1
 kind: Service

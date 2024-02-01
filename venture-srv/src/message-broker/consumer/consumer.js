@@ -40,7 +40,8 @@ const consumer = async () => {
             const foreign='USER-SRV'
             //send to user service
             console.log('this data is sended to user-service',response)
-            publisher(foreign,response)
+            let k=publisher(foreign,response)
+            console.log("published to user service from venture -srv the venture data ",k)
 
         } 
         channel.ack(message)

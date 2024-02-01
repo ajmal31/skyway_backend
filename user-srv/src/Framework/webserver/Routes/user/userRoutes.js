@@ -10,7 +10,7 @@ import multer from "multer"
 
 
 //my own middleware
-import { jwtVerfication } from "jwt-verification-middleware"
+import {jwtVerfication} from "jwt-verification-middleware"
 const userSecret = 'ajmal123user-srv'
 const ventureSecret = "ajmal123venture-srv"
 const adminSecret= "ajmal123admin-srv"

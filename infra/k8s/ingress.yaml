@@ -11,13 +11,14 @@ spec:
   ingressClassName: nginx
   # tls:
   #   - hosts:
+
   #       - "focuspoint.shop"
   #     secretName: focuspoint-shop-tls
   rules:
-    - host: "focuspoint.shop"
+    - host: "flyway.website"
       http:
         paths:
-          - path: /api/chat-srv
+          - path: /api/chat-srv/
             pathType: Prefix
             backend:
               service:
@@ -45,8 +46,8 @@ spec:
                 name: admin-srv-service
                 port:
                   number: 3002
-          - pathType: Prefix
-            path: "/"
+          - path: "/"
+            pathType: Prefix
             backend:
               service:
                 name: client-srv-service

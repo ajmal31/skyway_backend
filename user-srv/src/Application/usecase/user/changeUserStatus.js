@@ -9,7 +9,8 @@ const changeUserStatus=async(status,uid,vid,dbRep)=>{
         method:'taking venture data',
         vid:vid
     }
-    publisher(foreign,payload)
+    let k=publisher(foreign,payload)
+    console.log("published to venture srv to take user venture in user service",k)
     return response
 }
 

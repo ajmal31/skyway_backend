@@ -176,7 +176,6 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
 
 
         const {senderId,receiverId}=req?.body
-        console.log('reach',senderId,receiverId)
         const response=await takeConnectedVenture(dbRepository,senderId,receiverId)
         return res.json({response})
     }
@@ -205,7 +204,6 @@ const userController = (repositoryInterface, repositoryImplements, serviceInterf
         return res.json(response)
     }
     //document uploading
-      //test route written check whether it uploading to s3 is working or not
     const upload = async (req, res) => {
 
     const files = req.files

@@ -14,9 +14,11 @@ spec:
       labels:
         app: rabbitmq
     spec:
+      restartPolicy: Always
       containers:
         - name: rabbitmq
           image: rabbitmq:latest
+          
 ---
 apiVersion: v1
 kind: Service

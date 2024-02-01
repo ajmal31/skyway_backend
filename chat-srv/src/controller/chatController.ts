@@ -61,7 +61,6 @@ const chatController = () => {
     const {field}=req.body
    
     const response = await fetchAllChats(findingId,field)
-   console.log("all chat s!!!!!!!!!!!!",response)
     return res.json({ response })
 
   }

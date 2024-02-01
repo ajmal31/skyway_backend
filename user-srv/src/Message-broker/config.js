@@ -5,7 +5,7 @@ const createChannel = async () => {
 
     try {
         const url="amqp://rabbitmq-service:5672"// service name
-        // const url = "amqp://localhost" // local using 
+        //  const url = "amqp://localhost" // local using 
         // const url = "amqp://host.docker.internal:5672" // inside the docker
         const connection = await amqp.connect(url)
         const channel = await connection.createChannel()
