@@ -150,7 +150,7 @@ const chatHelper = () => {
                 }
             },{
                 $sort:{"last_message.updatedAt":-1}
-            }
+            } 
         ]);
         return response
 
