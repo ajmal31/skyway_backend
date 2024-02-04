@@ -13,6 +13,6 @@ RUN npm install
 # copy rest of the files
 COPY . .
 
-ENV PORT = 4003
+ENV PORT = 5003
 
 CMD ["npm","start"]

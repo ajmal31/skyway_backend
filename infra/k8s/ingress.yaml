@@ -7,24 +7,37 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/websocket-services: "chat-srv-service"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    # nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.org/websocket-services: chat-srv-service
+    # service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "tcp"
+    # nginx.ingress.kubernetes.io/proxy-read-timeout: "1800"
+    # nginx.ingress.kubernetes.io/proxy-send-timeout: "1800"
+    nginx.ingress.kubernetes.io/secure-backends: "true"
+    # cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   ingressClassName: nginx
   # tls:
   #   - hosts:
-
   #       - "focuspoint.shop"
   #     secretName: focuspoint-shop-tls
   rules:
     - host: "flyway.website"
       http:
         paths:
-          - path: /api/chat-srv/
+          - path: /api/chat-srv
             pathType: Prefix
             backend:
               service:
                 name: chat-srv-service
                 port:
-                  number: 4003
+                  number: 5003
+          - path: /socket.io/
+            pathType: Prefix
+            backend:
+              service:
+                name: chat-srv-service
+                port:
+                  number: 5003
           - pathType: Prefix
             path: /api/user-srv
             backend:

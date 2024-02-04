@@ -8,12 +8,12 @@ const socketConfguration = (server: any) => {
 
     //create server instance of socket.io
     const io = new Server(server, {
-        pingTimeout:60000,
+        // pingTimeout:60000,
         cors: {
             origin: "*",
         }
     })
-
+console.log("what about in backend socket server",io)
     //connection establishing
     io.on('connection', (socket: any) => {
 

@@ -7,14 +7,21 @@ exports.chatSchema = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const { Schema } = mongoose_1.default;
 const chatModel = new Schema({
-    senderId: { type: Schema.Types.ObjectId, required: true, },
-    receiverId: { type: Schema.Types.ObjectId, required: true },
+    participants: [
+        {
+            userId: { type: String, required: true },
+            userUnReadMessages: { type: Number, required: true, default: 0 },
+            ventureId: { type: String, required: true },
+            ventureUnReadMessages: { type: Number, required: true, default: 0 }
+        }
+    ],
     message: [
         {
             type: Schema.Types.ObjectId,
             ref: "messages"
         }
-    ]
+    ],
+    lastMessage: { type: Schema.Types.ObjectId, ref: "messages" }
 }, {
     timestamps: true
 });

@@ -6,7 +6,6 @@ import connection from "./src/config/db/connection";
 import server from "./src/config/server";
 import consumer from "./src/Message-Broker/consumer/consumer";
 import http from "http"
-import socketConfguration from "./src/socket.io/socket";
 
 
 
@@ -22,7 +21,7 @@ ExpressConfig(app)
 RoutesConfig(app,express)
 
 //RabbitMQ consumer
-consumer()
+// consumer()
 
 //Invokign Database configuration function
 connection(env.MONGO_URI)
@@ -31,10 +30,6 @@ connection(env.MONGO_URI)
 server(httpServer,env.PORT)
 
 
-
-
-//Socket connection
-// socketConfguration()
 
  
 

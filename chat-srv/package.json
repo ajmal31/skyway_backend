@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node-dev app.ts",
-    "dev": "nodemon app.ts"
+    "build": "npx tsc",
+    "start": "npm run build && npm run dev",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/app.js\""
   },
   "keywords": [],
   "author": "",
@@ -21,18 +22,18 @@
     "express": "^4.18.2",
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.0.2",
+    "mongoose": "^8.1.1",
     "morgan": "^1.10.0",
-    "nodemon": "^3.0.2",
-    "socket.io": "^4.7.2",
-    "socket.io-client": "^4.7.2",
+    "nodemon": "^3.0.3",
+    "socket.io": "^4.7.4",
     "x-xss-protection": "^2.0.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/jsonwebtoken": "^9.0.5",
     "@types/morgan": "^1.9.9",
+    "concurrently": "^8.2.2",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.3.2"
+    "typescript": "^5.3.3"
   }
 }
